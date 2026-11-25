@@ -103,10 +103,10 @@ footer:
   - title: { en: Products, zh: 产品 }
     items:
       - { label: { en: Platform Overview, zh: 平台总览 }, href: /platform/ }
-      - { label: { en: Address Screening (KYA), zh: 地址筛查 KYA }, href: /products/kya/ }
-      - { label: { en: Transaction Screening (KYT), zh: 交易筛查 KYT }, href: /products/kyt/ }
+      - { label: { en: KYA Screening, zh: 地址筛查 KYA }, href: /products/kya/ }
+      - { label: { en: KYT Screening, zh: 交易筛查 KYT }, href: /products/kyt/ }
       - { label: { en: Sanctions Screening, zh: 制裁筛查 }, href: /products/sanctions/ }
-      - { label: { en: Fund Tracing & Investigations, zh: 资金追踪与调查 }, href: /products/investigations/ }
+      - { label: { en: Fund Tracing, zh: 资金追踪与调查 }, href: /products/investigations/ }
       - { label: { en: Rulesets & Scoring, zh: 规则集与评分 }, href: /products/rulesets/ }
       - { label: { en: AI Agents (MCP), zh: AI 助手（MCP） }, href: /products/agents/ }
       - { label: { en: Developers & API, zh: 开发者与 API }, href: /developers/ }
@@ -114,7 +114,7 @@ footer:
     items:
       - { label: { en: Exchanges, zh: 交易所 }, href: /solutions/exchanges/ }
       - { label: { en: Wallets, zh: 钱包 }, href: /solutions/wallets/ }
-      - { label: { en: Payments & Card Issuers, zh: 支付与U卡 }, href: /solutions/payments/ }
+      - { label: { en: Payments & Cards, zh: 支付与U卡 }, href: /solutions/payments/ }
       - { label: { en: Custody & WaaS, zh: 托管与 WaaS }, href: /solutions/custody/ }
   - title: { en: Data, zh: 数据 }
     items:
@@ -125,9 +125,9 @@ footer:
   - title: { en: Partners, zh: 合作 }
     items:
       - { label: { en: Law Enforcement, zh: 执法机构 }, href: /partners/lea/ }
-      - { label: { en: Universities & Research, zh: 高校与研究 }, href: /partners/academic/ }
-      - { label: { en: Address Check for Individuals, zh: 个人地址体检 }, href: /check/ }
-      - { label: { en: All Partner Programmes, zh: 全部合作方式 }, href: /partners/ }
+      - { label: { en: Universities, zh: 高校与研究 }, href: /partners/academic/ }
+      - { label: { en: Address Check, zh: 个人地址体检 }, href: /check/ }
+      - { label: { en: All Programmes, zh: 全部合作方式 }, href: /partners/ }
   - title: { en: Company, zh: 公司 }
     items:
       - { label: { en: About Us, zh: 关于我们 }, href: /about/ }

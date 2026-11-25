@@ -535,19 +535,21 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
    和 width.com 的页脚统一（2026-11-25）：浅灰底、推广条、WIDTH 标志 + 标语、邮箱、新加坡 / 香港地址、
    社交图标（微信悬停出二维码）、AI 摘要、五栏链接、认证徽章、底部版权。样式取自 width.com 的 footer.site.paper。 */
 .site-footer { --f-ink: #1c1a17; --f-sub: #55565a; --f-line: #e3e5e9; --f-blue: #0d4fd3;
-  background: #f4f5f7; color: var(--f-sub); padding: clamp(56px, 6vw, 80px) 0 32px; border-top: 0; }
-.site-footer .container { max-width: 1280px; }
+  background: #f4f5f7; color: var(--f-sub); padding: 80px 0 32px; border-top: 0; font-size: 16px; line-height: 1.55; }
+.site-footer .container { max-width: 1160px; padding: 0 28px; }
 .foot-promo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px;
   margin: 0 0 clamp(36px, 4vw, 52px); padding: 16px clamp(18px, 2vw, 26px); background: #fff; border-radius: 14px; }
 .foot-promo p { display: flex; align-items: center; gap: 12px; margin: 0; font-size: 15px; line-height: 1.45; color: var(--f-ink); }
+.foot-promo p span { display: block; }
 .foot-promo p svg { flex: none; width: 22px; height: 22px; fill: none; stroke: var(--f-blue); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
 .foot-promo b { font-weight: 700; color: var(--f-blue); }
-.foot-promo a { font-size: 15px; font-weight: 700; color: var(--f-blue); white-space: nowrap; }
+.foot-promo a { display: block; font-size: 15px; line-height: 1.55; font-weight: 700; color: var(--f-blue); white-space: nowrap; }
 .foot-promo .ar { display: inline-block; transition: transform .18s ease; }
 .foot-promo a:hover .ar { transform: translateX(4px); }
 
-.foot-grid { display: grid; grid-template-columns: minmax(280px, 300px) minmax(0, 1fr); gap: 16px 48px; align-items: start; }
-.foot-brand { grid-row: span 2; display: flex; flex-direction: column; align-items: flex-start; }
+.foot-grid { display: grid; grid-template-columns: 300px minmax(0, 1fr); gap: 16px 48px; align-items: start; }
+.foot-brand { grid-row: span 2; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+.foot-brand > * { margin-bottom: 0; }
 .foot-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--f-blue); }
 .foot-logo svg { height: 22px; width: auto; display: block; }
 .foot-product { font-size: 15px; font-weight: 700; letter-spacing: .06em; color: var(--f-ink); border-left: 1px solid var(--f-line); padding-left: 10px; line-height: 22px; }
@@ -555,7 +557,9 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
 .foot-tag b { font-weight: 500; color: var(--f-blue); white-space: nowrap; }
 .foot-contact, .foot-offices, .foot-social, .foot-col ul, .foot-certs ul { list-style: none; margin: 0; padding: 0; }
 .foot-contact { margin-top: 20px; }
-.foot-contact li, .foot-contact a, .foot-col li, .foot-col a { line-height: 19.5px; }
+.foot-contact li, .foot-contact a { line-height: 19.5px; }
+.foot-contact li { margin: 0; }
+.foot-col li, .foot-col a { line-height: 26px; }
 .foot-contact a { font-size: 14px; color: var(--f-sub); transition: color .22s ease; }
 .foot-offices { display: grid; gap: 8px; width: 100%; margin-top: 16px; color: var(--f-sub); }
 .foot-offices li { display: grid; grid-template-columns: 21px minmax(0, 1fr); column-gap: 10px; align-items: start; }
@@ -585,21 +589,22 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
 .foot-ai a:hover { color: var(--f-blue); border-color: var(--f-blue); }
 
 .foot-nav { display: grid; grid-template-columns: repeat(5, max-content); justify-content: space-between; gap: 28px 24px; }
-.foot-col h3 { margin: 0 0 14px; font-size: 14px; font-weight: 700; letter-spacing: .01em; color: var(--f-ink); }
+.foot-col ul li { margin: 0; }
+.foot-col h3 { margin: 0 0 14px; font-size: 14px; font-weight: 700; line-height: 1.4; letter-spacing: .01em; color: var(--f-ink); }
 .foot-col a { display: inline-block; vertical-align: top; font-size: 14px; color: var(--f-sub); white-space: nowrap; transition: color .22s ease, transform .22s ease; }
 .foot-col a:hover { transform: translateX(3px); }
 .foot-contact a:hover, .foot-col a:hover { color: var(--f-blue); }
 
 .foot-certs { grid-column: 2; align-self: end; padding-top: 16px; border-top: 1px solid var(--f-line); }
 .foot-certs > p { margin: 0; font-size: 13px; line-height: 19.5px; }
-.foot-certs ul { margin-top: 14px; display: grid; grid-template-columns: repeat(3, max-content); justify-content: space-between; align-items: center; gap: 16px 20px; }
+.foot-certs ul { margin-top: 14px; display: flex; flex-wrap: nowrap; justify-content: space-between; align-items: center; gap: 14px; }
 .foot-certs li { display: flex; align-items: center; }
 .foot-certs li.badge a { display: block; }
 .foot-certs li.badge svg { display: block; width: auto; height: 34px; overflow: visible; fill: currentColor; color: var(--f-ink); opacity: .8; transition: opacity .22s ease; font-family: var(--font); }
 .foot-certs li.badge:hover svg { opacity: 1; }
 
 .foot-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px 28px; margin-top: 36px; padding-top: 18px;
-  border-top: 1px solid var(--f-line); font-size: 12.5px; line-height: 1.6; color: var(--f-sub); }
+  border-top: 1px solid var(--f-line); font-size: 12.5px; line-height: 20px; color: var(--f-sub); }
 .foot-legal { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; }
 .foot-legal a { color: var(--f-sub); text-decoration: underline; text-decoration-color: rgba(28, 26, 23, .25); text-underline-offset: 3px; text-decoration-thickness: 1px;
   transition: color .22s ease, text-decoration-color .22s ease; }
@@ -607,6 +612,7 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
 
 @media (max-width: 1100px) {
   .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+  .foot-certs ul { flex-wrap: wrap; justify-content: flex-start; gap: 16px 24px; }
   .foot-brand { grid-row: auto; }
   .foot-certs { grid-column: auto; }
   .foot-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px 22px; }
