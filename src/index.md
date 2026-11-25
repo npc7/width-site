@@ -7,28 +7,44 @@ description: DART screens USDT and USDC flows in time order, so exchanges, walle
 sections:
   - type: ledger
     eyebrow: WIDTH DART · Stablecoin risk screening
-    title: Know Where the Money Came from <em>Before You Accept It</em>
-    lead: "DART screens USDT and USDC flows hop by hop, in time order. Bad funds stay out, and good customers get through."
+    title: Stablecoin Risk Screening <em>That Actually Works</em>
+    lead: "Funds are traced hop by hop in time order, so false alarms drop. Every point ties back to a rule and a path, so anyone on your team can read the result. Go live with one API call, edit the rules yourself, and re-score a case in about a second. Built for USDT and USDC."
     ctas:
       - { label: Get Free Access, href: /contact/ }
     note: Free until 31 December 2028 · Console, API and MCP included
     stats:
-      - { value: 300K+, label: API calls a day in production }
-      - { value: "< 1", unit: s, label: sanctions screening response }
+      - { value: 1.5M+, label: "API calls a week in production, November 2026" }
+      - { value: "0.61", unit: s, label: "median time for a fully traced screening" }
       - { value: 200M, label: "labeled addresses, with sanctions, freeze and hack labels kept current" }
       - { value: Same day, label: "FinCEN 9714 order published, ruleset live" }
 
   - type: showcase
     id: how
-    title: Every Point <em>Has a Reason</em>
-    lead: "The path-matching ruleset decides what counts as a violation. The scoring ruleset decides how serious it is and what to do. You can change both."
+    title: Accurate, Easy to Read, <em>Yours to Tune</em>
+    lead: "Most screening tools give you a number. DART gives you the number, the reason behind it, and the controls to change it."
     items:
-      - { tag: Time Order, title: "Count Only Funds That Arrived First", text: "Every hop is checked for timing. Paths that run backwards in time are dropped, so false alarms fall at the source." }
-      - { tag: Share of Funds, title: "The Further Away, the Higher the Bar", text: "By default risky funds must reach 5% / 10% / 15% / 20% of the total at hops 2 / 3 / 4 / 5 before they count." }
-      - { tag: Evidence, title: "When the Regulator Asks Why, Show Them", text: "Every point maps to a rule, with the path, hop, amount and share listed, and saved as an immutable snapshot." }
+      - { tag: Accurate, title: "Only Money That Arrived First Counts", text: "Every hop is checked for timing, and paths that run backwards in time are dropped. Distant links need a higher share of risky funds before they count. When results differ from another tool, timing is the most common reason." }
+      - { tag: Easy to read, title: "A Score and the Highlights, Side by Side", text: "Read the 0–100 score and the highlighted hits together. Every point maps to a rule, a path, a hop, an amount and a share, saved as an immutable snapshot." }
+      - { tag: Yours to tune, title: "Change a Rule, See the New Result in a Second", text: "Copy a ruleset, set your own thresholds, and re-judge the original case without tracing again. The before and after sit side by side." }
+
+  - type: split
+    id: tracing
+    tone: alt
+    eyebrow: Built with investigators
+    title: Many Transactions, <em>One Money Trail</em>
+    text: "A scam case rarely comes as one transfer. Victims pay in dozens of transactions, and the money splits, merges and changes chains. Shaped with law enforcement investigators who trace stablecoin cases every day, DART puts every transaction into a single case and follows them all forward together."
+    points:
+      - "**Up to 500 transactions in one case**, or start from an address. USDT and USDC on Tron and Ethereum"
+      - "**See where the funds meet**: addresses shared across the transactions come to the top"
+      - "**See where the money is now**: still at unlabeled addresses (freeze leads), at exchanges, or at sanctioned and frozen addresses, with each address's current balance read from the chain"
+      - "**Choose how funds are apportioned**: pro rata, first in first out, or last in first out"
+      - "**Through bridges and swaps**: USDT0 and Circle CCTP transfers continue on the destination chain, and DEX swaps are resolved inside the transaction instead of spilling into pool noise"
+    ctas:
+      - { label: Fund Tracing & Investigations, href: /products/investigations/ }
+      - { label: For Law Enforcement, href: /partners/lea/ }
+    visual: multitrace
 
   - type: cases
-    tone: alt
     eyebrow: In production
     title: Teams Already Running on DART
     items:
@@ -51,6 +67,23 @@ sections:
         title: A Wallet and Custody Infrastructure Provider
         text: Screens every deposit and withdrawal for its enterprise wallets. Its clients get KYA and KYT out of the box instead of buying their own.
     note: Customer names withheld for confidentiality. Figures from DART production data, November 2026.
+
+  - type: table
+    id: why
+    tone: alt
+    eyebrow: Next to your current tools
+    title: Already Have a KYT Provider? <em>Here's What DART Adds</em>
+    lead: Most teams we work with already run one or more onchain analytics tools. DART is built to sit next to them, not to copy them.
+    head: [When you need, DART gives you]
+    rows:
+      - ["To know why two tools disagree", "Every point traced to a rule, a path, a hop, an amount and a share, so a disagreement becomes a line-by-line comparison"]
+      - ["Fewer false alarms on stablecoin flows", "Time-ordered tracing and higher bars for distant links, both on by default"]
+      - ["Your own policy, not a vendor's", "Both rulesets are readable and editable. A rule change re-scores a stored case in about a second"]
+      - ["New government actions covered fast", "The FinCEN 9714 order was published on 6 November. A ruleset was live the same day"]
+      - ["Results your own systems can use", "Structured JSON with the score, the verdict, the highlights and the full evidence, plus MCP for AI agents"]
+      - ["Deep stablecoin investigations", "Many transactions traced together in one case, with current balances and freeze leads"]
+      - ["To try it without a budget line", "Free until **31 December 2028**"]
+    note: DART covers USDT and USDC. Keep your current tools for other assets.
 
   - type: audiences
     id: who
@@ -100,9 +133,10 @@ sections:
         link: Solutions for Custody
       - label: Law Enforcement
         title: Turn Scattered Transfers Into One Complete Money Trail
-        text: Start from a single address, follow the funds across hops and chains, and export tracing reports you can use in a case.
+        text: Put every transaction in a case into one trace, follow the funds across hops and chains, and see where the money sits now.
         points:
-          - "**Fund tracing**: hop-by-hop upstream and downstream, with cross-chain USDC tracing via CCTP"
+          - "**Many transactions, one case**: up to 500 traced together, with the addresses where they meet and current balances"
+          - "**Across chains**: USDT0 and USDC via Circle CCTP continue on the destination chain"
           - "**Case support**: our analysts write tracing reports for priority cases and prepare evidence packs for freeze requests"
           - "**Hands-on training** in onchain tracing for investigators"
           - Accounts opened after identity verification; every query is logged

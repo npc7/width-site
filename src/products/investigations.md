@@ -12,7 +12,7 @@ sections:
     compact: true
     eyebrow: Investigations · Fund tracing
     title: Where the Money Came from and Where It Went, <em>on One Graph</em>
-    lead: A suspicious deposit to review, stolen funds to chase, a case report to write. Start from an address or a transaction and DART expands the flow upstream and downstream, labels every counterparty, drops paths that can't hold up in time, and follows funds across chains.
+    lead: A suspicious deposit to review, stolen funds to chase, a case report to write. Start from an address, a transaction, or every transaction in a case at once, and DART expands the flow upstream and downstream, labels every counterparty, drops paths that can't hold up in time, and follows funds across chains.
     ctas:
       - { label: Book a Demo, href: /contact/ }
       - { label: For Law Enforcement, href: /partners/lea/ }
@@ -28,7 +28,16 @@ sections:
           - Keep only paths that **hold up in time**: funds arrive before they move on
           - Set a minimum amount and a node limit per hop to see the main flow first
           - Paths stop at exchanges and other known entities instead of expanding into noise
-        proof: The same engine handles 300,000–400,000 API calls a day in production.
+        proof: The same engine handles over 1.5 million API calls a week in production.
+      - problem: One Case, Dozens of Transactions
+        detail: Victims pay in many transfers, and the money splits, merges and moves on. Tracing each one by hand and lining them up takes days.
+        solution: |
+          - Put **up to 500 transactions** into one case and trace them all forward together
+          - Addresses where the transactions **meet** come to the top
+          - See where the money **is now**, with each address's current balance read from the chain: unlabeled addresses are freeze leads, exchanges get freeze requests
+          - Choose how funds are apportioned at each address: pro rata, first in first out, or last in first out
+          - DEX swaps are resolved inside the transaction, and lending, yield and bridge pools are endpoints, so the graph stays readable
+        proof: Shaped with law enforcement investigators who use it on live stablecoin cases.
       - problem: You Don't Know Who the Counterparties Are
         solution: |
           - 200 million labeled addresses, over 90% of them exchange addresses, plus sanctions, issuer-freeze, hack, scam and mixer labels
@@ -36,7 +45,7 @@ sections:
         proof: Labels are verified and updated continuously by our intelligence team.
       - problem: The Trail Goes Cold When Funds Change Chains
         solution: |
-          - USDC moved through **Circle CCTP** is followed onto the destination chain
+          - USDC moved through **Circle CCTP** and USDT moved through **USDT0** are followed onto the destination chain
           - An address is checked on every chain and token where it has activity
         proof: USDT and USDC across 11 chains.
 
@@ -78,8 +87,12 @@ sections:
         a: Hop depth is configurable. For daily screening we suggest 3 inbound and 1 outbound; investigations can go deeper, with a minimum amount and a per-hop node limit to keep the graph readable.
       - q: Why were some paths excluded?
         a: DART requires funds to arrive at each hop before they move on. A path that runs backwards in time means the money could not have come from that source, so it is excluded, and the result says so.
+      - q: Can I trace several transactions at once?
+        a: Yes. Add up to 500 transaction hashes to one case. DART traces them together, shows the addresses where they meet, and reads each address's current balance from the chain.
+      - q: How are funds apportioned when an address mixes money from several sources?
+        a: Pro rata by default. You can switch to first in first out or last in first out, and DART reads the address's ledger in order. Where a ledger cannot be read in full, that address falls back to pro rata and is marked on the graph.
       - q: Does DART trace across chains?
-        a: Yes for USDC moved through Circle CCTP. The path continues on the destination chain.
+        a: Yes for USDC moved through Circle CCTP and USDT moved through USDT0. The path continues on the destination chain.
       - q: How can a law enforcement agency get access?
         a: Apply through the law enforcement partnership page. We verify the agency before opening investigator accounts and agree the terms of cooperation directly.
       - q: Are queries recorded?

@@ -1,0 +1,55 @@
+{#- 多笔交易追踪：一个案子里的 4 笔交易一起往下追，在同一个地址汇合，再分到交易所（可发冻结函）、无标签地址（冻结线索，带当前余额）、跨链桥（目标链续追）。地址和金额均为示意。 -#}
+{%- set zh = (lang == 'zh') -%}
+<figure class="viz viz-flow viz-multi">
+  <svg viewBox="0 0 560 420" role="img" aria-labelledby="mt-t mt-d">
+    <title id="mt-t">{{ '多笔交易一起追踪' if zh else 'Tracing many transactions together' }}</title>
+    <desc id="mt-d">{{ '一个案子里的四笔交易一起往下追，资金在同一个地址汇合，再分别流向交易所、一个仍持有余额的无标签地址，以及跨链桥。' if zh else 'Four transactions in one case are traced forward together. The funds meet at one address, then split to an exchange, an unlabeled address that still holds a balance, and a cross-chain bridge.' }}</desc>
+    <defs>
+      <marker id="mt-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--viz-risk)"/></marker>
+      <marker id="mt-arr-ex" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--viz-ex)"/></marker>
+      <marker id="mt-arr-mute" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="var(--viz-mute)"/></marker>
+    </defs>
+
+    <text class="ring-label" x="58" y="30" text-anchor="middle">{{ '一个案子 · 4 笔' if zh else '1 CASE · 4 TXS' }}</text>
+    <text class="ring-label" x="262" y="30" text-anchor="middle">{{ '汇合' if zh else 'WHERE THEY MEET' }}</text>
+    <text class="ring-label" x="480" y="30" text-anchor="middle">{{ '钱现在在哪' if zh else 'WHERE IT IS NOW' }}</text>
+
+    <!-- 四笔交易 → 汇合地址 -->
+    <path class="edge risk" d="M100 67 C172 67 196 168 232 192" marker-end="url(#mt-arr)"/>
+    <path class="edge risk" d="M100 157 C168 157 196 190 228 200" marker-end="url(#mt-arr)"/>
+    <path class="edge risk" d="M100 247 C168 247 196 222 228 212" marker-end="url(#mt-arr)"/>
+    <path class="edge risk" d="M100 337 C172 337 196 240 232 222" marker-end="url(#mt-arr)"/>
+    <text class="t-time ok" x="112" y="58">18,000</text>
+    <text class="t-time ok" x="112" y="148">9,500</text>
+    <text class="t-time ok" x="112" y="238">26,200</text>
+    <text class="t-time ok" x="112" y="328">12,800</text>
+
+    <!-- 汇合地址 → 三个去向 -->
+    <path class="edge ex" d="M296 196 C340 168 372 86 410 80" marker-end="url(#mt-arr-ex)"/>
+    <path class="edge risk" d="M298 207 C340 207 372 207 410 207" marker-end="url(#mt-arr)"/>
+    <path class="edge mute" d="M296 218 C340 246 372 328 410 334" marker-end="url(#mt-arr-mute)"/>
+    <text class="t-time ok" x="318" y="132">21,000</text>
+    <text class="t-time ok" x="330" y="199">41,200</text>
+    <text class="t-time" x="318" y="290">4,300</text>
+
+    <!-- 四笔交易 -->
+    <g class="node src"><rect x="16" y="50" width="84" height="34" rx="17"/><text x="58" y="72" text-anchor="middle">Tx 1</text></g>
+    <g class="node src"><rect x="16" y="140" width="84" height="34" rx="17"/><text x="58" y="162" text-anchor="middle">Tx 2</text></g>
+    <g class="node src"><rect x="16" y="230" width="84" height="34" rx="17"/><text x="58" y="252" text-anchor="middle">Tx 3</text></g>
+    <g class="node src"><rect x="16" y="320" width="84" height="34" rx="17"/><text x="58" y="342" text-anchor="middle">Tx 4</text></g>
+
+    <!-- 汇合地址 -->
+    <g class="node target"><circle cx="262" cy="207" r="36"/><text x="262" y="205" text-anchor="middle">0x9a…41</text><text class="sub" x="262" y="220" text-anchor="middle">{{ '4 笔汇合' if zh else '4 of 4 meet' }}</text></g>
+
+    <!-- 三个去向 -->
+    <g class="node ex"><rect x="414" y="62" width="132" height="36" rx="18"/><text x="480" y="85" text-anchor="middle">{{ '交易所' if zh else 'Exchange' }}</text></g>
+    <g class="callout ex"><rect x="414" y="104" width="132" height="24" rx="12"/><text x="480" y="120" text-anchor="middle">{{ '可发冻结请求' if zh else 'Send a freeze request' }}</text></g>
+
+    <g class="node risk"><rect x="414" y="189" width="132" height="36" rx="18"/><text x="480" y="212" text-anchor="middle">{{ '无标签 · 余额 41,200' if zh else 'Unlabeled · 41.2K' }}</text></g>
+    <g class="callout ok"><rect x="414" y="231" width="132" height="24" rx="12"/><text x="480" y="247" text-anchor="middle">{{ '冻结线索' if zh else 'Freeze lead' }}</text></g>
+
+    <g class="node br"><rect x="414" y="316" width="132" height="36" rx="18"/><text x="480" y="339" text-anchor="middle">{{ 'CCTP 跨链桥' if zh else 'CCTP bridge' }}</text></g>
+    <g class="callout bad"><rect x="414" y="358" width="132" height="24" rx="12"/><text x="480" y="374" text-anchor="middle">{{ '在 Arbitrum 上续追' if zh else 'Continues on Arbitrum' }}</text></g>
+  </svg>
+  <figcaption class="viz-cap">{{ '示意：地址和金额均为虚构。' if zh else 'Illustration. Addresses and amounts are made up.' }}</figcaption>
+</figure>
