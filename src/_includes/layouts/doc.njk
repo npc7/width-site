@@ -1,0 +1,71 @@
+---
+layout: layouts/base.njk
+bodyClass: docs-page
+---
+{#- 文档中心版式：左侧目录（按 _data/docs.yml 分组）、中间正文、右侧本页目录（site.js 自动生成）。
+    文档首页（isDocsHome: true）不显示右侧目录，正文写在页面里。 -#}
+{%- set zh = (lang == 'zh') -%}
+{%- set list = collections.docs_zh if zh else collections.docs_en -%}
+{%- set base = '/zh/docs/' if zh else '/docs/' -%}
+{%- set nb = list | docNeighbors(page.url) -%}
+{%- set sec = docs.sections | findBy("key", section) -%}
+<div class="docs-shell{% if isDocsHome %} is-home{% endif %}" data-docs data-index="{{ (base + 'search-index.json') | url }}">
+  <aside class="docs-side" aria-label="{{ '文档目录' if zh else 'Documentation' }}">
+    <div class="docs-search">
+      <input type="search" placeholder="{{ '搜索文档，例如：跳数、0 分复核、FAILED' if zh else 'Search docs, e.g. hops, FAILED, highlights' }}" aria-label="{{ '搜索文档' if zh else 'Search docs' }}" data-docs-search>
+      <div class="docs-results" data-docs-results hidden></div>
+    </div>
+    <details class="docs-nav" open>
+      <summary>{{ '文档目录' if zh else 'All docs' }}</summary>
+      <a class="docs-nav-home{% if isDocsHome %} is-current{% endif %}" href="{{ base }}">{{ '文档中心首页' if zh else 'Docs home' }}</a>
+      {%- for s in docs.sections %}
+      {%- set items = list | where("section", s.key) %}
+      {%- if items | length %}
+      <div class="docs-nav-group">
+        <p class="docs-nav-title">{{ s.title | tr(lang) }}</p>
+        <ul>
+          {%- for d in items %}
+          <li><a href="{{ d.url }}"{% if d.url == page.url %} class="is-current" aria-current="page"{% endif %}>{{ d.data.navTitle or d.data.title }}</a></li>
+          {%- endfor %}
+        </ul>
+      </div>
+      {%- endif %}
+      {%- endfor %}
+    </details>
+  </aside>
+
+  <article class="docs-main">
+    {%- if not isDocsHome %}
+    <nav class="docs-crumb" aria-label="Breadcrumb">
+      <a href="{{ base }}">{{ '文档中心' if zh else 'Docs' }}</a>
+      {%- if sec %}<span aria-hidden="true">/</span><span>{{ sec.title | tr(lang) }}</span>{% endif %}
+    </nav>
+    <h1>{{ title }}</h1>
+    {%- if description %}<p class="docs-lead">{{ description }}</p>{% endif %}
+    {%- if updated %}<p class="docs-meta">{{ '最后更新' if zh else 'Last updated' }} {{ updated | date(lang) }}</p>{% endif %}
+    {%- endif %}
+    <div class="docs-body prose" data-docs-body>
+      {{ content | safe }}
+    </div>
+    {%- if not isDocsHome %}
+    <aside class="docs-help">
+      <div>
+        <strong>{{ '这篇没解决你的问题？' if zh else 'Still stuck?' }}</strong>
+        <p>{{ '把地址或交易哈希、你用的参数和看到的结果发给我们，工程师会在群里回复；新问题我们会补进文档。' if zh else 'Send us the address or transaction hash, the parameters you used and what you saw. An engineer replies in your group, and new questions get added to the docs.' }}</p>
+      </div>
+      <a class="btn btn-primary btn-sm" href="{{ '/contact/' | locale(lang) }}?type=other">{{ '联系工程师' if zh else 'Contact an engineer' }}</a>
+    </aside>
+    <nav class="docs-pager" aria-label="{{ '上一篇和下一篇' if zh else 'Previous and next' }}">
+      {%- if nb.prev %}<a class="prev" href="{{ nb.prev.url }}"><small>{{ '上一篇' if zh else 'Previous' }}</small>{{ nb.prev.data.navTitle or nb.prev.data.title }}</a>{% else %}<span></span>{% endif %}
+      {%- if nb.next %}<a class="next" href="{{ nb.next.url }}"><small>{{ '下一篇' if zh else 'Next' }}</small>{{ nb.next.data.navTitle or nb.next.data.title }}</a>{% endif %}
+    </nav>
+    {%- endif %}
+  </article>
+
+  {%- if not isDocsHome %}
+  <aside class="docs-toc" aria-label="{{ '本页目录' if zh else 'On this page' }}">
+    <p class="docs-toc-title">{{ '本页目录' if zh else 'On this page' }}</p>
+    <ul data-docs-toc></ul>
+  </aside>
+  {%- endif %}
+</div>

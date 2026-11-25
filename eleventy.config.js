@@ -4,8 +4,27 @@
 import * as yaml from "js-yaml";
 import markdownIt from "markdown-it";
 import { HtmlBasePlugin } from "@11ty/eleventy";
+import { readFileSync } from "node:fs";
 
 const md = markdownIt({ html: true, linkify: true, typographer: false });
+
+// 标题自动加锚点 id（文档页右侧「本页目录」和站内链接用）：中文保留原字，空格和标点换成连字符
+const slugify = (s) =>
+  String(s).trim().toLowerCase()
+    .replace(/<[^>]+>/g, "")
+    .replace(/[\s　]+/g, "-")
+    .replace(/[^\p{L}\p{N}\-_]+/gu, "")
+    .replace(/-+/g, "-").replace(/^-|-$/g, "");
+md.core.ruler.push("heading_ids", (state) => {
+  const used = {};
+  state.tokens.forEach((tok, i) => {
+    if (tok.type !== "heading_open" || tok.attrGet("id")) return;
+    const text = state.tokens[i + 1].children.map((c) => c.content).join("");
+    let id = slugify(text) || "section";
+    if (used[id]) id += "-" + ++used[id]; else used[id] = 1;
+    tok.attrSet("id", id);
+  });
+});
 
 const isProd = process.env.ELEVENTY_RUN_MODE === "build";
 
@@ -33,6 +52,42 @@ export default function (eleventyConfig) {
   eleventyConfig.addCollection("posts_zh", (api) =>
     api.getFilteredByGlob("src/zh/blog/posts/*.md").sort(byDate)
   );
+
+  // ---------- 文档中心（docs）：按 _data/docs.yml 的分组顺序，再按页面的 order 排 ----------
+  const docsSort = (sections) => (a, b) => {
+    const ia = sections.findIndex((x) => x.key === a.data.section);
+    const ib = sections.findIndex((x) => x.key === b.data.section);
+    return (ia - ib) || ((a.data.order || 99) - (b.data.order || 99));
+  };
+  eleventyConfig.addCollection("docs_en", (api) => {
+    const sections = yaml.load(readFileSync("src/_data/docs.yml", "utf8")).sections;
+    return api.getFilteredByGlob("src/docs/**/*.md").filter((p) => !p.data.isDocsHome).sort(docsSort(sections));
+  });
+  eleventyConfig.addCollection("docs_zh", (api) => {
+    const sections = yaml.load(readFileSync("src/_data/docs.yml", "utf8")).sections;
+    return api.getFilteredByGlob("src/zh/docs/**/*.md").filter((p) => !p.data.isDocsHome).sort(docsSort(sections));
+  });
+  // 纯文本（站内搜索索引用）
+  eleventyConfig.addFilter("plain", (html, n = 4000) =>
+    String(html || "").replace(/<(script|style)[\s\S]*?<\/\1>/g, " ").replace(/<[^>]+>/g, " ")
+      .replace(/&[a-z#0-9]+;/gi, " ").replace(/\s+/g, " ").trim().slice(0, n));
+  // h2 / h3 标题列表（搜索索引用）
+  // 小标题和折叠问答的问题（<summary>）都进索引；问题没有锚点，跳到它前面最近的小标题
+  eleventyConfig.addFilter("headings", (html) => {
+    const out = []; let last = "";
+    for (const m of String(html || "").matchAll(/<h[23][^>]*id="([^"]+)"[^>]*>([\s\S]*?)<\/h[23]>|<summary>([\s\S]*?)<\/summary>/g)) {
+      if (m[1]) { last = m[1]; out.push({ id: m[1], text: m[2].replace(/<[^>]+>/g, "") }); }
+      else out.push({ id: last, text: m[3].replace(/<[^>]+>/g, ""), q: 1 });
+    }
+    return out;
+  });
+  eleventyConfig.addFilter("json", (v) => JSON.stringify(v));
+  // 文档的上一篇 / 下一篇
+  eleventyConfig.addFilter("docNeighbors", (list, url) => {
+    const i = (list || []).findIndex((d) => d.url === url);
+    return i < 0 ? {} : { prev: list[i - 1] || null, next: list[i + 1] || null };
+  });
+  eleventyConfig.addFilter("findBy", (arr, key, val) => (arr || []).find((x) => x[key] === val));
 
   // ---------- 过滤器 ----------
   // Markdown：块级 / 行内

@@ -120,6 +120,16 @@ tags: [KYT, 稳定币]
 7. **FinCEN 9714 是命令，不是制裁。**
 8. **不提内部问题。**
 
+## 文档中心（/docs/）
+
+产品说明、功能教程、场景方案、监管对照和常见问题都在文档中心：中文在 `src/zh/docs/`，英文在 `src/docs/`（英文版正在翻译，目前只有首页）。
+
+- **新增一篇**：在 `src/zh/docs/` 新建 `网址短名.md`，front matter 写 `title`、`description`、`section`（分组，见 `src/_data/docs.yml`）、`order`（组内顺序）、`updated`。左侧目录、上一篇 / 下一篇、站内搜索会自动更新。
+- **分组**：改 `src/_data/docs.yml`。
+- **写法**：普通 Markdown；提示框用 `<div class="callout tip|warn|danger"><b class="t">标题</b>正文</div>`；问答用 `<details><summary>问题？</summary>…</details>`（问题会进搜索索引）；站内链接写 `/zh/docs/网址短名/`。
+- **客户问到文档里没有的问题**：答完后补进 `faq.md` 对应主题下，或补进相关文档。
+- 对外口径同「写文章前过一遍」。
+
 ## 数据中心榜单
 
 数据在 `src/_data/boards.yml`。现在是示例数据（`sample: true`，页面上会显示「示例数据 · 上线前替换」）。接入真实数据后把 `rows` 换掉，并把 `sample` 改成 `false`。以后可以写脚本定期从 DART 数据生成这个文件。

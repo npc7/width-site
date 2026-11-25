@@ -1,0 +1,7 @@
+---
+permalink: /zh/docs/search-index.json
+eleventyExcludeFromCollections: true
+layout: false
+---
+{%- set list = collections.docs_zh if "zh/" == "zh/" else collections.docs_en -%}
+[{%- for d in list %}{"t":{{ d.data.title | json | safe }},"d":{{ (d.data.description or "") | json | safe }},"u":{{ d.url | url | json | safe }},"s":{{ d.data.section | json | safe }},"h":{{ d.content | headings | json | safe }},"x":{{ d.content | plain(30000) | json | safe }}}{% if not loop.last %},{% endif %}{%- endfor %}]

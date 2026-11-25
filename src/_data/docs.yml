@@ -1,0 +1,27 @@
+# 文档中心的分组（左侧目录的顺序）。每篇文档在 front matter 里写 section（下面的 key）和 order（组内顺序）。
+# 新增一篇文档：在 src/zh/docs/（中文）或 src/docs/（英文）新建 .md，写好 title / description / section / order 即可，目录和搜索会自动更新。
+sections:
+  - key: start
+    title: { zh: 开始使用, en: Get Started }
+    desc: { zh: 第一次用 DART，从这里开始, en: New to DART? Start here }
+  - key: concepts
+    title: { zh: 核心概念, en: Concepts }
+    desc: { zh: 分数怎么来、为什么按时间、跳数怎么定, en: How the score works, why time order, how hops are set }
+  - key: guides
+    title: { zh: 功能指南, en: Feature Guides }
+    desc: { zh: 每个功能怎么用，控制台和 API 两种方式, en: How to use each feature, in the console and the API }
+  - key: playbooks
+    title: { zh: 场景方案, en: Playbooks }
+    desc: { zh: 交易所、钱包、支付、托管的推荐配置, en: Recommended setups for exchanges, wallets, payments and custody }
+  - key: compliance
+    title: { zh: 合规与监管, en: Compliance }
+    desc: { zh: 监管要求对照，以及怎么向监管解释你的规则, en: Regulatory requirements and how to explain your rules to a regulator }
+  - key: api
+    title: { zh: 接入与开发, en: API & Integration }
+    desc: { zh: 认证、同步异步、错误处理、上线检查, en: Auth, sync vs async, errors, go-live checks }
+  - key: faq
+    title: { zh: 常见问题与排错, en: FAQ & Troubleshooting }
+    desc: { zh: 客户问得最多的问题, en: The questions customers ask most }
+  - key: reference
+    title: { zh: 参考, en: Reference }
+    desc: { zh: 标签体系、术语表、更新日志, en: Label taxonomy, glossary, changelog }

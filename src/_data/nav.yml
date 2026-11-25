@@ -94,6 +94,9 @@ main:
             icon: person
             href: /check/
 
+  - label: { en: Docs, zh: 文档 }
+    href: /docs/
+
   - label: { en: Pricing, zh: 价格 }
     href: /pricing/
 
@@ -120,7 +123,7 @@ footer:
     items:
       - { label: { en: Data Hub, zh: 数据中心 }, href: /data/ }
       - { label: { en: Blog & Research, zh: 文章与研究 }, href: /blog/ }
-      - { label: { en: Product Manual, zh: 产品手册 }, href: "https://width.info/docs" }
+      - { label: { en: Docs & Tutorials, zh: 文档与教程 }, href: /docs/ }
       - { label: { en: API Reference, zh: API 文档 }, href: "https://width.info/api-reference" }
   - title: { en: Partners, zh: 合作 }
     items:
