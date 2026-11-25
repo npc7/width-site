@@ -20,7 +20,7 @@ const field=root.querySelector('.ledger-field'),glc=root.querySelector('.ledger-
 if(!field||!glc||!ov)return;   /* the status line (.ledger-hud) and the Play/Pause button (.ledger-motion) were removed from the template on 2026-11-22 (Eunice); both are used only if present */
 const ctx=ov.getContext('2d');
 /* visible strings, from the template (page language). English fallbacks if the attribute is missing. */
-let T={play:'Play motion',pause:'Pause motion',sim:'SIMULATED',pulse:'pulse {n}',flagged1:'{n} risky transfer flagged',flaggedN:'{n} risky transfers flagged',hop1:'{n} hop',hopN:'{n} hops',cat:{}};
+let T={play:'Play motion',pause:'Pause motion',sim:'SIMULATED',screening:'Screening',found0:'Scanning the ledger…',found1:'{n} risk found',foundN:'{n} risks found',pulse:'pulse {n}',flagged1:'{n} risky transfer flagged',flaggedN:'{n} risky transfers flagged',hop1:'{n} hop',hopN:'{n} hops',cat:{}};
 try{T=Object.assign(T,JSON.parse(root.getAttribute('data-i18n')||'{}'));}catch(e){}
 const fmt=(s,n)=>String(s).replace('{n}',n),catName=c=>(T.cat&&T.cat[c])||c;
 const TAU=Math.PI*2,clamp=(x,a,b)=>x<a?a:x>b?b:x,lerp=(a,b,t)=>a+(b-a)*t,pick=a=>a[(Math.random()*a.length)|0];
@@ -30,7 +30,7 @@ const col=(c,a)=>'rgba('+c[0]+','+c[1]+','+c[2]+','+(+a).toFixed(3)+')';
 const MONO='"Geist Mono", ui-monospace, Menlo, monospace';
 const reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
 /* accent = WIDTH blue (#0D4FD3); glow = a lighter tint of it for bloom, which reads as light on white */
-const PAL={bg:'#FFFFFF',bgc:[255,255,255],fg:[12,20,48],dim:[98,113,158],accent:[13,79,211],glow:[40,112,255],risk:[214,52,38],amber:[214,134,8],riskText:[184,38,28],amberText:[160,88,4],riskPill:[200,46,34],amberPill:[186,104,6]};
+const PAL={bg:'#FFFFFF',bgc:[255,255,255],fg:[12,20,48],dim:[84,108,172],accent:[13,79,211],glow:[40,112,255],risk:[214,52,38],amber:[214,134,8],riskText:[184,38,28],amberText:[160,88,4],riskPill:[200,46,34],amberPill:[186,104,6]};
 
 /* point buffer → three.js. aGlow = 1 turns a point from a crisp dot into a soft bloom sprite. */
 const MAXP=24000,PB={n:0,pos:new Float32Array(MAXP*3),col:new Float32Array(MAXP*4),size:new Float32Array(MAXP),glow:new Float32Array(MAXP)};
@@ -48,7 +48,7 @@ const GFS='uniform vec2 uC;uniform float uR;uniform vec3 uCol;uniform float uA;u
   +'float e=length(vec2(X,z-uOZ))-uRing;'
   +'float on=step(uHy+0.5,vP.y)*uAmp*(1.0-smoothstep(uZf*0.5,uZf,z));'
   +'float band=exp(-e*e/(1.6*g*g));float wake=e<0.0?exp(e/(2.8*g)):exp(-e*e/(0.5*g*g));'
-  +'a+=(band*0.09+wake*0.022)*on;'
+  +'a+=(band*0.13+wake*0.032)*on;'
   /* sonar: up to 8 soft rings of red/amber light on the ground, one set per flag (uRp = X, z, radius, strength) */
   +'float up=step(uHy+0.5,vP.y)*(1.0-smoothstep(uZf,uZf*1.15,z));vec3 rc=vec3(0.0);float ra=0.0;'
   +'for(int i=0;i<8;i++){vec4 p=uRp[i];if(p.w>0.0){float f=length(vec2(X-p.x,z-p.y))-p.z;float fw=clamp(fwidth(f),0.0001,0.2);'
@@ -87,19 +87,19 @@ function flush(){
 }
 
 /* Flags stay visible for FLAG_LIFE seconds after the scan reaches them. */
-const FLAG_LIFE=4;
+const FLAG_LIFE=5.6;
 /* sonar: three rings per flag, 0.28 s apart, starting RIP_DELAY s after the hit (once the dot has turned), each
    growing to RIP_R ledger units over RIP_T s (ease-out) while it fades. Each ring is a thin soft line on the
    ground (gaussian, ~1.2 px sigma on screen, so no hard edge) with a little glow, plus a tint on the dots it passes. */
 const RIP_T=1.4,RIP_GAP=0.28,RIP_R=0.5,RIP_DELAY=0.2,RIP_END=RIP_DELAY+RIP_T+2*RIP_GAP;
 /* risk chips (2D overlay): solid pills in the flag colour with white text. Full chip = score · category · hops;
    mini chip = score only, for far flags and when the full slots are taken. */
-const CHIP_H=22,MINI_H=16,SANS='"Gotham", -apple-system, "PingFang SC", "Helvetica Neue", Arial, sans-serif';
-function chipBox(ctx,L,S,mini){const sc='+'+L.fg.pts;ctx.font=(mini?'600 10px ':'600 11px ')+MONO;const w1=ctx.measureText(sc).width;
-  if(mini){const w=w1+12,lead=clamp(L.s*0.06,10,30);return {mini,x:clamp(L.sx-w/2,8,S.w-8-w),y:L.sy-lead-MINI_H,w,h:MINI_H,w1,sc};}
-  const cat=catName(L.fg.cat),hop=' · '+fmt(L.fg.hop===1?T.hop1:T.hopN,L.fg.hop);
-  ctx.font='500 12px '+SANS;const w2=ctx.measureText(cat).width;ctx.font='400 12px '+SANS;const w3=ctx.measureText(hop).width;
-  const w=19+w1+7+w2+w3+11,lead=clamp(L.s*0.08,18,44),x=clamp(L.sx-w/2,8,S.w-8-w),y=L.sy-lead-CHIP_H;return {mini,x,y,w,h:CHIP_H,w1,w2,sc,cat,hop};}
+const CHIP_H=28,MINI_H=22,SANS='"Gotham", -apple-system, "PingFang SC", "Helvetica Neue", Arial, sans-serif';
+function chipBox(ctx,L,S,mini){const sc='+'+L.fg.pts,cat=catName(L.fg.cat);ctx.font=(mini?'600 11.5px ':'600 13px ')+MONO;const w1=ctx.measureText(sc).width;
+  if(mini){ctx.font='500 12px '+SANS;const w2=ctx.measureText(cat).width,w=10+w1+6+w2+10,lead=clamp(L.s*0.07,14,34);return {mini,x:clamp(L.sx-w/2,8,S.w-8-w),y:L.sy-lead-MINI_H,w,h:MINI_H,w1,w2,sc,cat};}
+  const hop=' · '+fmt(L.fg.hop===1?T.hop1:T.hopN,L.fg.hop);
+  ctx.font='600 14px '+SANS;const w2=ctx.measureText(cat).width;ctx.font='400 13.5px '+SANS;const w3=ctx.measureText(hop).width;
+  const w=22+w1+8+w2+w3+14,lead=clamp(L.s*0.09,22,52),x=clamp(L.sx-w/2,8,S.w-8-w),y=L.sy-lead-CHIP_H;return {mini,x,y,w,h:CHIP_H,w1,w2,sc,cat,hop};}
 function rrect(ctx,x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
 function drawChip(ctx,L,b,P){const red=L.fg.fl===2,c=red?P.risk:P.amber,pc=red?P.riskPill:P.amberPill,age=(1-L.fg.lit)*FLAG_LIFE,a=S.still?Math.max(age,1.2):age;
   /* entrance, by age since the scan hit (on the wave's leading edge, ~0.2 s before its peak, so the whole
@@ -107,27 +107,40 @@ function drawChip(ctx,L,b,P){const red=L.fg.fl===2,c=red?P.risk:P.amber,pc=red?P
      (0.2–0.42 s), a bead forms at its tip (~0.32 s) and stretches sideways into the pill (0.36–0.62 s), then the
      text fades in (0.5–0.72 s); the chip settles up 6px meanwhile. The exit runs backwards: text out from 2.9 s, pill back to a bead by 3.3 s,
      stem gone by 3.6 s. The still frame shows it fully open. */
-  const stem=ease(win(a,0.2,0.22))*(1-ease(win(a,3.3,0.3))),bead=sm(win(a,0.32,0.1))*(1-sm(win(a,3.3,0.12))),
-    open=ease(win(a,0.36,0.26))*(1-sm(win(a,3.0,0.3))),txt=sm(win(a,0.5,0.22))*(1-sm(win(a,2.9,0.2)));
+  const stem=ease(win(a,0.2,0.22))*(1-ease(win(a,4.75,0.3))),bead=sm(win(a,0.32,0.1))*(1-sm(win(a,4.75,0.12))),
+    open=ease(win(a,0.36,0.26))*(1-sm(win(a,4.4,0.3))),txt=sm(win(a,0.5,0.22))*(1-sm(win(a,4.3,0.2)));
   if(stem<0.005&&bead<0.005)return;
   const h=b.h,y=b.y+6*(1-ease(win(a,0.2,0.52))),cy=y+h/2,ty=cy+0.5,y0=L.sy-L.ds-3;
   ctx.save();
   /* stem: brightest at its tip, fading out toward the dot, so there is no hard line */
   const yt=lerp(y0,y+h,stem);if(y0-yt>1){const gr=ctx.createLinearGradient(0,y0,0,yt);gr.addColorStop(0,col(c,0));gr.addColorStop(1,col(c,0.35));
-    ctx.strokeStyle=gr;ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(L.sx,y0);ctx.lineTo(L.sx,yt);ctx.stroke();}
+    ctx.strokeStyle=gr;ctx.lineWidth=1.25;ctx.beginPath();ctx.moveTo(L.sx,y0);ctx.lineTo(L.sx,yt);ctx.stroke();}
   if(bead<0.005){ctx.restore();return;}
   /* bead → pill: the span opens from the stem out to the final box; shadow only once it is mostly open */
   const r0=h/2*(0.35+0.65*bead),bx=clamp(L.sx,b.x+h/2,b.x+b.w-h/2),xl=lerp(bx-r0,b.x,open),xr=lerp(bx+r0,b.x+b.w,open),sh=sm(win(open,0.7,0.3));
-  ctx.globalAlpha=bead;if(sh>0.01){ctx.shadowColor=col(pc,0.3*sh);ctx.shadowBlur=b.mini?8:14;ctx.shadowOffsetY=b.mini?2:4;}
+  ctx.globalAlpha=bead;if(sh>0.01){ctx.shadowColor=col(pc,0.3*sh);ctx.shadowBlur=b.mini?10:18;ctx.shadowOffsetY=b.mini?3:5;}
   rrect(ctx,xl,cy-r0,xr-xl,2*r0,r0);ctx.fillStyle=col(pc,1);ctx.fill();ctx.shadowColor='transparent';
   if(txt<0.01){ctx.restore();return;}
   /* text is clipped to the pill as it opens or closes */
   ctx.clip();ctx.globalAlpha=txt;ctx.textAlign='left';ctx.textBaseline='middle';ctx.fillStyle='#fff';
-  if(b.mini){ctx.font='600 10px '+MONO;ctx.fillText(b.sc,b.x+6,ty);ctx.restore();return;}
-  ctx.fillStyle='rgba(255,255,255,.9)';ctx.beginPath();ctx.arc(b.x+11,cy,2.5,0,TAU);ctx.fill();
-  let x=b.x+19;ctx.fillStyle='#fff';ctx.font='600 11px '+MONO;ctx.fillText(b.sc,x,ty);x+=b.w1+7;
-  ctx.font='500 12px '+SANS;ctx.fillText(b.cat,x,ty);x+=b.w2;
-  ctx.fillStyle='rgba(255,255,255,.74)';ctx.font='400 12px '+SANS;ctx.fillText(b.hop,x,ty);ctx.restore();}
+  if(b.mini){ctx.font='600 11.5px '+MONO;ctx.fillText(b.sc,b.x+10,ty);ctx.font='500 12px '+SANS;ctx.fillText(b.cat,b.x+10+b.w1+6,ty);ctx.restore();return;}
+  ctx.fillStyle='rgba(255,255,255,.95)';ctx.beginPath();ctx.arc(b.x+12,cy,3,0,TAU);ctx.fill();
+  let x=b.x+22;ctx.fillStyle='#fff';ctx.font='600 13px '+MONO;ctx.fillText(b.sc,x,ty);x+=b.w1+8;
+  ctx.font='600 14px '+SANS;ctx.fillText(b.cat,x,ty);x+=b.w2;
+  ctx.fillStyle='rgba(255,255,255,.8)';ctx.font='400 13.5px '+SANS;ctx.fillText(b.hop,x,ty);ctx.restore();}
+/* fund-flow link (2026-11-25): once a flag turns, a curved dashed path draws from it to the screened address, so a
+   chip reads as "this risk reaches your address". It draws in over 0.35-1.25 s, a bright bead then runs along it toward
+   the address, and it fades with the chip. Flag colour at the flag end, WIDTH blue at the address end. */
+function drawLink(ctx,L,ax,ay,P,t){const red=L.fg.fl===2,c=red?P.risk:P.amber,age=(1-L.fg.lit)*FLAG_LIFE,a=S.still?Math.max(age,1.6):age;
+  const grow=ease(win(a,0.35,0.9)),fade=1-sm(win(a,4.3,0.7));if(grow<0.01||fade<0.01)return;
+  const x0=L.sx,y0=L.sy,dist=Math.hypot(ax-x0,ay-y0),mx=(x0+ax)/2,my=(y0+ay)/2-Math.min(90,dist*0.16);
+  const q=k=>{const u=1-k;return [u*u*x0+2*u*k*mx+k*k*ax,u*u*y0+2*u*k*my+k*k*ay];};
+  ctx.save();const gr=ctx.createLinearGradient(x0,y0,ax,ay);gr.addColorStop(0,col(c,0.75*fade));gr.addColorStop(1,col(P.accent,0.55*fade));
+  ctx.strokeStyle=gr;ctx.lineWidth=1.5;ctx.setLineDash([5,5]);ctx.lineDashOffset=-((t*18)%10);ctx.beginPath();ctx.moveTo(x0,y0);
+  const N=36;for(let n=1;n<=N;n++){const pp=q(n/N*grow);ctx.lineTo(pp[0],pp[1]);}ctx.stroke();ctx.setLineDash([]);
+  if(!S.still&&grow>=0.999){const k=((a-1.25)*0.55)%1,pp=q(k),bc=blend(c,P.accent,k);ctx.fillStyle=col(bc,0.18*fade);ctx.beginPath();ctx.arc(pp[0],pp[1],7,0,TAU);ctx.fill();
+    ctx.fillStyle=col(bc,0.95*fade);ctx.beginPath();ctx.arc(pp[0],pp[1],2.6,0,TAU);ctx.fill();}
+  ctx.restore();}
 
 /* F · Ledger Field — same renderer as the concept board */
 const ledger={
@@ -140,7 +153,7 @@ const ledger={
     this.flags=new Map();const c2=['Sanctions','Ransomware','Stolen funds','Darknet market'],c3=['Mixer','Gambling','High-risk exchange'];
     const BASE={'Sanctions':30,'Ransomware':26,'Stolen funds':22,'Darknet market':21,'Mixer':9,'Gambling':6,'High-risk exchange':8};
     const nf=Math.round(10*this.cols/128);
-    for(let k=0;k<nf;k++){const i=(Math.random()*this.cols)|0,j=12+((Math.random()*(this.rows-15))|0),fl=Math.random()<0.5?2:3,cat=pick(fl===2?c2:c3),hop=1+((Math.random()*5)|0);
+    for(let k=0;k<nf;k++){const i=(Math.random()*this.cols)|0,j=7+((Math.random()*(this.rows*0.5))|0),fl=Math.random()<0.5?2:3,cat=pick(fl===2?c2:c3),hop=1+((Math.random()*5)|0);
       this.flags.set(j*this.cols+i,{fl,lit:0,hot:false,chip:false,cat,hop,pts:Math.round(BASE[cat]*(1.25-0.125*hop))});}
     this.period=7;this.pulseN=0;this.prevPh=0;this.maxD=Math.hypot(this.half,this.zf-this.oZ)*0.85;this.litN=0;this.lift=0.09;this.r=0;this.amp=0;this.rip=[];
     /* two fixed flags so the still frame always shows the story: the same example as the console demo below
@@ -171,12 +184,12 @@ const ledger={
       for(let i=0;i<cols;i++){const X=lerp(-this.half,this.half,i/(cols-1)),sx=this.vx+X*s;if(sx<-16||sx>S.w+16)continue;
         /* e: distance past the scan front. crest = on the front, wake = already scanned, fading back to grey */
         const d=Math.hypot(X,z-this.oZ),e=d-r,crest=Math.exp(-(e*e)/cw)*amp,wake=e<0?Math.exp(e/ww)*amp*0.35:0;
-        const Y=0.05*Math.sin(i*0.21+t*0.9)*Math.cos(j*0.33+t*0.6)+crest*lift*gz,sy=this.hy+(1-Y)*s;if(sy>S.h+16)continue;
+        const Y=0.04*Math.sin(i*0.21+t*0.9)*Math.cos(j*0.33+t*0.6)+0.045*Math.sin(j*0.5-t*1.15+i*0.06)+crest*lift*gz,sy=this.hy+(1-Y)*s;if(sy>S.h+16)continue;
         const fg=this.flags.get(j*cols+i);
         /* a flag fires once per pulse, when the wave's leading edge reaches it (e<=0.35, ~0.2 s before the peak, so it turns red under the crest, not after it) while the pulse is live; it re-arms
            only when the next pulse restarts from the address (e>0.6). The chip slot is freed at age 3.68 s,
            after its exit (3.6 s). */
-        if(fg){if(e<=0.35&&amp>0.25&&!fg.hot){fg.hot=true;fg.lit=1;}else if(e>0.6)fg.hot=false;fg.lit=Math.max(0,fg.lit-dt/FLAG_LIFE);if(fg.lit<=0.08)fg.chip=false;if(fg.lit>0){lit.push({fg,sx,sy,s,z,base});continue;}}
+        if(fg){if(e<=0.35&&amp>0.25&&!fg.hot){fg.hot=true;fg.lit=1;}else if(e>0.6)fg.hot=false;fg.lit=Math.max(0,fg.lit-dt/FLAG_LIFE);if(fg.lit<=0.05)fg.chip=false;if(fg.lit>0){lit.push({fg,sx,sy,s,z,base});continue;}}
         const k=Math.min(0.85,Math.max(crest*1.05,wake));
         /* sonar: the strongest ring passing this dot warms it toward the flag colour */
         let kr=0,rc=null;for(let m=0;m<rip.length;m++){const g=rip[m],ex=X-g.x,ez=z-g.z;if(ex>RIP_R+0.4||ex<-RIP_R-0.4||ez>RIP_R+0.4||ez<-RIP_R-0.4)continue;
@@ -192,7 +205,7 @@ const ledger={
        swell (peak ~0.4 s, core ~1.35× then settling to ~1.15×); sonar from 0.2 s; hold; back to grey 2.8–4.0.
        The still frame shows the settled state (no catch, no ring). */
     lit.forEach(L=>{const c=L.fg.fl===2?P.risk:P.amber,age=(1-L.fg.lit)*FLAG_LIFE,a=S.still?Math.max(age,1.2):age,
-        cb=1-sm(win(a,0.05,0.3)),tn=sm(win(a,0.12,0.3)),back=sm(win(a,2.8,1.2)),sw=Math.exp(-((a-0.4)*(a-0.4))/0.035);
+        cb=1-sm(win(a,0.05,0.3)),tn=sm(win(a,0.12,0.3)),back=sm(win(a,4.5,1.0)),sw=Math.exp(-((a-0.4)*(a-0.4))/0.035);
       L.ds=Math.max(3,L.base*(1+0.15*(1-back)+0.2*sw+0.15*cb*(1-tn)));
       if(cb>0.01)pt(L.sx,L.sy,Math.min(L.base*5.2,40),P.glow,0.4*cb*clamp(L.s/300,0.3,1),1);
       if(tn>0.01)pt(L.sx,L.sy,L.ds*4.5*(0.55+0.45*ease(tn)),c,(0.12+0.12*sw)*tn*(1-back),1);
@@ -204,20 +217,27 @@ const ledger={
        never jump between flags. Full chips (2; 1 on phones, red flags only) go to near flags; far flags and
        the overflow get a mini score-only chip (2; 1 on phones). During the still warm-up only the two fixed
        flags may take full chips. */
-    const ax=this.vx,ay=this.hy+this.F/this.oZ,maxFull=S.narrow?1:2,maxMini=S.narrow?1:2,boxes=[[ax-48,ay-12,96,48]];
-    const kept=lit.filter(L=>L.fg.chip),fresh=lit.filter(L=>!L.fg.chip&&L.fg.lit>0.6).sort((a,b)=>b.fg.lit-a.fg.lit);
+    const ax=this.vx,ay=this.hy+this.F/this.oZ,maxFull=S.narrow?1:3,maxMini=S.narrow?1:3,boxes=[[ax-110,ay-14,220,70]],placed=[];
+    const kept=lit.filter(L=>L.fg.chip),fresh=lit.filter(L=>!L.fg.chip&&L.fg.lit>0.6).sort((a,b)=>b.s-a.s);
     let nF=0,nM=0;
     for(const L of kept.concat(fresh)){const fg=L.fg;let kind=fg.chip;
       if(!kind){const canFull=L.s>sF*0.25&&(!S.narrow||fg.fl===2)&&(!S.stillRun||fg.pri);kind=canFull&&nF<maxFull?'full':nM<maxMini?'mini':null;if(!kind)continue;}
       else if(kind==='full'?nF>=maxFull:nM>=maxMini){fg.chip=false;continue;}
       const b=chipBox(ctx,L,S,kind==='mini');
       if(!fg.chip&&(b.y<S.h*0.18||boxes.some(o=>b.x<o[0]+o[2]+16&&o[0]<b.x+b.w+16&&b.y<o[1]+o[3]+16&&o[1]<b.y+b.h+16)))continue;
-      boxes.push([b.x,b.y,b.w,b.h]);fg.chip=kind;if(kind==='full')nF++;else nM++;drawChip(ctx,L,b,P);}
+      boxes.push([b.x,b.y,b.w,b.h]);fg.chip=kind;if(kind==='full')nF++;else nM++;placed.push([L,b]);}
+    for(const [L] of placed)drawLink(ctx,L,ax,ay,P,t);for(const [L,b] of placed)drawChip(ctx,L,b,P);
     /* the screened address: the scan's source, with a blue bloom that flares as each pulse leaves it */
     const flare=Math.max(0,1-ph*4);
     pt(ax,ay,40+26*flare,P.glow,0.16+0.2*flare,1);pt(ax,ay,9.5,P.fg,1);
     ctx.strokeStyle=col(P.accent,0.6);ctx.lineWidth=1.25;ctx.beginPath();ctx.ellipse(ax,ay,18,6.5,0,0,TAU);ctx.stroke();
-    ctx.font="500 11px "+MONO;ctx.textAlign="center";ctx.lineJoin="round";ctx.lineWidth=3;ctx.strokeStyle="rgba(255,255,255,.9)";ctx.strokeText("0x8a…c21e",ax,ay+26);ctx.fillStyle=col(P.fg,0.8);ctx.fillText("0x8a…c21e",ax,ay+26);this.litN=lit.length;
+    ctx.textAlign="center";ctx.lineJoin="round";ctx.lineWidth=4;ctx.strokeStyle="rgba(255,255,255,.92)";
+    const lab=T.screening+" 0x8a…c21e";ctx.font="600 12.5px "+MONO;ctx.strokeText(lab,ax,ay+28);ctx.fillStyle=col(P.fg,0.88);ctx.fillText(lab,ax,ay+28);
+    /* how many risks this pulse has found so far, so the scene reads as "searching the ocean, finding threats" */
+    const nFound=lit.length,ftxt=nFound?fmt(nFound===1?T.found1:T.foundN,nFound):T.found0,stxt=' · '+T.sim;ctx.font="500 12.5px "+SANS;
+    const fw=ctx.measureText(ftxt).width,sw2=ctx.measureText(stxt).width,x0=ax-(fw+sw2)/2;ctx.textAlign="left";
+    ctx.strokeText(ftxt+stxt,x0,ay+48);ctx.fillStyle=nFound?col(P.riskText,0.95):col(P.dim,0.95);ctx.fillText(ftxt,x0,ay+48);
+    ctx.fillStyle=col(P.dim,0.7);ctx.fillText(stxt,x0+fw,ay+48);ctx.textAlign="center";this.litN=lit.length;
   },
   hud(){return fmt(T.pulse,this.pulseN+1)+' · '+fmt(this.litN===1?T.flagged1:T.flaggedN,this.litN);}
 };

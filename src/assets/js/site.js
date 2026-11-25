@@ -96,3 +96,13 @@
     });
   });
 })();
+
+// 页脚微信图标：点击（手机上）切换二维码，点别处或按 Esc 关闭；桌面端悬停时由 CSS 显示
+(() => {
+  const btn = document.querySelector(".foot-wechat button");
+  if (!btn) return;
+  const set = (open) => btn.setAttribute("aria-expanded", String(open));
+  btn.addEventListener("click", (e) => { e.stopPropagation(); set(btn.getAttribute("aria-expanded") !== "true"); });
+  document.addEventListener("click", () => set(false));
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") set(false); });
+})();

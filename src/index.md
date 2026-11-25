@@ -118,14 +118,9 @@ sections:
         href: /check/
         link: About the Address Check
 
-  - type: news
-    title: News & Highlights
-    lead: "The latest from DART: announcements, product updates and industry notes."
-    placeholder: true
-    items:
-      - { tag: News, title: News Headline Placeholder One, text: One-line summary placeholder. Replace before launch. }
-      - { tag: Product Update, title: News Headline Placeholder Two, text: One-line summary placeholder. Replace before launch. }
-      - { tag: Highlight, title: News Headline Placeholder Three, text: One-line summary placeholder. Replace before launch. }
+  - type: posts
+    title: Latest Articles
+    limit: 3
 
   - type: cta
     eyebrow: Free access

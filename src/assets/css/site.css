@@ -94,7 +94,6 @@ code, pre, .mono { font-family: var(--mono); }
 }
 /* 与 width.com 一致：标题上方不放小标签。页面文件里的 eyebrow 字段保留，只是不显示；页脚的栏目标题照常显示。 */
 .eyebrow { display: none; }
-.site-footer .eyebrow { display: block; }
 .mini-label { font-size: 13px; font-weight: 600; color: var(--text-3); margin: 0 0 6px; }
 .chip {
   display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 600;
@@ -532,28 +531,102 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
 .viz-image { overflow: hidden; padding: 0; }
 .viz-image img { width: 100%; }
 
-/* == footer ============================================================== */
-.site-footer { margin-top: 0; border-top: 1px solid var(--line); background: #f4f5f7; }
-.disposition-bar { display: none; grid-template-columns: repeat(4, 1fr); height: 4px; }  /* 四档色只表示风险含义，不作装饰 */
-.disposition-bar i:nth-child(1) { background: var(--pass); } .disposition-bar i:nth-child(2) { background: var(--review); }
-.disposition-bar i:nth-child(3) { background: var(--edd); } .disposition-bar i:nth-child(4) { background: var(--block); }
-.footer-grid { display: grid; grid-template-columns: 1.5fr repeat(5, 1fr); gap: 36px; padding-top: 64px; padding-bottom: 48px; }
-.footer-brand p { color: var(--text-3); font-size: 14.5px; margin-top: 18px; max-width: 340px; }
-.footer-brand .footer-free { color: var(--accent); font-weight: 600; font-size: 13.5px; }
-.footer-contact { display: grid; gap: 4px; margin-top: 24px; font-size: 14px; color: var(--text-2); }
-.footer-contact .eyebrow { margin-bottom: 4px; color: var(--text-3); }
-.footer-col .eyebrow { color: var(--text); font-size: 14px; }
-.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
-.footer-col a { color: var(--text-2); font-size: 14.5px; }
-.footer-col a:hover, .footer-contact a:hover { color: var(--accent); }
-.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-top: 24px; padding-bottom: 32px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-3); }
-.footer-links { display: flex; flex-wrap: wrap; gap: 20px; }
-.footer-links a:hover { color: var(--accent); }
+/* == footer ==============================================================
+   和 width.com 的页脚统一（2026-11-25）：浅灰底、推广条、WIDTH 标志 + 标语、邮箱、新加坡 / 香港地址、
+   社交图标（微信悬停出二维码）、AI 摘要、五栏链接、认证徽章、底部版权。样式取自 width.com 的 footer.site.paper。 */
+.site-footer { --f-ink: #1c1a17; --f-sub: #55565a; --f-line: #e3e5e9; --f-blue: #0d4fd3;
+  background: #f4f5f7; color: var(--f-sub); padding: clamp(56px, 6vw, 80px) 0 32px; border-top: 0; }
+.site-footer .container { max-width: 1280px; }
+.foot-promo { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 24px;
+  margin: 0 0 clamp(36px, 4vw, 52px); padding: 16px clamp(18px, 2vw, 26px); background: #fff; border-radius: 14px; }
+.foot-promo p { display: flex; align-items: center; gap: 12px; margin: 0; font-size: 15px; line-height: 1.45; color: var(--f-ink); }
+.foot-promo p svg { flex: none; width: 22px; height: 22px; fill: none; stroke: var(--f-blue); stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+.foot-promo b { font-weight: 700; color: var(--f-blue); }
+.foot-promo a { font-size: 15px; font-weight: 700; color: var(--f-blue); white-space: nowrap; }
+.foot-promo .ar { display: inline-block; transition: transform .18s ease; }
+.foot-promo a:hover .ar { transform: translateX(4px); }
+
+.foot-grid { display: grid; grid-template-columns: minmax(280px, 300px) minmax(0, 1fr); gap: 16px 48px; align-items: start; }
+.foot-brand { grid-row: span 2; display: flex; flex-direction: column; align-items: flex-start; }
+.foot-logo { display: inline-flex; align-items: center; gap: 10px; color: var(--f-blue); }
+.foot-logo svg { height: 22px; width: auto; display: block; }
+.foot-product { font-size: 15px; font-weight: 700; letter-spacing: .06em; color: var(--f-ink); border-left: 1px solid var(--f-line); padding-left: 10px; line-height: 22px; }
+.foot-tag { margin: 16px 0 0; max-width: 34ch; font-size: 15px; line-height: 1.55; color: var(--f-sub); }
+.foot-tag b { font-weight: 500; color: var(--f-blue); white-space: nowrap; }
+.foot-contact, .foot-offices, .foot-social, .foot-col ul, .foot-certs ul { list-style: none; margin: 0; padding: 0; }
+.foot-contact { margin-top: 20px; }
+.foot-contact li, .foot-contact a, .foot-col li, .foot-col a { line-height: 19.5px; }
+.foot-contact a { font-size: 14px; color: var(--f-sub); transition: color .22s ease; }
+.foot-offices { display: grid; gap: 8px; width: 100%; margin-top: 16px; color: var(--f-sub); }
+.foot-offices li { display: grid; grid-template-columns: 21px minmax(0, 1fr); column-gap: 10px; align-items: start; }
+.foot-offices .flag { display: block; width: 21px; height: 14px; margin-top: 3px; }
+.foot-offices .adr { min-width: 0; font-size: 13px; line-height: 1.5; }
+.foot-social { display: flex; gap: 2px; margin: 18px 0 0 -10px; }
+.foot-social li { position: relative; }
+.foot-social a, .foot-social li.foot-wechat button { display: grid; place-items: center; width: 40px; height: 40px; padding: 0; border: 0; background: none;
+  color: var(--f-sub); cursor: pointer; transition: color .25s ease, transform .3s cubic-bezier(.2, .7, .2, 1); }
+.foot-social a svg { width: 20px; height: 20px; }
+.foot-social li.foot-wechat button svg { width: 22px; height: 22px; }
+.foot-social a:hover, .foot-social li.foot-wechat button:hover, .foot-social li.foot-wechat button[aria-expanded="true"] { color: var(--f-blue); transform: translateY(-2px); }
+.foot-wechat-pop { position: absolute; left: 50%; bottom: calc(100% + 10px); z-index: 5; display: grid; justify-items: center; gap: 4px; width: max-content; min-width: 200px;
+  padding: 14px 18px; background: #fff; border: 1px solid var(--f-line); box-shadow: 0 18px 44px -18px rgba(4, 16, 43, .35);
+  clip-path: polygon(-1px -1px, calc(100% + 1px) -1px, calc(100% + 1px) calc(100% - 13px), calc(100% - 11.3px) calc(100% + 1px), -1px calc(100% + 1px));
+  transform: translate(-50%, 6px); opacity: 0; visibility: hidden; pointer-events: none; transition: opacity .2s ease, transform .2s ease, visibility 0s linear .2s; }
+.foot-wechat-pop img { display: block; width: 120px; height: 120px; }
+.foot-wechat-pop b { display: block; margin-top: 6px; font-size: 13px; font-weight: 700; line-height: 1.2; color: var(--f-ink); }
+.foot-wechat-pop small { display: block; font-size: 11.5px; line-height: 1.35; color: var(--f-sub); white-space: nowrap; }
+.foot-social li.foot-wechat:hover .foot-wechat-pop, .foot-social li.foot-wechat:focus-within .foot-wechat-pop, .foot-social li.foot-wechat button[aria-expanded="true"] + .foot-wechat-pop {
+  opacity: 1; visibility: visible; pointer-events: auto; transform: translate(-50%, 0); transition-delay: 0s; }
+.foot-ai { display: inline-flex; align-items: center; gap: 8px; margin-top: 6px; }
+.foot-ai-label { font-size: 12.5px; color: var(--f-sub); white-space: nowrap; }
+.foot-ai a { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: var(--f-sub); border: 1px solid var(--f-line);
+  transition: color .25s ease, border-color .25s ease; }
+.foot-ai a svg { width: 13px; height: 13px; }
+.foot-ai a:hover { color: var(--f-blue); border-color: var(--f-blue); }
+
+.foot-nav { display: grid; grid-template-columns: repeat(5, max-content); justify-content: space-between; gap: 28px 24px; }
+.foot-col h3 { margin: 0 0 14px; font-size: 14px; font-weight: 700; letter-spacing: .01em; color: var(--f-ink); }
+.foot-col a { display: inline-block; vertical-align: top; font-size: 14px; color: var(--f-sub); white-space: nowrap; transition: color .22s ease, transform .22s ease; }
+.foot-col a:hover { transform: translateX(3px); }
+.foot-contact a:hover, .foot-col a:hover { color: var(--f-blue); }
+
+.foot-certs { grid-column: 2; align-self: end; padding-top: 16px; border-top: 1px solid var(--f-line); }
+.foot-certs > p { margin: 0; font-size: 13px; line-height: 19.5px; }
+.foot-certs ul { margin-top: 14px; display: grid; grid-template-columns: repeat(3, max-content); justify-content: space-between; align-items: center; gap: 16px 20px; }
+.foot-certs li { display: flex; align-items: center; }
+.foot-certs li.badge a { display: block; }
+.foot-certs li.badge svg { display: block; width: auto; height: 34px; overflow: visible; fill: currentColor; color: var(--f-ink); opacity: .8; transition: opacity .22s ease; font-family: var(--font); }
+.foot-certs li.badge:hover svg { opacity: 1; }
+
+.foot-meta { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px 28px; margin-top: 36px; padding-top: 18px;
+  border-top: 1px solid var(--f-line); font-size: 12.5px; line-height: 1.6; color: var(--f-sub); }
+.foot-legal { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; }
+.foot-legal a { color: var(--f-sub); text-decoration: underline; text-decoration-color: rgba(28, 26, 23, .25); text-underline-offset: 3px; text-decoration-thickness: 1px;
+  transition: color .22s ease, text-decoration-color .22s ease; }
+.foot-legal a:hover { color: var(--f-blue); text-decoration-color: rgba(13, 79, 211, .5); }
+
+@media (max-width: 1100px) {
+  .foot-grid { grid-template-columns: 1fr; gap: 40px; }
+  .foot-brand { grid-row: auto; }
+  .foot-certs { grid-column: auto; }
+  .foot-nav { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 30px 22px; }
+}
+@media (max-width: 640px) {
+  .site-footer { padding-top: 48px; }
+  .foot-promo p { align-items: flex-start; }
+  .foot-nav { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 26px 18px; }
+  .foot-col a { white-space: normal; }
+  .foot-tag { max-width: none; }
+  .foot-certs ul { display: flex; flex-wrap: wrap; }
+  .foot-meta { justify-content: flex-start; margin-top: 30px; }
+  .foot-legal { gap: 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .foot-col a:hover, .foot-social a:hover, .foot-social li.foot-wechat button:hover { transform: none; }
+}
 
 /* == 响应式 =============================================================== */
 @media (max-width: 1100px) {
-  .footer-grid { grid-template-columns: repeat(3, 1fr); }
-  .footer-brand { grid-column: 1 / -1; }
   .steps, .steps.cols-5 { grid-template-columns: repeat(2, 1fr); }
   .step::after { display: none; }
   .cards.cols-4 { grid-template-columns: repeat(2, 1fr); }
@@ -593,7 +666,6 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
   body { font-size: 16px; }
   .problems { grid-template-columns: 1fr; }
   .cards.cols-2, .cards.cols-3, .cards.cols-4, .cases.cols-2, .cases.cols-3, .post-grid, .steps, .steps.cols-3, .steps.cols-5 { grid-template-columns: 1fr; }
-  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
   .form { grid-template-columns: 1fr; padding: 22px; }
   .table-wrap table { min-width: 560px; }   /* 手机上表格横向滑动，不把单元格挤成竖排 */
   th, td { padding: 14px 16px; }
@@ -777,7 +849,6 @@ main h2 { font-size: clamp(32px, 3.8vw, 52px); line-height: 1.14; letter-spacing
 .cta-band { padding: 0; background: none; align-items: end; gap: 48px 64px; }
 main .cta-band h2 { font-size: clamp(34px, 4.2vw, 58px); line-height: 1.12; }
 .cta-band .lead { margin-top: 24px; max-width: 520px; font-size: 18px; line-height: 1.7; }
-.site-footer { border-top: 0; }
 
 /* == 只属于首页的规则（页面 front matter 里写 bodyClass: home-v2）============== */
 .home-v2 main h2 { font-size: clamp(34px, 4.4vw, 60px); }

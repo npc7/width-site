@@ -118,14 +118,9 @@ sections:
         href: /check/
         link: 了解个人地址体检
 
-  - type: news
-    title: 新闻与亮点
-    lead: DART 的最新动态、产品更新和行业观察。
-    placeholder: true
-    items:
-      - { tag: 新闻, title: 新闻标题占位一, text: 一句话摘要占位，上线前替换为真实内容。 }
-      - { tag: 产品更新, title: 新闻标题占位二, text: 一句话摘要占位，上线前替换为真实内容。 }
-      - { tag: 亮点, title: 新闻标题占位三, text: 一句话摘要占位，上线前替换为真实内容。 }
+  - type: posts
+    title: 最新文章
+    limit: 3
 
   - type: cta
     eyebrow: 免费接入

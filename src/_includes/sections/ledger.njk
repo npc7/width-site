@@ -5,7 +5,11 @@
 {%- set L = {
   play: '播放动效' if zh else 'Play motion',
   pause: '暂停动效' if zh else 'Pause motion',
-  sim: '模拟演示' if zh else 'SIMULATED',
+  sim: '模拟演示' if zh else 'Simulated',
+  screening: '正在筛查' if zh else 'Screening',
+  found0: '正在扫描链上转账…' if zh else 'Scanning onchain transfers…',
+  found1: '已发现 {n} 个风险点' if zh else '{n} risk found',
+  foundN: '已发现 {n} 个风险点' if zh else '{n} risks found',
   pulse: '第 {n} 轮扫描' if zh else 'pulse {n}',
   flagged1: '已标记 {n} 笔风险转账' if zh else '{n} risky transfer flagged',
   flaggedN: '已标记 {n} 笔风险转账' if zh else '{n} risky transfers flagged',
