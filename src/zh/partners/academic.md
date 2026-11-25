@@ -39,18 +39,9 @@ sections:
     eyebrow: 申请流程
     title: 三步开始合作
     items:
-      - { label: STEP 01, title: 提交申请, text: 使用 .edu 等高校邮箱，附导师或项目说明。 }
-      - { label: STEP 02, title: 审核用途, text: 我们确认研究或教学用途，商业用途请走企业接入。 }
-      - { label: STEP 03, title: 开通额度, text: 开通学术 API 额度，或按项目约定数据集和课程合作。 }
-
-  - type: split
-    eyebrow: 合作约定
-    title: 我们希望你做的一件事
-    text: 使用 Width 数据发表论文、报告或课程材料时，请注明数据来源为 Width。这是学术合作里我们唯一的要求。
-    points:
-      - 学术 API 额度仅限非商业用途
-      - 数据集为事件级脱敏数据，不含个人信息
-      - 联合研究的署名和发布方式，按项目单独约定
+      - { label: 第 1 步, title: 提交申请, text: 使用 .edu 等高校邮箱，附导师或项目说明。 }
+      - { label: 第 2 步, title: 审核用途, text: 我们确认研究或教学用途，商业用途请走企业接入。 }
+      - { label: 第 3 步, title: 开通额度, text: 开通学术 API 额度，或按项目约定数据集和课程合作。 }
 
   - type: faq
     eyebrow: 常见问题

@@ -10,7 +10,7 @@ breadcrumb:
 sections:
   - type: hero
     compact: true
-    eyebrow: RULESETS & SCORING · 规则集与评分
+    eyebrow: 规则集与评分
     title: 把你的风险偏好，<br><em>写成规则</em>
     lead: 什么样的资金链路算违规、违规了扣多少分、多少分该拦，每家机构的口径都不一样。DART 用两套规则集把这件事拆开：路径匹配规则集判断「算不算违规」，评分规则集决定「有多严重、怎么处置」。两套都公开、都能改。
     ctas:
@@ -73,16 +73,6 @@ sections:
     ctas:
       - { label: 看评分公式详解, href: "https://width.info/docs", style: ghost }
     visual: result
-
-  - type: steps
-    tone: alt
-    eyebrow: 怎么改
-    title: 改规则的四步
-    items:
-      - { label: 复制, title: 从内置规则集开始, text: KYA、KYT-IN、KYT-OUT 和评分都有内置版本，复制一份成为你自己的。 }
-      - { label: 修改, title: 改条件和分值, text: "按类别、金额、占比、跳数区间、链等条件组合规则；调整基础分、权重和处置阈值。" }
-      - { label: 试跑, title: 拿历史地址验证, text: 同一批地址用新旧两套规则集各跑一遍，对比结果再上线。 }
-      - { label: 启用, title: 筛查时指定, text: 控制台选择或 API 传规则集 ID，快照里记录用的是哪一版。 }
 
   - type: faq
     eyebrow: 常见问题

@@ -10,97 +10,67 @@ sections:
   - type: hero
     compact: true
     eyebrow: Solutions · Exchanges
-    title: Screen every deposit and withdrawal, <em>without the false alarms</em>
+    title: Screen Every Deposit and Withdrawal, <em>Without the False Alarms</em>
     lead: Deposits are about where the money came from; withdrawals are about where it is going. DART traces funds hop by hop in time order and drops paths the money could not have taken, so your compliance team only works the cases that matter.
     ctas:
-      - { label: Get free access, href: "/contact/?type=exchange" }
-      - { label: Read the docs, href: "https://width.info/docs" }
+      - { label: Get Free Access, href: "/contact/?type=exchange" }
+      - { label: Read the Docs, href: "https://width.info/docs" }
     note: Free until 31 December 2028
     visual: result
 
   - type: problems
     eyebrow: Exchange compliance
-    title: Sound familiar?
+    title: Sound Familiar?
     items:
-      - problem: Too many deposit alerts for the review team
+      - problem: Too Many Deposit Alerts for the Review Team
         detail: If a tool only asks "are these addresses connected?", ordinary deposits get traced a few hops out to something risky, and most alerts end up as false positives.
         solution: |
           - A hop only counts if the funds **arrived before they left**. Paths that run backwards in time are dropped
           - **Share of funds matters**: the further the hop, the higher the threshold, so a trace amount of bad money doesn't condemn an address
           - Four dispositions (pass, review, EDD, block) mean reviewers only see the middle two
         proof: In one payment company's test, another tool rated an address "medium-low risk, needs review". DART scored it 0. Broken down transfer by transfer, the risky funds could not have reached it in time.
-      - problem: Getting dragged in by other exchanges' users
+      - problem: Getting Dragged In by Other Exchanges' Users
         detail: A hot wallet touches thousands of addresses a day. Trace through another exchange and you will almost always hit something risky.
         solution: |
           - **Exchange counterparties are exempt by default**: tracing stops at another exchange, so other users of that exchange don't count against you
           - Switch the exemption off for strict scenarios such as sanctions screening
         proof: A Middle East exchange runs deposit and withdrawal screening with the exemption on by default.
-      - problem: New regulatory actions outpace your rules
+      - problem: New Regulatory Actions Outpace Your Rules
         detail: Official lists and enforcement orders change faster every year. Maintaining rules in-house is slow and easy to get wrong.
         solution: |
           - We turn new official actions into **built-in rulesets** you can select in the console or API
           - Every rule is readable. Copy a ruleset and adjust it to your own policy
         proof: FinCEN's 9714 order was published on 6 November. The DART built-in ruleset went live the same day.
-      - problem: Licensing reviews ask why you blocked or passed
-        detail: A bare score with no reasoning leaves you exposed in VASP licensing reviews and regulatory inspections.
-        solution: |
-          - **Every point maps to a rule**: path, hop, amount, share of funds and points added, all listed
-          - Every screening is saved as an **immutable snapshot**, with the ruleset version on record
-        proof: Pull any snapshot from the console or API, and build screening and disposition reports for any period.
 
   - type: steps
     tone: alt
     eyebrow: Where DART sits
-    title: One check on the way in, one on the way out
+    title: One Check on the Way In, One on the Way Out
     lead: Deposits are screened inbound and withdrawals outbound, each with its own ruleset and hop depth.
     items:
-      - { label: DEPOSIT, title: Funds land onchain, text: A user's deposit confirms and your system has the transaction hash. }
-      - { label: KYT-IN, title: Screen the source, text: Trace upstream in time order against the inbound ruleset and get a 0–100 score. }
-      - { label: DECIDE, title: Credit or hold, text: Pass credits straight away; review and EDD go to a queue; block freezes and escalates. }
-      - { label: WITHDRAWAL, title: Screen the destination, text: Before release, run KYA or KYT-OUT on the target address. Critical hits such as sanctions are blocked. }
-
-  - type: table
-    eyebrow: Recommended setup
-    title: How exchanges typically integrate
-    head: [Checkpoint, Endpoint, Ruleset, Hops, Exchange exemption]
-    rows:
-      - [Before crediting a deposit, "`POST /api/v3/screen/kyt`", Built-in KYT-IN + default scoring, Inbound 3 (default), "On"]
-      - [Before releasing a withdrawal, "`POST /api/v3/screen/kyt` or `/screen/kya`", Built-in KYT-OUT / AML KYA Default, Outbound 1 (default), "On"]
-      - [First or large deposits, "`POST /api/v3/screen/kya/multi`", AML KYA Default, Deeper as needed, "On"]
-      - [Dedicated sanctions checks, "`POST /api/v3/screen/kya`", Sanctions rulesets, Configurable, "Off if required"]
-    note: "Hops, thresholds and rules are all adjustable. Sync calls return the result directly; for very active addresses, use async mode (`mode: async`) so nothing blocks."
+      - { label: Deposit, title: Funds Land Onchain, text: A user's deposit confirms and your system has the transaction hash. }
+      - { label: KYT-IN, title: Screen the Source, text: Trace upstream in time order against the inbound ruleset and get a 0–100 score. }
+      - { label: Decide, title: Credit or Hold, text: Pass credits straight away; review and EDD go to a queue; block freezes and escalates. }
+      - { label: Withdrawal, title: Screen the Destination, text: Before release, run KYA or KYT-OUT on the target address. Critical hits such as sanctions are blocked. }
 
   - type: cases
     eyebrow: Customers
-    title: Exchanges already on DART
+    title: Exchanges Already on DART
     columns: 2
     items:
       - tag: Exchange · Middle East
-        title: A Middle East exchange
+        title: A Middle East Exchange
         text: Screens deposits and withdrawals automatically, with exchange counterparties exempt by default, so it isn't dragged in by other exchanges' users.
       - tag: Regulatory update
         metric: Same day
         metricLabel: From new order to built-in ruleset
-        title: FinCEN 9714 order
+        title: FinCEN 9714 Order
         text: Published on 6 November, live as a DART built-in ruleset the same day. Customers selected it in the console and could identify related funds in their deposits and withdrawals.
     note: Customer names withheld for confidentiality. Figures from DART production data, November 2026.
 
-  - type: cards
-    tone: alt
-    eyebrow: Related products
-    title: What exchanges use
-    columns: 3
-    items:
-      - { title: Transaction screening (KYT), text: Source of funds on deposits, destination on withdrawals, with rules per direction., href: /products/kyt/ }
-      - { title: Address screening (KYA), text: New users, large amounts and withdrawal targets, across every chain the address uses., href: /products/kya/ }
-      - { title: Sanctions screening, text: Official lists in under a second. A natural fit before releasing withdrawals., href: /products/sanctions/ }
-      - { title: Rulesets & scoring, text: Write your risk appetite as rules. Copy a built-in ruleset and edit., href: /products/rulesets/ }
-      - { title: Fund tracing & investigations, text: Follow suspicious funds across hops and chains and export a tracing report., href: /products/investigations/ }
-      - { title: AI agents (MCP), text: Let analysts screen and explain addresses from their AI assistant., href: /products/agents/ }
-
   - type: faq
     eyebrow: FAQ
-    title: Questions exchanges ask
+    title: Questions Exchanges Ask
     items:
       - q: Does the exchange exemption let risk slip through?
         a: The exemption only stops tracing once a path reaches another exchange. If the screened address carries a risk label itself, or a path hits a rule before it reaches an exchange, it still counts. Turn the exemption off for strict scenarios such as sanctions screening.
@@ -115,13 +85,13 @@ sections:
 
   - type: cta
     eyebrow: Free access
-    title: Run it <em>next to your current tools</em>
+    title: Run It <em>Next to Your Current Tools</em>
     text: Nothing to switch off. Send us a batch of historical deposit and withdrawal addresses (anonymized is fine) and we explain every difference.
     points:
       - A result for every address, with the path behind it and a **diff against your current tools**
       - Stablecoins on DART, everything else stays where it is
       - Free until **31 December 2028**
     ctas:
-      - { label: Get free access, href: "/contact/?type=exchange" }
-      - { label: Book a demo, href: "/contact/?type=exchange" }
+      - { label: Get Free Access, href: "/contact/?type=exchange" }
+      - { label: Book a Demo, href: "/contact/?type=exchange" }
 ---

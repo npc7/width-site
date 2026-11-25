@@ -1,0 +1,20 @@
+{#- console：一张大的产品示意图，只用在首页。左边是结果卡（result），右边是资金图（flow）。地址为示意。
+    默认（没有 JS、或系统设置了「减少动态效果」）显示最终结果：四条命中、36 分、复核。
+    assets/js/console.js 在它进入屏幕时给 .console 加 is-demo，按时间轴一步步演示：
+    输入地址 → 扫描 → 追出一跳 / 两跳 → 四条命中逐条点亮（左边这一行和右边图里它依据的节点、连线一起高亮）→ 给出处置。
+    consoleDemo = true 让 result / flow 两个模板输出演示用的部分（混币器节点、viz-demo 类），别的页面不受影响。 -#}
+{%- set zh = (lang == 'zh') -%}
+{%- set consoleDemo = true -%}
+<div class="console" data-console>
+  <div class="console-bar">
+    <b>{{ '地址筛查 · KYA' if zh else 'Address Screening · KYA' }}</b>
+    <span class="console-q" role="text" aria-label="{{ '被筛地址' if zh else 'Screened address' }} TZCL2K…3ULr"><span class="mono" data-type aria-hidden="true">TZCL2K…3ULr</span><em class="console-run" aria-hidden="true">{{ '筛查中' if zh else 'Screening' }}</em></span>
+    <span class="console-chain">Tron · USDT</span>
+    <i>{{ '资金图' if zh else 'Fund Graph' }}</i><i>{{ '命中明细' if zh else 'Hits' }}</i><i>{{ '快照' if zh else 'Snapshot' }}</i>
+  </div>
+  <div class="console-body">
+    <div class="console-side">{% include "visuals/result.njk" %}</div>
+    <div class="console-main">{% include "visuals/flow.njk" %}</div>
+  </div>
+</div>
+<script src="/assets/js/console.js" defer></script>

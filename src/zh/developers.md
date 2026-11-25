@@ -8,7 +8,7 @@ breadcrumb:
 sections:
   - type: hero
     compact: true
-    eyebrow: DEVELOPERS · 开发者
+    eyebrow: 开发者
     title: 一个 API Key，<em>几行代码接入</em>
     lead: 地址筛查、交易筛查、读取快照、管理规则集，全部走同一套 REST API。AI 助手可以通过 MCP 直接调用同样的能力。
     ctas:
@@ -30,17 +30,17 @@ sections:
           }'
 
   - type: steps
-    eyebrow: QUICKSTART · 快速开始
+    eyebrow: 快速开始
     title: 四步跑通第一次筛查
     items:
-      - { label: STEP 01, title: 拿到 API Key, text: 在控制台创建 API Key，放在请求头 X-Api-Key 里。 }
-      - { label: STEP 02, title: 筛一个地址, text: "POST /api/v3/screen/kya，默认同步返回结果；加 \"mode\": \"async\" 返回任务 ID。" }
-      - { label: STEP 03, title: 读结果, text: 看 score.verdict 和 hits，每条命中都带规则、跳数、金额和占比；快照可以随时用 ID 调出。 }
-      - { label: STEP 04, title: 按你的口径调, text: 复制内置规则集，改条件和分值，筛查时传 ruleset_id 和 scoring_ruleset_id。 }
+      - { label: 第 1 步, title: 拿到 API Key, text: 在控制台创建 API Key，放在请求头 X-Api-Key 里。 }
+      - { label: 第 2 步, title: 筛一个地址, text: "POST /api/v3/screen/kya，默认同步返回结果；加 \"mode\": \"async\" 返回任务 ID。" }
+      - { label: 第 3 步, title: 读结果, text: 看 score.verdict 和 hits，每条命中都带规则、跳数、金额和占比；快照可以随时用 ID 调出。 }
+      - { label: 第 4 步, title: 按你的口径调, text: 复制内置规则集，改条件和分值，筛查时传 ruleset_id 和 scoring_ruleset_id。 }
 
   - type: table
     tone: alt
-    eyebrow: ENDPOINTS · 常用接口
+    eyebrow: 常用接口
     title: 常用接口
     head: [接口, 用途]
     rows:
@@ -55,37 +55,16 @@ sections:
     note: 生产环境 `https://api.width.live`，测试环境 `https://test-api.width.live`（独立数据库，规则集 ID 与生产不同）。
 
   - type: cards
-    eyebrow: RESOURCES · 资源
+    eyebrow: 资源
     title: 文档和工具
     columns: 3
     items:
-      - { tag: DOCS, title: API 文档, text: 每个接口的参数、返回和示例，浏览器里直接调用。, href: "https://width.info/api-reference" }
-      - { tag: MANUAL, title: 产品手册, text: 两套规则集、评分公式、控制台操作，配截图讲清楚。, href: "https://width.info/docs" }
-      - { tag: OPENAPI, title: OpenAPI 3.1, text: 所有接口的 schema，用来生成 SDK 或工具定义。, href: "https://width.info/openapi.json" }
-      - { tag: LLMS, title: llms.txt, text: 给大模型读的接口说明，单文件完整版见 llms-full.txt。, href: "https://width.info/llms.txt" }
-      - { tag: SKILL, title: Agent Skill, text: 现成的 Skill 文件，放进 AI 助手就能用。, href: "https://width.info/agent/SKILL.md" }
-      - { tag: OPEN SOURCE, title: AMLClaw, text: 基于 DART API 的开源合规工作台：筛查、地址和交易监控、证据报告。, href: "https://github.com/amlclaw/amlclaw.com" }
-
-  - type: split
-    eyebrow: MCP
-    title: AI 助手接上就能用
-    text: "MCP 地址 `https://api.width.live/mcp`，用 `Authorization: Bearer <API Key>` 认证。19 个工具覆盖筛查、读取结果、管理规则集和规则。"
-    ctas:
-      - { label: 了解 AI 助手, href: /products/agents/, style: ghost }
-    visual: code
-    code:
-      title: mcp.json
-      body: |
-        {
-          "mcpServers": {
-            "width-dart": {
-              "url": "https://api.width.live/mcp",
-              "headers": {
-                "Authorization": "Bearer <你的 API Key>"
-              }
-            }
-          }
-        }
+      - { tag: 文档, title: API 文档, text: 每个接口的参数、返回和示例，浏览器里直接调用。, href: "https://width.info/api-reference" }
+      - { tag: 手册, title: 产品手册, text: 两套规则集、评分公式、控制台操作，配截图讲清楚。, href: "https://width.info/docs" }
+      - { tag: OpenAPI, title: OpenAPI 3.1, text: 所有接口的 schema，用来生成 SDK 或工具定义。, href: "https://width.info/openapi.json" }
+      - { tag: llms.txt, title: llms.txt, text: 给大模型读的接口说明，单文件完整版见 llms-full.txt。, href: "https://width.info/llms.txt" }
+      - { tag: Skill, title: Agent Skill, text: 现成的 Skill 文件，放进 AI 助手就能用。, href: "https://width.info/agent/SKILL.md" }
+      - { tag: 开源, title: AMLClaw, text: 基于 DART API 的开源合规工作台：筛查、地址和交易监控、证据报告。, href: "https://github.com/amlclaw/amlclaw.com" }
 
   - type: cta
     title: 拿一个 API Key 试试

@@ -21,7 +21,7 @@ sections:
   - type: cards
     id: method
     tone: alt
-    eyebrow: METHODOLOGY · 方法说明
+    eyebrow: 方法说明
     title: 我们怎么做这些榜单
     columns: 2
     items:

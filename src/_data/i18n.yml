@@ -5,26 +5,26 @@ en:
   switchTo: 中文
   skip: Skip to content
   menu: Menu
-  signIn: Sign in
-  ctaPrimary: Get free access
-  ctaDemo: Book a demo
-  ctaDocs: Read the docs
-  readMore: Read more
-  learnMore: Learn more
-  allPosts: All articles
-  latest: Latest from the blog
+  signIn: Sign In
+  ctaPrimary: Get Free Access
+  ctaDemo: Book a Demo
+  ctaDocs: Read the Docs
+  readMore: Read More
+  learnMore: Learn More
+  allPosts: All Articles
+  latest: Latest from the Blog
   minRead: min read
   by: By
   category: Category
-  related: Related articles
+  related: Related Articles
   share: Share
-  backToBlog: Back to blog
+  backToBlog: Back to Blog
   page: Page
   prev: Newer
   next: Older
   breadcrumbHome: Home
   sampleData: Sample data · replace before launch
-  comingSoon: Coming soon
+  comingSoon: Coming Soon
   footerTagline: Onchain intelligence for stablecoin compliance. DART screens USDT and USDC flows in time order, so good customers get through and bad funds don't.
   footerFree: Free until 31 Dec 2028
   contactTitle: Contact

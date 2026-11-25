@@ -10,96 +10,66 @@ sections:
   - type: hero
     compact: true
     eyebrow: Solutions · Payments & card issuers
-    title: Keep tainted funds <em>out of card and fiat rails</em>
+    title: Keep Tainted Funds <em>Out of Card and Fiat Rails</em>
     lead: Before a card top-up, a fiat off-ramp or a merchant payout, check where the USDT came from. When a banking partner or card scheme asks, every decision comes with its evidence.
     ctas:
-      - { label: Get free access, href: "/contact/?type=payments" }
-      - { label: Read the docs, href: "https://width.info/docs" }
+      - { label: Get Free Access, href: "/contact/?type=payments" }
+      - { label: Read the Docs, href: "https://width.info/docs" }
     note: Free until 31 December 2028
     visual: scores
 
   - type: problems
     eyebrow: Payments challenges
-    title: What PSPs and card issuers deal with
+    title: What PSPs and Card Issuers Deal With
     items:
-      - problem: One bad deposit can put a whole rail at risk
+      - problem: One Bad Deposit Can Put a Whole Rail at Risk
         detail: Once tainted funds reach a card scheme or bank, partners start looking hard at your entire business.
         solution: |
           - **Screen the source before top-up or deposit**: sanctions, issuer freezes, hacks and scams are handled by disposition level
           - Trace upstream in time order, counting only money that arrived before it left
         proof: A Middle East card issuer screens every top-up source, so tainted funds never reach card schemes or fiat rails.
-      - problem: Block everything or let everything through
+      - problem: Block Everything or Let Everything Through
         detail: With only pass or reject, blocking too much loses customers and passing too much takes on risk.
         solution: |
           - **Four dispositions**: 0–19 pass, 20–49 review, 50–79 EDD, 80–100 block
           - EDD asks the customer for source of funds instead of refusing outright
           - Thresholds and rule weights follow your own risk appetite
         proof: Dispositions and rule weights are documented in the product manual, ready to attach to internal policy.
-      - problem: Another tool flags risk but can't say why
+      - problem: Another Tool Flags Risk but Can't Say Why
         detail: A "medium-low risk" verdict with no reasoning leaves you unable to pass the payment or justify blocking it.
         solution: |
           - A hop only counts if funds **arrived before they left**. Backwards paths are dropped
           - Results list path, hop, amount, share of funds and points
         proof: In one payment company's test, another tool rated an address "medium-low risk, needs review". DART scored it 0. Broken down, the risky funds could not have reached it in time.
-      - problem: Every banking partner wants something different
-        detail: Each bank and card scheme has its own view on risk categories and thresholds.
-        solution: |
-          - **One ruleset per partner**: copy a built-in ruleset, change conditions and weights, and save each separately
-          - Every screening records which ruleset it ran under
-        proof: Every screening is saved as an immutable snapshot you can pull in bulk over the API.
 
   - type: steps
     tone: alt
     eyebrow: Where DART sits
-    title: A check before money reaches fiat
+    title: A Check Before Money Reaches Fiat
     items:
-      - { label: TOP-UP, title: Customer funds a card, text: Stablecoins arrive and you have the transaction hash. }
-      - { label: KYT-IN, title: Screen the source, text: Trace upstream in time order against your ruleset for a 0–100 score and a disposition. }
-      - { label: DECIDE, title: Route by level, text: Pass tops up the card; review and EDD go to a queue; block returns or freezes funds. }
-      - { label: OFF-RAMP, title: Check again before payout, text: Screen the target and funds before fiat payout or merchant settlement, and keep the snapshot. }
-
-  - type: table
-    eyebrow: Recommended setup
-    title: How payments businesses typically integrate
-    head: [Checkpoint, Endpoint, Ruleset, Hops, Notes]
-    rows:
-      - [Before top-up or deposit, "`POST /api/v3/screen/kyt`", Built-in KYT-IN + default scoring, Inbound 3 (default), Source of funds by disposition]
-      - [OTC or merchant receipts, "`POST /api/v3/screen/kya/multi`", AML KYA Default, Default, Screens every chain and token of the payer]
-      - [Before payout or settlement, "`POST /api/v3/screen/kyt`", Built-in KYT-OUT, Outbound 1 (default), Critical hits blocked]
-      - [Per banking partner, Same as above, Your copied ruleset, As required, One ruleset per partner]
-    note: Exchange counterparties are exempt by default. Hops, thresholds and rules are all adjustable, and every screening is snapshotted.
+      - { label: Top-up, title: Customer Funds a Card, text: Stablecoins arrive and you have the transaction hash. }
+      - { label: KYT-IN, title: Screen the Source, text: Trace upstream in time order against your ruleset for a 0–100 score and a disposition. }
+      - { label: Decide, title: Route by Level, text: Pass tops up the card; review and EDD go to a queue; block returns or freezes funds. }
+      - { label: Off-ramp, title: Check Again Before Payout, text: Screen the target and funds before fiat payout or merchant settlement, and keep the snapshot. }
 
   - type: cases
     eyebrow: Customers
-    title: How payments companies use DART
+    title: How Payments Companies Use DART
     columns: 2
     items:
       - tag: Card issuer · Middle East
-        title: A Middle East card issuer
+        title: A Middle East Card Issuer
         text: Screens the source of every card top-up, so tainted funds stay out of card schemes and fiat rails.
       - tag: Payment company
         metric: Score 0
         metricLabel: Same address another tool sent to review
-        title: A payment company's comparison
+        title: A Payment Company's Comparison
         text: Broken down transfer by transfer, the funds on the risky paths flowed backwards in time. The customer's money could not have come from the risky address.
     note: Customer names withheld for confidentiality.
 
-  - type: cards
-    tone: alt
-    eyebrow: Related products
-    title: What payments teams use
-    columns: 3
-    items:
-      - { title: Transaction screening (KYT), text: Source on the way in, destination on the way out., href: /products/kyt/ }
-      - { title: Address screening (KYA), text: Check the payer before OTC or merchant receipts., href: /products/kya/ }
-      - { title: Sanctions screening, text: Official lists in under a second., href: /products/sanctions/ }
-      - { title: Rulesets & scoring, text: One ruleset per banking partner, thresholds as required., href: /products/rulesets/ }
-      - { title: Fund tracing & investigations, text: When something goes wrong, follow the money across hops and chains., href: /products/investigations/ }
-      - { title: AI agents (MCP), text: Let analysts screen and explain addresses from their AI assistant., href: /products/agents/ }
-
   - type: faq
     eyebrow: FAQ
-    title: Questions payments companies ask
+    title: Questions Payments Companies Ask
     items:
       - q: Our bank partner wants zero tolerance. How do we configure DART?
         a: Set sanctions, terrorist financing and similar categories to block and lower the score thresholds. Rulesets are saved separately, so you can show exactly which rules applied at any point in time.
@@ -114,13 +84,13 @@ sections:
 
   - type: cta
     eyebrow: Free access
-    title: Run it <em>next to your current tools</em>
+    title: Run It <em>Next to Your Current Tools</em>
     text: Nothing to switch off. Send us a batch of historical deposit addresses (anonymized is fine) and we explain every difference.
     points:
       - A result for every address, with the path behind it and a **diff against your current tools**
       - Stablecoins on DART, everything else stays where it is
       - Free until **31 December 2028**
     ctas:
-      - { label: Get free access, href: "/contact/?type=payments" }
-      - { label: Book a demo, href: "/contact/?type=payments" }
+      - { label: Get Free Access, href: "/contact/?type=payments" }
+      - { label: Book a Demo, href: "/contact/?type=payments" }
 ---

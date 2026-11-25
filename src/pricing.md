@@ -9,15 +9,15 @@ sections:
   - type: hero
     compact: true
     eyebrow: Pricing
-    title: DART is <em>free until 31 December 2028</em>
+    title: DART Is <em>Free Until 31 December 2028</em>
     lead: You get the full product and engineering support, not a trial. We want more teams screening in time order, and real-world use is how we make the product better.
     ctas:
-      - { label: Get free access, href: /contact/ }
-      - { label: Book a demo, href: /contact/, style: ghost }
+      - { label: Get Free Access, href: /contact/ }
+      - { label: Book a Demo, href: /contact/, style: ghost }
 
   - type: table
     eyebrow: What's included
-    title: Everything, for the whole free period
+    title: Everything, for the Whole Free Period
     head: [Item, Details]
     rows:
       - [Free period, "Free until **31 December 2028**"]
@@ -31,16 +31,16 @@ sections:
   - type: cards
     tone: alt
     eyebrow: Who it's for
-    title: Ready for teams of every size
+    title: Ready for Teams of Every Size
     columns: 3
     items:
-      - { tag: Businesses, title: "Exchanges, wallets, payments, custody", text: "Go live in production with rulesets configured for each deposit and withdrawal point.", href: /contact/, link: Get free access }
-      - { tag: Public sector, title: Law enforcement and research, text: "Investigator accounts or academic quota after identity verification.", href: /partners/, link: Partner channels }
-      - { tag: Individuals, title: Address check, text: "Check addresses and freezes before you receive USDT, free for individuals (coming soon).", href: /check/, link: Learn more }
+      - { tag: Businesses, title: "Exchanges, Wallets, Payments, Custody", text: "Go live in production with rulesets configured for each deposit and withdrawal point.", href: /contact/, link: Get Free Access }
+      - { tag: Public sector, title: Law Enforcement and Research, text: "Investigator accounts or academic quota after identity verification.", href: /partners/, link: Partner Channels }
+      - { tag: Individuals, title: Address Check, text: "Check addresses and freezes before you receive USDT, free for individuals (coming soon).", href: /check/, link: Learn More }
 
   - type: faq
     eyebrow: FAQ
-    title: Questions about free access
+    title: Questions About Free Access
     items:
       - q: Why is it free?
         a: We want more institutions screening in time order, and we want to sharpen the product on real business. During the free period you get the full product and engineering support, not a trial version.
@@ -54,8 +54,8 @@ sections:
         a: See [Width platform pricing](https://www.width.com/pricing) for KYC / KYB, transaction monitoring, Travel Rule and other products.
 
   - type: cta
-    title: Start now and <em>pay nothing until 2029</em>
+    title: Start Now and <em>Pay Nothing Until 2029</em>
     ctas:
-      - { label: Get free access, href: /contact/ }
-      - { label: Read the docs, href: "https://width.info/docs" }
+      - { label: Get Free Access, href: /contact/ }
+      - { label: Read the Docs, href: "https://width.info/docs" }
 ---

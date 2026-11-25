@@ -40,12 +40,6 @@ sections:
           - **归集前先筛**：对充值交易做流入方向筛查，命中的地址暂停归集
           - 按时间顺序向上游追，只计算转出前已经到账的钱
         proof: MPC 托管归集与 KYT 接入有现成指南，接入时我们一起梳理流程。
-      - problem: 量大，但不能拖慢充提
-        detail: 托管平台的充提量集中在工作日，筛查一慢，下游客户就会投诉。
-        solution: |
-          - 制裁筛查 **1 秒内返回**；同步调用直接给结果，深度追踪走异步模式
-          - 控制台、API、CSV 批量共用一个账号和同一份额度
-        proof: 生产环境每天 30–40 万次 API 调用。
 
   - type: steps
     tone: alt
@@ -56,17 +50,6 @@ sections:
       - { label: KYT-IN, title: 归集前筛来源, text: 按客户的规则集筛资金来源，命中的地址暂停归集，交给客户处置。 }
       - { label: 归集, title: 干净资金进主钱包, text: 通过的资金正常归集，结果和快照按客户留存。 }
       - { label: 提现, title: 筛目标地址, text: 客户发起提现时，对目标地址做 KYA 或 KYT-OUT 筛查。 }
-
-  - type: table
-    eyebrow: 推荐配置
-    title: 托管和 WaaS 常用接入方式
-    head: [节点, 接口, 规则集, 跳数, 说明]
-    rows:
-      - [充值到账、归集前, "`POST /api/v3/screen/kyt`", 按客户配置的 KYT-IN 规则集, 流入 3 跳（默认）, 命中则暂停归集]
-      - [客户提现前, "`POST /api/v3/screen/kyt` 或 `/screen/kya`", 按客户配置的 KYT-OUT / KYA 规则集, 流出 1 跳（默认）, 严重规则直接拦截]
-      - [新客户存量地址回扫, CSV 批量导入, AML KYA Default, 默认, 一次性重新筛查]
-      - [大批量、深度追踪, "`mode: async`", 同上, 按需加深, 返回任务 ID 再查询，不阻塞充提]
-    note: 交易所对手方默认豁免；跳数、阈值和规则都可以按客户分别调整。
 
   - type: cases
     eyebrow: 案例
@@ -82,19 +65,6 @@ sections:
         title: MPC 托管归集与 KYT 接入
         text: 用 MPC 托管自建归集的团队，可以照着指南把 KYT 放进归集流程。
     note: 案例均匿名展示。数据来自 DART 生产环境，截至 2026 年 11 月。
-
-  - type: cards
-    tone: alt
-    eyebrow: 相关产品
-    title: 托管服务商会用到的能力
-    columns: 3
-    items:
-      - { title: 交易筛查 KYT, text: 充值看来源、提现看去向，归集前把关。, href: /products/kyt/ }
-      - { title: 地址筛查 KYA, text: 新客户、提现目标地址一次筛完全部链和币种。, href: /products/kya/ }
-      - { title: 规则集与评分, text: 每个客户一套规则集，按各自口径配置。, href: /products/rulesets/ }
-      - { title: 制裁筛查, text: 官方名单 1 秒内返回。, href: /products/sanctions/ }
-      - { title: 资金追踪与调查, text: 客户出了问题，跨跳、跨链追资金去向。, href: /products/investigations/ }
-      - { title: 接入指南, text: MPC 托管归集与 KYT 接入等操作指南。, href: /blog/category/guides/, link: 看指南 }
 
   - type: faq
     eyebrow: 常见问题

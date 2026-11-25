@@ -5,7 +5,7 @@
     <ol class="steps cols-{{ s.items | length }}">
       {%- for st in s.items %}
       <li class="step">
-        <span class="step-label">{{ st.label or ("STEP " + (loop.index | pad)) }}</span>
+        <span class="step-label">{{ st.label or (('第 ' + loop.index + ' 步') if lang == 'zh' else ('Step ' + loop.index)) }}</span>
         <h3>{{ st.title }}</h3>
         <p>{{ st.text | mdi | safe }}</p>
       </li>

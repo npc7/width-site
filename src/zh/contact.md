@@ -7,7 +7,7 @@ breadcrumb:
   - { label: 联系我们 }
 sections:
   - type: form
-    eyebrow: CONTACT · 联系我们
+    eyebrow: 联系我们
     title: 免费接入，或先约个演示
     text: 告诉我们你的业务类型和想解决的问题，我们会在一个工作日内回复，并安排工程师对接。
     points:

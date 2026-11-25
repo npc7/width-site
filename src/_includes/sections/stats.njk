@@ -4,7 +4,7 @@
     {% include "partials/section-head.njk" %}
     <div class="stat-strip">
       {%- for st in s.items %}
-      <div class="stat"><div class="stat-value">{{ st.value }}{% if st.unit %}<small>{{ st.unit }}</small>{% endif %}</div><div class="stat-label">{{ st.label }}</div></div>
+      <div class="stat"><div class="stat-value{% if r/^[一-鿿]/.test(st.value | string) %} is-word{% endif %}">{{ st.value }}{% if st.unit %}<small>{{ st.unit }}</small>{% endif %}</div><div class="stat-label">{{ st.label }}</div></div>
       {%- endfor %}
     </div>
   </div>

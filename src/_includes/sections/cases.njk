@@ -1,4 +1,4 @@
-{#- cases：匿名案例。items[{tag, title, text, metric, metricLabel}] -#}
+{#- cases：匿名案例。items[{icon?, tag, title, text, metric, metricLabel}]；icon 取 _data/icons.yml 的名字 -#}
 <section class="section {{ s.tone }}"{% if s.id %} id="{{ s.id }}"{% endif %}>
   <div class="container">
     {% include "partials/section-head.njk" %}
@@ -6,7 +6,8 @@
       {%- for c in s.items %}
       <article class="case">
         {%- if c.tag %}<span class="chip">{{ c.tag }}</span>{% endif %}
-        {%- if c.metric %}<p class="case-metric">{{ c.metric }}{% if c.metricLabel %}<small>{{ c.metricLabel }}</small>{% endif %}</p>{% endif %}
+        {%- if c.icon and icons[c.icon] %}<svg class="case-ico" viewBox="0 0 24 24" aria-hidden="true">{{ icons[c.icon] | safe }}</svg>{% endif %}
+        {%- if c.metric %}<p class="case-metric{% if r/^[一-鿿]/.test(c.metric | string) %} is-word{% endif %}">{{ c.metric }}{% if c.metricLabel %}<small>{{ c.metricLabel }}</small>{% endif %}</p>{% endif %}
         <h3>{{ c.title }}</h3>
         <p>{{ c.text | mdi | safe }}</p>
       </article>

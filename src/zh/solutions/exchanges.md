@@ -41,12 +41,6 @@ sections:
           - 新的官方动作由我们做成**内置规则集**，在控制台或 API 里直接选用
           - 规则全部公开可读，复制一份就能按你自己的口径改
         proof: FinCEN 9714 命令 11 月 6 日发布，DART 当天就上线了内置规则集。
-      - problem: 牌照申请、监管检查时说不清依据
-        detail: 只有一个分数、没有过程，VASP 牌照审查和监管检查都要你解释「为什么拦、为什么放」。
-        solution: |
-          - **每一分对应一条规则**：命中路径、跳数、金额、占比、加分全部列出
-          - 每次筛查自动存为**不可篡改的快照**，规则集版本可追溯
-        proof: 快照可以从控制台或 API 随时调出，按任意时间段生成筛查记录和处置统计。
 
   - type: steps
     tone: alt
@@ -58,17 +52,6 @@ sections:
       - { label: KYT-IN, title: 筛资金来源, text: 按时间顺序向上游追，匹配流入规则集，给出 0–100 分。 }
       - { label: 处置, title: 入账或挂起, text: 通过直接入账；复核、加强尽调进人工队列；拦截则冻结并上报。 }
       - { label: 提现, title: 筛收款地址, text: 用户提现前，对目标地址做 KYA 或 KYT-OUT 筛查，命中制裁等严重规则直接拦截。 }
-
-  - type: table
-    eyebrow: 推荐配置
-    title: 交易所常用接入方式
-    head: [节点, 接口, 规则集, 跳数, 交易所豁免]
-    rows:
-      - [充值入账前, "`POST /api/v3/screen/kyt`", 内置 KYT-IN + 默认评分规则集, 流入 3 跳（默认）, 开启]
-      - [提现放行前, "`POST /api/v3/screen/kyt` 或 `/screen/kya`", 内置 KYT-OUT / AML KYA Default, 流出 1 跳（默认）, 开启]
-      - [新用户首次充值、大额充值, "`POST /api/v3/screen/kya/multi`", AML KYA Default, 按需加深, 开启]
-      - [制裁名单专项筛查, "`POST /api/v3/screen/kya`", 制裁类规则集, 按需配置, 按需关闭]
-    note: "跳数、阈值、规则都可以按你的风险偏好调整。同步调用默认直接返回结果；交易非常活跃的地址可以用异步模式（`mode: async`），不阻塞业务。"
 
   - type: cases
     eyebrow: 案例
@@ -84,19 +67,6 @@ sections:
         title: FinCEN 9714 命令
         text: 命令 11 月 6 日发布，DART 当天就上线了内置规则集，客户在控制台直接选用，充提中即可识别相关资金。
     note: 案例均匿名展示。数据来自 DART 生产环境，截至 2026 年 11 月。
-
-  - type: cards
-    tone: alt
-    eyebrow: 相关产品
-    title: 交易所会用到的能力
-    columns: 3
-    items:
-      - { title: 交易筛查 KYT, text: 充值看来源，提现看去向，按方向分别配置规则。, href: /products/kyt/ }
-      - { title: 地址筛查 KYA, text: 新用户、大额、提现目标地址，一次筛完全部有流水的链和币种。, href: /products/kya/ }
-      - { title: 制裁筛查, text: 官方名单 1 秒内返回，适合放在提现放行前。, href: /products/sanctions/ }
-      - { title: 规则集与评分, text: 把你的风险偏好写成规则，复制内置规则集就能改。, href: /products/rulesets/ }
-      - { title: 资金追踪与调查, text: 可疑案件跨跳、跨链追资金去向，导出追踪报告。, href: /products/investigations/ }
-      - { title: AI 助手（MCP）, text: 合规人员用一句话让 AI 查地址、解释结果。, href: /products/agents/ }
 
   - type: faq
     eyebrow: 常见问题

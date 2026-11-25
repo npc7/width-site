@@ -10,51 +10,42 @@ sections:
   - type: hero
     compact: true
     eyebrow: Partners · Universities & research
-    title: Real onchain data <em>for research and teaching</em>
+    title: Real Onchain Data <em>for Research and Teaching</em>
     lead: Stablecoin AML, sanctions and security incidents can only be studied properly with real data. We open academic API access and de-identified datasets to universities and research groups.
     ctas:
       - { label: Apply, href: "/contact/?type=academic" }
-      - { label: Developer docs, href: /developers/ }
+      - { label: Developer Docs, href: /developers/ }
 
   - type: cards
     eyebrow: What we provide
-    title: Four ways to work with us
+    title: Four Ways to Work with Us
     columns: 2
     items:
       - tag: API
-        title: Academic API quota
+        title: Academic API Quota
         text: Free for non-commercial use. The same screening and tracing endpoints our enterprise customers use, for theses and research projects.
       - tag: Datasets
-        title: Quarterly public datasets
+        title: Quarterly Public Datasets
         text: De-identified event-level data covering sanctions, stablecoin freezes and hacks, with a methodology note.
       - tag: Teaching
-        title: Course packs and tracing competitions
+        title: Course Packs and Tracing Competitions
         text: Onchain AML course material plus CTF-style fund-tracing competitions, where students follow money from one address to its final destination.
       - tag: Research
-        title: Joint research and internships
+        title: Joint Research and Internships
         text: Joint research reports, plus internship and hiring pathways.
 
   - type: steps
     tone: alt
     eyebrow: How to apply
-    title: Three steps to start
+    title: Three Steps to Start
     items:
-      - { label: STEP 01, title: Apply, text: Apply from a university email with a supervisor or project description. }
-      - { label: STEP 02, title: Use review, text: We confirm research or teaching use. Commercial use goes through enterprise access. }
-      - { label: STEP 03, title: Access opens, text: We open your API quota, or agree datasets and course work per project. }
-
-  - type: split
-    eyebrow: The one thing we ask
-    title: Credit the data
-    text: When you publish a paper, report or course material using Width data, please credit Width as the data source. That's our only requirement for academic partners.
-    points:
-      - Academic API quota is for non-commercial use only
-      - Datasets are de-identified at the event level and contain no personal information
-      - Authorship and publication for joint research are agreed per project
+      - { label: Step 1, title: Apply, text: Apply from a university email with a supervisor or project description. }
+      - { label: Step 2, title: Use Review, text: We confirm research or teaching use. Commercial use goes through enterprise access. }
+      - { label: Step 3, title: Access Opens, text: We open your API quota, or agree datasets and course work per project. }
 
   - type: faq
     eyebrow: FAQ
-    title: Questions universities ask
+    title: Questions Universities Ask
     items:
       - q: Can students apply directly?
         a: Yes, from a university email, with a supervisor or project description.
@@ -67,9 +58,9 @@ sections:
 
   - type: cta
     eyebrow: Apply
-    title: Contact us <em>from your university email</em>
+    title: Contact Us <em>from Your University Email</em>
     text: Choose "University / research" in the contact form and tell us about your project or course.
     ctas:
       - { label: Apply, href: "/contact/?type=academic" }
-      - { label: Back to partners, href: /partners/ }
+      - { label: Back to Partners, href: /partners/ }
 ---

@@ -8,7 +8,7 @@ breadcrumb:
 sections:
   - type: hero
     compact: true
-    eyebrow: PLATFORM · 平台总览
+    eyebrow: 平台总览
     title: 一套引擎，<em>从数据到处置</em>
     lead: DART 把链上数据、资金追踪、规则判断和评分放进同一套引擎。你提交一个地址或一笔交易，拿回一个分数、一个处置建议，以及每一分背后的依据。
     ctas:
@@ -17,43 +17,32 @@ sections:
     visual: result
 
   - type: steps
-    eyebrow: ARCHITECTURE · 四层结构
+    eyebrow: 四层结构
     title: 每一层都是我们自己做的
     lead: 数据、标签、规则、评分都是自建的，所以能按你的口径改，也能说清每一个结论从哪来。
     items:
-      - { label: LAYER 1, title: 链上数据层, text: 11 条链的 USDT / USDC 流水，近实时更新。 }
-      - { label: LAYER 2, title: 地址标签, text: 2 亿已标注地址，九成以上是交易所地址；制裁、冻结、黑客等风险标签持续更新。 }
-      - { label: LAYER 3, title: 时序资金追踪, text: 逐跳展开上下游，只保留时间上流得过来的路径。 }
-      - { label: LAYER 4, title: 规则与评分, text: 路径匹配规则判断违规，评分规则集按资金占比给出 0–100 分和处置。 }
+      - { label: 第 1 层, title: 链上数据层, text: 11 条链的 USDT / USDC 流水，近实时更新。 }
+      - { label: 第 2 层, title: 地址标签, text: 2 亿已标注地址，九成以上是交易所地址；制裁、冻结、黑客等风险标签持续更新。 }
+      - { label: 第 3 层, title: 时序资金追踪, text: 逐跳展开上下游，只保留时间上流得过来的路径。 }
+      - { label: 第 4 层, title: 规则与评分, text: 路径匹配规则判断违规，评分规则集按资金占比给出 0–100 分和处置。 }
 
   - type: cards
     tone: alt
-    eyebrow: CAPABILITIES · 能力
+    eyebrow: 能力
     title: 按你要回答的问题选
     columns: 3
     items:
       - { tag: KYA, title: 地址筛查, text: 这个地址能不能打交道？自身命中、直接往来、多跳暴露一次看清。, href: /products/kya/ }
       - { tag: KYT, title: 交易筛查, text: 这笔充值从哪来，这笔提现打到哪去？按方向分别判断。, href: /products/kyt/ }
-      - { tag: SANCTIONS, title: 制裁筛查, text: 官方制裁名单上的实体、个人、公司和地址，1 秒内返回。, href: /products/sanctions/ }
-      - { tag: TRACING, title: 资金追踪与调查, text: 跨跳、跨链追资金去向，导出追踪报告。, href: /products/investigations/ }
-      - { tag: RULES, title: 规则集与评分, text: 72 条公开规则、可改的评分矩阵，把你的风险偏好写成规则。, href: /products/rulesets/ }
+      - { tag: 制裁, title: 制裁筛查, text: 官方制裁名单上的实体、个人、公司和地址，1 秒内返回。, href: /products/sanctions/ }
+      - { tag: 追踪, title: 资金追踪与调查, text: 跨跳、跨链追资金去向，导出追踪报告。, href: /products/investigations/ }
+      - { tag: 规则, title: 规则集与评分, text: 72 条公开规则、可改的评分矩阵，把你的风险偏好写成规则。, href: /products/rulesets/ }
       - { tag: MCP, title: AI 助手, text: 19 个 MCP 工具，AI 助手直接查地址、看结果、改规则。, href: /products/agents/ }
-
-  - type: split
-    eyebrow: DATA · 数据
-    title: 2 亿已标注地址，<em>持续更新</em>
-    text: 判断一笔钱有没有问题，先要知道它经过的每一个对手方是谁。我们自建链上数据层，由情报团队持续维护标签。
-    points:
-      - "**交易所**：2 亿标签中九成以上是交易所地址，交易所对手方可以默认豁免"
-      - "**稳定币发行方冻结**：被冻结地址和冻结时间"
-      - "**制裁与执法**：OFAC、联合国、欧盟、英国等官方名单，以及执法冻结"
-      - "**网络犯罪与混淆服务**：黑客、诈骗、钓鱼、混币器、暗网市场、博彩等"
-    visual: flow
 
   - type: split
     reverse: true
     tone: alt
-    eyebrow: DISPOSITION · 处置
+    eyebrow: 处置
     title: 四档处置，<em>不是一刀切</em>
     text: 每次筛查给出 0–100 分和四档处置建议。合规团队按档位分流，真正需要人工处理的单子尽量少。阈值和每条规则的分值都可以按你的风险偏好调整。
     points:
@@ -61,28 +50,6 @@ sections:
       - 流入、流出分开加权，跳数越远权重越低
       - 每次筛查保存为不可篡改的快照
     visual: scores
-
-  - type: table
-    eyebrow: ACCESS · 接入方式
-    title: 四种用法，同一个账号
-    head: [方式, 适合谁, 说明]
-    rows:
-      - [控制台, 合规分析员, 粘贴地址或交易直接筛查，看资金图、命中明细和快照，管理规则集]
-      - [REST API, 系统对接, 同步调用直接返回结果；异步模式返回任务 ID 再查询]
-      - [MCP, AI 助手, 19 个工具，Claude、Cursor、Codex 等直接调用]
-      - [CSV 批量, 存量回扫, 一次导入一批地址，用于历史回扫和并行测试]
-    note: 控制台、API、MCP 共用同一个账号、同一份额度、同一批快照。
-
-  - type: cards
-    eyebrow: WIDTH PLATFORM · 链下合规
-    title: 链上、链下的合规记录放在一起
-    lead: Width 合规平台同时提供案件管理、KYC / KYB、名单筛查和 Travel Rule，和 DART 的筛查结果可以放在同一套系统里。
-    columns: 4
-    items:
-      - { title: 案件管理, text: 复核、尽调、上报的处理记录集中留存。, href: "https://www.width.com/case-management" }
-      - { title: KYC / KYB, text: 个人和企业客户的身份核验与尽调。, href: "https://www.width.com/kyc-onboarding" }
-      - { title: 交易监控, text: 链下交易的规则监控与告警。, href: "https://www.width.com/transaction-monitoring" }
-      - { title: Travel Rule, text: 虚拟资产转账的旅行规则信息传递。, href: "https://www.width.com/travel-rule" }
 
   - type: faq
     eyebrow: FAQ

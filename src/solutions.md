@@ -9,30 +9,30 @@ sections:
   - type: hero
     compact: true
     eyebrow: Solutions
-    title: One engine, <em>set up for your business</em>
+    title: One Engine, <em>Set Up for Your Business</em>
     lead: Exchanges care about deposits and withdrawals, wallets about the moment of sending and receiving, payment companies about what reaches their fiat rails, custodians about their clients. Find where you sit, then see how DART solves your problem.
   - type: cards
     eyebrow: By industry
     title: Businesses
     columns: 2
     items:
-      - { tag: Exchanges, title: "Screen deposits and withdrawals, without false alarms", text: "Check sources and destinations, exempt exchange counterparties by default, and get new official actions as rulesets fast.", href: /solutions/exchanges/ }
-      - { tag: Wallets, title: "Warn before send, alert after receive", text: "Keep users away from sanctioned, terrorist-financing and scam addresses and reduce knock-on freezes, and turn safety into revenue.", href: /solutions/wallets/ }
-      - { tag: Payments & cards, title: Keep tainted funds off your fiat rails, text: "Screen sources before top-ups, off-ramps and payouts, with four dispositions and evidence for every decision.", href: /solutions/payments/ }
-      - { tag: Custody & WaaS, title: KYT built in for every client, text: "Integrate once and screen every enterprise wallet's deposits and withdrawals automatically.", href: /solutions/custody/ }
+      - { tag: Exchanges, title: "Screen Deposits and Withdrawals, Without False Alarms", text: "Check sources and destinations, exempt exchange counterparties by default, and get new official actions as rulesets fast.", href: /solutions/exchanges/ }
+      - { tag: Wallets, title: "Warn Before Send, Alert After Receive", text: "Keep users away from sanctioned, terrorist-financing and scam addresses and reduce knock-on freezes, and turn safety into revenue.", href: /solutions/wallets/ }
+      - { tag: Payments & cards, title: Keep Tainted Funds Off Your Fiat Rails, text: "Screen sources before top-ups, off-ramps and payouts, with four dispositions and evidence for every decision.", href: /solutions/payments/ }
+      - { tag: Custody & WaaS, title: KYT Built In for Every Client, text: "Integrate once and screen every enterprise wallet's deposits and withdrawals automatically.", href: /solutions/custody/ }
   - type: cards
     tone: alt
     eyebrow: Public sector & individuals
-    title: Partners and individuals
+    title: Partners and Individuals
     columns: 3
     items:
-      - { tag: Law enforcement, title: Tracing and case support, text: "Follow funds across hops and chains, with analyst support on priority cases.", href: /partners/lea/ }
-      - { tag: Research, title: Academic quota and datasets, text: "Non-commercial API quota, de-identified event datasets, courses and competitions.", href: /partners/academic/ }
-      - { tag: Individuals, title: Address check, text: "Check addresses and freezes before you receive USDT (coming soon).", href: /check/ }
+      - { tag: Law enforcement, title: Tracing and Case Support, text: "Follow funds across hops and chains, with analyst support on priority cases.", href: /partners/lea/ }
+      - { tag: Research, title: Academic Quota and Datasets, text: "Non-commercial API quota, de-identified event datasets, courses and competitions.", href: /partners/academic/ }
+      - { tag: Individuals, title: Address Check, text: "Check addresses and freezes before you receive USDT (coming soon).", href: /check/ }
   - type: cta
-    title: Not sure where to start?
+    title: Not Sure Where to Start?
     text: Tell us about your business and where you take on risk, and we'll set up your first ruleset with you.
     ctas:
-      - { label: Get free access, href: /contact/ }
-      - { label: Book a demo, href: "/contact/?type=demo", style: ghost }
+      - { label: Get Free Access, href: /contact/ }
+      - { label: Book a Demo, href: "/contact/?type=demo", style: ghost }
 ---

@@ -76,3 +76,23 @@
     }
   }
 })();
+
+// 中文标题不留孤字（首页 hero 的导语 .ledger-lead 也一样）：把标题按标点切成小段（.ph，inline-block），浏览器就只会在标点后换行，
+// 不会把一个词拆到两行，也不会在行尾剩一个字。段落太长放不下一行时仍会在段内正常换行。
+(function () {
+  if (!document.body.classList.contains("lang-zh")) return;
+  document.querySelectorAll("h1, h2, h3, .stat-label, summary, .ledger-lead p").forEach(function (h) {
+    var walker = document.createTreeWalker(h, NodeFilter.SHOW_TEXT), nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (n) {
+      var parts = n.nodeValue.match(/[^，、。？！：；]+[，、。？！：；]*/g);
+      if (!parts || !n.nodeValue.trim()) return;
+      var frag = document.createDocumentFragment();
+      parts.forEach(function (t) {
+        var span = document.createElement("span");
+        span.className = "ph"; span.textContent = t; frag.appendChild(span);
+      });
+      n.parentNode.replaceChild(frag, n);
+    });
+  });
+})();

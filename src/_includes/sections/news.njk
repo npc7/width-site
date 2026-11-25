@@ -1,0 +1,21 @@
+{#- news：新闻与亮点。title, lead, placeholder(布尔，显示“占位内容”提示), items[{image, imageAlt, tag, date, title, text, href}] -#}
+{%- set zh = (lang == 'zh') -%}
+<section class="section {{ s.tone }}"{% if s.id %} id="{{ s.id }}"{% endif %}>
+  <div class="container">
+    {% include "partials/section-head.njk" %}
+    {%- if s.placeholder %}<p class="sample-flag">{{ "占位内容 · 上线前替换" if zh else "Placeholder content · replace before launch" }}</p>{% endif %}
+    <div class="news-grid">
+      {%- for n in s.items %}
+      <article class="news-card">
+        {%- if n.image %}<img class="news-cover" src="{{ n.image }}" alt="{{ n.imageAlt or '' }}" loading="lazy">{% else %}<div class="news-cover placeholder" aria-hidden="true"><span>{{ "图片占位 · 16:9" if zh else "Image placeholder · 16:9" }}</span></div>{% endif %}
+        <div class="news-body">
+          {%- if n.tag or n.date %}<p class="post-meta">{% if n.tag %}<span class="chip">{{ n.tag }}</span>{% endif %}{% if n.date %}<time datetime="{{ n.date | isoDate }}">{{ n.date | date(lang) }}</time>{% endif %}</p>{% endif %}
+          <h3>{% if n.href %}<a href="{{ n.href | locale(lang) }}">{{ n.title }}</a>{% else %}{{ n.title }}{% endif %}</h3>
+          {%- if n.text %}<p>{{ n.text | mdi | safe }}</p>{% endif %}
+          {%- if n.href %}<a class="link-arrow" href="{{ n.href | locale(lang) }}" tabindex="-1" aria-hidden="true">{{ i18n[lang].readMore }}</a>{% endif %}
+        </div>
+      </article>
+      {%- endfor %}
+    </div>
+  </div>
+</section>

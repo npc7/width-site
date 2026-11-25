@@ -2,7 +2,7 @@
 <header class="site-header" data-header>
   <div class="bar">
     <a class="brand" href="{{ '/' | locale(lang) }}" aria-label="Width DART">
-      <img src="/assets/img/width-logo-white.svg" alt="WIDTH" width="96" height="20">
+      <img src="/assets/img/width-logo.svg" alt="WIDTH" width="96" height="20">
       <span class="brand-product">DART</span>
     </a>
 
@@ -13,20 +13,45 @@
         <li class="nav-item has-menu">
           <button class="nav-link" aria-expanded="false" data-menu-toggle>{{ item.label | tr(lang) }}<span class="caret" aria-hidden="true"></span></button>
           <div class="menu">
-            <div class="menu-inner cols-{{ item.groups | length }}">
+            <div class="menu-inner cols-{{ item.groups | length }}{% if item.feature %} has-feature{% endif %}">
               {%- for g in item.groups %}
               <div class="menu-group">
                 <p class="menu-title">{{ g.title | tr(lang) }}</p>
                 <ul>
                   {%- for l in g.items %}
                   <li><a href="{{ l.href | locale(lang) }}"{% if 'http' in l.href %} target="_blank" rel="noopener"{% endif %}>
-                    <span class="menu-label">{{ l.label | tr(lang) }}</span>
-                    {%- if l.desc %}<span class="menu-desc">{{ l.desc | tr(lang) }}</span>{% endif %}
+                    {%- if l.icon and icons[l.icon] %}<svg class="nav-ico" viewBox="0 0 24 24" aria-hidden="true">{{ icons[l.icon] | safe }}</svg>{% endif %}
+                    <span class="menu-text">
+                      <span class="menu-label">{{ l.label | tr(lang) }}</span>
+                      {%- if l.desc %}<span class="menu-desc">{{ l.desc | tr(lang) }}</span>{% endif %}
+                    </span>
                   </a></li>
                   {%- endfor %}
                 </ul>
               </div>
               {%- endfor %}
+              {#- 右侧推荐卡片：nav.yml 里的 feature。latest = 最新一篇文章；offer = 手写的文字 -#}
+              {%- if item.feature %}
+              {%- set f = item.feature %}
+              {%- if f.type == 'latest' %}
+              {%- set latestList = collections.posts_zh if lang == 'zh' else collections.posts_en %}
+              {%- for post in latestList | limit(1) %}
+              <a class="menu-feature" href="{{ post.url }}">
+                {%- if post.data.cover %}<span class="menu-feature-pic"><img src="{{ post.data.cover }}" alt="" loading="lazy"></span>{% endif %}
+                <span class="menu-feature-kicker">{{ f.kicker | tr(lang) }}</span>
+                <strong>{{ post.data.title }}</strong>
+                <span class="menu-feature-go">{{ t.readMore }}</span>
+              </a>
+              {%- endfor %}
+              {%- else %}
+              <a class="menu-feature" href="{{ f.href | locale(lang) }}">
+                <span class="menu-feature-pic is-type"><b>{{ f.big | tr(lang) }}</b><i>{{ f.sub | tr(lang) }}</i></span>
+                <strong>{{ f.title | tr(lang) }}</strong>
+                {%- if f.text %}<small>{{ f.text | tr(lang) }}</small>{% endif %}
+                <span class="menu-feature-go">{{ f.go | tr(lang) }}</span>
+              </a>
+              {%- endif %}
+              {%- endif %}
             </div>
           </div>
         </li>

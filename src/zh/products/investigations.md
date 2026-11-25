@@ -10,7 +10,7 @@ breadcrumb:
 sections:
   - type: hero
     compact: true
-    eyebrow: INVESTIGATIONS · 资金追踪
+    eyebrow: 资金追踪
     title: 钱从哪来、到哪去，<br><em>一张图看清</em>
     lead: 可疑充值要复核、被盗资金要追、案件要出报告。DART 从一个地址或一笔交易出发，逐跳展开上下游，每个对手方都带标签，时间上流不过来的路径自动排除，跨链转移也能接上。
     ctas:

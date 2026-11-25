@@ -9,52 +9,41 @@ sections:
   - type: hero
     compact: true
     eyebrow: Platform overview
-    title: One engine, <em>from data to decision</em>
+    title: One Engine, <em>from Data to Decision</em>
     lead: DART puts onchain data, fund tracing, rules and scoring into a single engine. Submit an address or a transaction and get back a score, a disposition and the reasoning behind every point.
     ctas:
-      - { label: Get free access, href: /contact/ }
-      - { label: Read the docs, href: "https://width.info/docs" }
+      - { label: Get Free Access, href: /contact/ }
+      - { label: Read the Docs, href: "https://width.info/docs" }
     visual: result
 
   - type: steps
     eyebrow: Architecture
-    title: Every layer is our own
+    title: Every Layer Is Our Own
     lead: Data, labels, rules and scoring are all built in-house, so they can follow your policy and every conclusion can be traced to its source.
     items:
-      - { label: LAYER 1, title: Onchain data, text: "USDT and USDC flows on 11 chains, updated in near real time." }
-      - { label: LAYER 2, title: Address labels, text: "200M labeled addresses, over 90% of them exchange addresses, plus continuously updated sanctions, freeze and hack labels." }
-      - { label: LAYER 3, title: Time-ordered tracing, text: "Hop-by-hop expansion upstream and downstream, keeping only paths that work in time." }
-      - { label: LAYER 4, title: Rules and scoring, text: "Path-matching rules flag violations; the scoring ruleset turns them into a 0–100 score and a disposition." }
+      - { label: Layer 1, title: Onchain Data, text: "USDT and USDC flows on 11 chains, updated in near real time." }
+      - { label: Layer 2, title: Address Labels, text: "200M labeled addresses, over 90% of them exchange addresses, plus continuously updated sanctions, freeze and hack labels." }
+      - { label: Layer 3, title: Time-Ordered Tracing, text: "Hop-by-hop expansion upstream and downstream, keeping only paths that work in time." }
+      - { label: Layer 4, title: Rules and Scoring, text: "Path-matching rules flag violations; the scoring ruleset turns them into a 0–100 score and a disposition." }
 
   - type: cards
     tone: alt
     eyebrow: Capabilities
-    title: Pick by the question you need answered
+    title: Pick by the Question You Need Answered
     columns: 3
     items:
-      - { tag: KYA, title: Address screening, text: "Is this address safe to deal with? Self-hits, direct exposure and indirect exposure in one view.", href: /products/kya/ }
-      - { tag: KYT, title: Transaction screening, text: "Where did this deposit come from, and where is this withdrawal going? Each direction judged on its own.", href: /products/kyt/ }
-      - { tag: SANCTIONS, title: Sanctions screening, text: "Entities, individuals, companies and addresses on official sanctions lists, answered in under a second.", href: /products/sanctions/ }
-      - { tag: TRACING, title: Fund tracing & investigations, text: "Follow funds across hops and chains, and export a tracing report.", href: /products/investigations/ }
-      - { tag: RULES, title: Rulesets & scoring, text: "72 open rules and an editable scoring matrix. Your risk appetite, written as rules.", href: /products/rulesets/ }
-      - { tag: MCP, title: AI agents, text: "19 MCP tools so an AI agent can screen, read results and edit rules.", href: /products/agents/ }
-
-  - type: split
-    eyebrow: Data
-    title: 200 million labeled addresses, <em>kept current</em>
-    text: To judge a transfer you first need to know who every counterparty along the way is. We run our own onchain data layer, with labels maintained by a dedicated intelligence team.
-    points:
-      - "**Exchanges**: over 90% of our 200M labels are exchange addresses, and exchange counterparties can be exempted by default"
-      - "**Stablecoin issuer freezes**: frozen addresses and when they were frozen"
-      - "**Sanctions and enforcement**: OFAC, UN, EU, UK and other official lists, plus law-enforcement freezes"
-      - "**Cybercrime and obfuscation**: hacks, scams, phishing, mixers, darknet markets, gambling and more"
-    visual: flow
+      - { tag: KYA, title: Address Screening, text: "Is this address safe to deal with? Self-hits, direct exposure and indirect exposure in one view.", href: /products/kya/ }
+      - { tag: KYT, title: Transaction Screening, text: "Where did this deposit come from, and where is this withdrawal going? Each direction judged on its own.", href: /products/kyt/ }
+      - { tag: Sanctions, title: Sanctions Screening, text: "Entities, individuals, companies and addresses on official sanctions lists, answered in under a second.", href: /products/sanctions/ }
+      - { tag: Tracing, title: Fund Tracing & Investigations, text: "Follow funds across hops and chains, and export a tracing report.", href: /products/investigations/ }
+      - { tag: Rules, title: Rulesets & Scoring, text: "72 open rules and an editable scoring matrix. Your risk appetite, written as rules.", href: /products/rulesets/ }
+      - { tag: MCP, title: AI Agents, text: "19 MCP tools so an AI agent can screen, read results and edit rules.", href: /products/agents/ }
 
   - type: split
     reverse: true
     tone: alt
     eyebrow: Disposition
-    title: Four dispositions, <em>not block-all</em>
+    title: Four Dispositions, <em>Not Block-All</em>
     text: Every screening returns a 0–100 score and one of four dispositions, so your team can triage instead of reviewing everything. Thresholds and the points behind each rule are yours to tune.
     points:
       - A self-hit on a severe label such as sanctions scores 100 and blocks outright
@@ -62,31 +51,9 @@ sections:
       - Every screening is kept as an immutable snapshot
     visual: scores
 
-  - type: table
-    eyebrow: Access
-    title: Four ways in, one account
-    head: [Channel, Built for, What it does]
-    rows:
-      - [Console, Compliance analysts, "Paste an address or transaction, see the fund-flow graph, hits and snapshots, manage rulesets"]
-      - [REST API, Your systems, "Sync calls return the result; async mode returns a job ID to poll"]
-      - [MCP, AI agents, "19 tools for Claude, Cursor, Codex and other agents"]
-      - [CSV batch, Back-screening, "Import a batch of addresses for historical review or a parallel test"]
-    note: Console, API and MCP share one account, one quota and the same snapshots.
-
-  - type: cards
-    eyebrow: Width platform
-    title: Onchain and offchain compliance in one place
-    lead: The Width compliance platform adds case management, KYC / KYB, name screening and Travel Rule, and DART results can live in the same system.
-    columns: 4
-    items:
-      - { title: Case management, text: "Review, due diligence and reporting records kept together.", href: "https://www.width.com/case-management" }
-      - { title: KYC / KYB, text: "Identity verification and due diligence for individuals and businesses.", href: "https://www.width.com/kyc-onboarding" }
-      - { title: Transaction monitoring, text: "Rule-based monitoring and alerts for offchain transactions.", href: "https://www.width.com/transaction-monitoring" }
-      - { title: Travel Rule, text: "Originator and beneficiary data exchange for virtual-asset transfers.", href: "https://www.width.com/travel-rule" }
-
   - type: faq
     eyebrow: FAQ
-    title: Common questions
+    title: Common Questions
     items:
       - q: Which chains and tokens does DART cover?
         a: DART focuses on USDT and USDC across 11 chains. Paste an address and DART finds every chain and token it has flow on, then screens them in one go. Keep your existing tools for BTC and other assets; each covers its own.
@@ -100,9 +67,9 @@ sections:
         a: DART is free until 31 December 2028, with console, API and MCP included. See [pricing](/pricing/).
 
   - type: cta
-    title: Test it <em>on your own data</em>
+    title: Test It <em>on Your Own Data</em>
     text: Send us a batch of historical addresses, including ones you've confirmed as risky and ones you know are clean. We'll return a result, risk path and explanation for every one.
     ctas:
-      - { label: Get free access, href: /contact/ }
-      - { label: Book a demo, href: /contact/ }
+      - { label: Get Free Access, href: /contact/ }
+      - { label: Book a Demo, href: /contact/ }
 ---

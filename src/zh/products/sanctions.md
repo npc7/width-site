@@ -10,7 +10,7 @@ breadcrumb:
 sections:
   - type: hero
     compact: true
-    eyebrow: SANCTIONS · 制裁筛查
+    eyebrow: 制裁筛查
     title: 对方在不在制裁名单上，<br><em>1 秒内给答案</em>
     lead: 制裁是合规的底线，也是最不能等的检查。DART 用自建的制裁库查地址、实体、个人和公司，1 秒内返回；官方有新动作，我们第一时间做成内置规则集，你直接选用：FinCEN 9714 命令发布当天就上线了。
     ctas:
@@ -55,15 +55,6 @@ sections:
       - { tag: 对象, title: 实体与个人, text: 被制裁的实体、个人和公司，可以按名称检索。 }
       - { tag: 链上, title: 关联地址, text: 名单中列出的链上地址，以及我们归属到这些实体的地址。 }
       - { tag: 动作, title: 执法命令, text: "例如 FinCEN 9714 命令，这类官方动作做成内置规则集。" }
-
-  - type: steps
-    eyebrow: 怎么用
-    title: 放在哪几个节点
-    items:
-      - { label: 开户, title: 绑定地址时, text: 用户绑定提现地址、商户登记收款地址时先查一遍。 }
-      - { label: 转账前, title: 放款签名前, text: 收款地址在名单上，或直接和名单地址往来，就拦下来。 }
-      - { label: 收款后, title: 入账前, text: 查资金来源有没有经过制裁对象，按占比和跳数判断。 }
-      - { label: 回扫, title: 名单更新后, text: 用 CSV 批量把存量地址重新筛一遍，看新名单影响了谁。 }
 
   - type: split
     tone: alt

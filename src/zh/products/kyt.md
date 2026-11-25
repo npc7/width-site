@@ -52,34 +52,6 @@ sections:
       - { label: 处置, title: 四档分流, text: "0–19 通过、20–49 复核、50–79 加强尽调、80–100 拦截，阈值按你的风险偏好调。" }
       - { label: 留痕, title: 自动存快照, text: 每次筛查的请求参数和完整结果存为不可篡改的快照，审计和监管检查时调出。 }
 
-  - type: split
-    tone: alt
-    eyebrow: API
-    title: 同步拿结果，或者交给异步
-    text: 默认同步调用，直接返回分数、处置和命中明细。交易非常活跃的地址追得深时，改用异步模式，返回任务 ID 再查询结果，不阻塞充提流程。
-    points:
-      - "`POST /api/v3/transaction-transfers`：列出一笔交易里的全部代币转账"
-      - "`POST /api/v3/screen/kyt`：筛查指定的一笔转账"
-      - "`GET /api/v3/screen/result/{jobId}`：查询异步任务结果"
-    ctas:
-      - { label: 看 API 文档, href: "https://width.info/api-reference", style: ghost }
-    visual: code
-    code:
-      title: POST /api/v3/screen/kyt
-      body: |
-        curl -X POST https://api.width.live/api/v3/screen/kyt \
-          -H "X-Api-Key: $DART_API_KEY" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "chain_name": "Tron",
-            "tx_id": "9f3c…e71a",
-            "event_index": 0,
-            "screen_direction": "in"
-          }'
-
-        # → data.score.verdict：accept / review / edd / block
-        # → data.hits：命中的规则、跳数、金额、占比
-
   - type: cards
     eyebrow: 能力一览
     title: 交易筛查都包含什么

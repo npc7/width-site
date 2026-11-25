@@ -1,0 +1,46 @@
+{#- ledger：首页 hero（Ledger Field）。eyebrow, title（可用 <em> / <br>）, lead, ctas, note, stats。
+    文字居中在上，下面整幅宽的账本点阵（assets/js/ledger.js，three.js r128 来自 cdnjs），再下面是数字条。
+    点阵上的文字都是模拟演示，按页面语言显示。 -#}
+{%- set zh = (lang == 'zh') -%}
+{%- set L = {
+  play: '播放动效' if zh else 'Play motion',
+  pause: '暂停动效' if zh else 'Pause motion',
+  sim: '模拟演示' if zh else 'SIMULATED',
+  pulse: '第 {n} 轮扫描' if zh else 'pulse {n}',
+  flagged1: '已标记 {n} 笔风险转账' if zh else '{n} risky transfer flagged',
+  flaggedN: '已标记 {n} 笔风险转账' if zh else '{n} risky transfers flagged',
+  hop1: '{n} 跳' if zh else '{n} hop',
+  hopN: '{n} 跳' if zh else '{n} hops',
+  cat: {
+    'Sanctions': '制裁' if zh else 'Sanctions',
+    'Ransomware': '勒索软件' if zh else 'Ransomware',
+    'Stolen funds': '被盗资金' if zh else 'Stolen funds',
+    'Darknet market': '暗网市场' if zh else 'Darknet market',
+    'Mixer': '混币器' if zh else 'Mixer',
+    'Gambling': '博彩' if zh else 'Gambling',
+    'High-risk exchange': '高风险交易所' if zh else 'High-risk exchange'
+  }
+} -%}
+<section class="ledger"{% if s.id %} id="{{ s.id }}"{% endif %} aria-labelledby="ledger-title" data-ledger data-i18n='{{ L | dump }}'>
+  <div class="container ledger-copy">
+    {%- if s.eyebrow %}<p class="eyebrow">{{ s.eyebrow }}</p>{% endif %}
+    <h1 id="ledger-title">{{ s.title | safe }}</h1>
+    {%- if s.lead %}<div class="ledger-lead">{{ s.lead | md | safe }}</div>{% endif %}
+    {%- set ctas = s.ctas %}{% include "partials/ctas.njk" %}
+    {%- if s.note %}<p class="ledger-note">{{ s.note | mdi | safe }}</p>{% endif %}
+  </div>
+  <div class="ledger-wrap">
+    <div class="ledger-field" aria-hidden="true">
+      <canvas class="ledger-gl"></canvas><canvas class="ledger-ov"></canvas>
+    </div>
+  </div>
+  {%- if s.stats %}
+  <div class="container"><div class="stat-strip">
+    {%- for st in s.stats %}
+    <div class="stat"><div class="stat-value{% if r/^[一-鿿]/.test(st.value | string) %} is-word{% endif %}">{{ st.value }}{% if st.unit %}<small>{{ st.unit }}</small>{% endif %}</div><div class="stat-label">{{ st.label }}</div></div>
+    {%- endfor %}
+  </div></div>
+  {%- endif %}
+</section>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="/assets/js/ledger.js" defer></script>

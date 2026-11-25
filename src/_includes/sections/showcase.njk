@@ -1,0 +1,18 @@
+{#- showcase：标题 + 一张大的产品示意图（visuals/console）+ 一行要点。title, lead, items[{tag, title, text}] -#}
+<section class="section {{ s.tone }}"{% if s.id %} id="{{ s.id }}"{% endif %}>
+  <div class="container">
+    {% include "partials/section-head.njk" %}
+    {% include "visuals/console.njk" %}
+    {%- if s.items %}
+    <div class="points3">
+      {%- for it in s.items %}
+      <div>
+        {%- if it.tag %}<span class="points3-tag">{{ it.tag }}</span>{% endif %}
+        <h3>{{ it.title }}</h3>
+        <p>{{ it.text | mdi | safe }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+    {%- endif %}
+  </div>
+</section>

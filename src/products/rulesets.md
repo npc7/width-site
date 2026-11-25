@@ -11,29 +11,29 @@ sections:
   - type: hero
     compact: true
     eyebrow: Rulesets & scoring
-    title: Your risk appetite, <em>written as rules</em>
+    title: Your Risk Appetite, <em>Written as Rules</em>
     lead: Which money trails count as a violation, how many points each one costs, and where you draw the line differs for every institution. DART splits this into two rulesets. The path-matching ruleset decides whether a trail is a violation. The scoring ruleset decides how serious it is and what to do. Both are open, and both are yours to edit.
     ctas:
-      - { label: Get free access, href: /contact/ }
-      - { label: Read the docs, href: "https://width.info/docs" }
+      - { label: Get Free Access, href: /contact/ }
+      - { label: Read the Docs, href: "https://width.info/docs" }
     note: Free until 31 December 2028
     visual: scores
 
   - type: problems
     eyebrow: Why editable rules matter
-    title: The problems with someone else's rules
+    title: The Problems with Someone Else's Rules
     items:
-      - problem: A black box you can't change or explain
+      - problem: A Black Box You Can't Change or Explain
         solution: |
           - All 72 built-in rules are **open**: conditions, hop range, severity and action are there to read
           - Built-in rulesets are read-only; **clone** one and change anything in your copy
         proof: Every snapshot records the ruleset used for that screening.
-      - problem: One threshold for everything means misses or noise
+      - problem: One Threshold for Everything Means Misses or Noise
         solution: |
           - The further the hop, the higher the bar: by default 5% / 10% / 15% / 20% of the flow at hops 2 / 3 / 4 / 5
           - Inbound and outbound have separate weights; verdict bands follow your risk appetite
         proof: A payment company compared the same address with another tool. It said "medium-low risk, review"; DART scored it 0.
-      - problem: Regulators and banking partners have their own requirements
+      - problem: Regulators and Banking Partners Have Their Own Requirements
         solution: |
           - Keep one ruleset per jurisdiction or partner and choose which one to run per screening
           - New official actions arrive as built-in rulesets you can switch on
@@ -42,9 +42,9 @@ sections:
   - type: table
     tone: alt
     eyebrow: Path-matching ruleset
-    title: 72 rules in 9 categories
+    title: 72 Rules in 9 Categories
     lead: Each rule answers one question, whether this money trail is a violation. A hit carries the rule's severity and action, but no score.
-    head: [Category, Rules, Default severity, Typical cases]
+    head: [Category, Rules, Default Severity, Typical Cases]
     rows:
       - [High-risk entities, "16", High, "High-risk service providers, unlicensed operators"]
       - [Cybercrime, "12", High, "Hacks, scams, phishing"]
@@ -59,7 +59,7 @@ sections:
 
   - type: split
     eyebrow: Scoring ruleset
-    title: Where the score comes from, in one formula
+    title: Where the Score Comes from, in One Formula
     text: |
       The scoring ruleset is a matrix of **direction × hop band × severity**. Each hit contributes:
 
@@ -71,22 +71,12 @@ sections:
       - "A self-hit overrides the sum with the self-hit score (100 by default): block"
       - "Run the same hits through a different scoring ruleset and the score changes; the hits don't"
     ctas:
-      - { label: Scoring formula in detail, href: "https://width.info/docs", style: ghost }
+      - { label: Scoring Formula in Detail, href: "https://width.info/docs", style: ghost }
     visual: result
-
-  - type: steps
-    tone: alt
-    eyebrow: How to customise
-    title: Four steps to your own rules
-    items:
-      - { label: Clone, title: Start from a built-in, text: "KYA, KYT-IN, KYT-OUT and scoring all ship as built-ins. Clone one to make it yours." }
-      - { label: Edit, title: Change conditions and points, text: "Combine category, amount, share, hop range, chain and more; adjust base points, weights and verdict bands." }
-      - { label: Test, title: Replay past addresses, text: "Run the same batch through the old and new rulesets and compare before you switch." }
-      - { label: Apply, title: Choose it per screening, text: Select it in the console or pass its ID in the API. The snapshot records which version ran. }
 
   - type: faq
     eyebrow: FAQ
-    title: Rulesets and scoring questions
+    title: Rulesets and Scoring Questions
     items:
       - q: What is the difference between the path-matching and scoring rulesets?
         a: The path-matching ruleset only answers whether a money trail is a violation and which rule it breaks. It never produces a score. The score comes entirely from the scoring ruleset, so the same hits can score differently under a different scoring ruleset while the hits themselves stay the same.
@@ -101,12 +91,12 @@ sections:
 
   - type: cta
     eyebrow: Free access
-    title: Replay your history <em>under your own policy</em>
+    title: Replay Your History <em>Under Your Own Policy</em>
     text: We help map your current risk categories, thresholds and actions onto DART rulesets, so your policy stays the same.
     points:
       - Old and new rules compared case by case, with reasons for every difference
       - Free until **31 December 2028**
     ctas:
-      - { label: Get free access, href: /contact/ }
-      - { label: AI agents (MCP), href: /products/agents/ }
+      - { label: Get Free Access, href: /contact/ }
+      - { label: AI Agents (MCP), href: /products/agents/ }
 ---

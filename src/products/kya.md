@@ -11,33 +11,33 @@ sections:
   - type: hero
     compact: true
     eyebrow: KYA · Address screening
-    title: Is this address <em>safe to deal with?</em>
+    title: Is This Address <em>Safe to Deal With?</em>
     lead: Before you onboard a customer, accept a payment or whitelist a withdrawal address, look it up. DART checks who the address is, who it deals with directly, and where its money came from hop by hop, then turns that into a 0–100 score and a clear next step.
     ctas:
-      - { label: Get free access, href: /contact/ }
-      - { label: Read the docs, href: "https://width.info/docs" }
+      - { label: Get Free Access, href: /contact/ }
+      - { label: Read the Docs, href: "https://width.info/docs" }
     note: Free until 31 December 2028
     visual: result
 
   - type: problems
     eyebrow: What address screening has to get right
-    title: Why screening one address is harder than it looks
+    title: Why Screening One Address Is Harder Than It Looks
     items:
-      - problem: Everything comes back "linked to risk"
+      - problem: Everything Comes Back "Linked to Risk"
         detail: Follow any busy address far enough and you will touch a risky one. A yes/no link tells you nothing.
         solution: |
           - A hop only counts if the funds **arrived before they left**. Paths that run backwards in time are dropped
           - The further away, the higher the bar: by default risky funds must make up 5% / 10% / 15% / 20% of the flow at hops 2 / 3 / 4 / 5
           - Exchange counterparties are exempt by default
         proof: A payment company ran the same address through another tool and DART. The other tool said "medium-low risk, review". DART scored it 0. Broken down transfer by transfer, the risky funds could not have reached it in time.
-      - problem: You checked one chain, the trouble was on another
+      - problem: You Checked One Chain, the Trouble Was on Another
         detail: An EVM address is the same wallet on every EVM chain. Clean on Ethereum says nothing about the rest.
         solution: |
           - **All chains in one call**: DART finds every chain and token where the address has stablecoin activity and screens each one
           - The worst result comes back on top, so you see at once where the risk sits
           - Or narrow it to specific chains, or screen USDT and USDC on one chain together
         proof: 11 chains covered. Chains with no activity are skipped and not charged.
-      - problem: You have a score but can't say why
+      - problem: You Have a Score but Can't Say Why
         solution: |
           - Every hit is listed: rule, direction, hop, amount, share of funds, points added
           - Excluded paths show their reason too: backwards in time, share too small, exchange exemption
@@ -46,40 +46,23 @@ sections:
 
   - type: steps
     eyebrow: How it works
-    title: Three ways an address can be hit, checked in one pass
+    title: Three Ways an Address Can Be Hit, Checked in One Pass
     lead: Risk can sit on the address itself or on the money that passed through it. DART looks at both inflow (where funds came from) and outflow (where they went), with separate weights for each direction.
     items:
-      - { label: Self-hit, title: The address carries a risk label, text: "It is on a sanctions list, frozen by a stablecoin issuer, or belongs to a hacker or mixer. A self-hit scores 100 by default and is a block." }
-      - { label: Direct exposure, title: It dealt with a risky address in one hop, text: "It received from, or sent to, a risky address directly. Scored by amount and share of funds." }
-      - { label: Layered exposure, title: Enough risky funds survive several hops, text: "Funds passed through intermediaries, in valid time order, and still clear that hop's threshold. Hops are configurable; we suggest 3 inbound and 1 outbound for daily screening." }
-
-  - type: table
-    tone: alt
-    eyebrow: Specs
-    title: Key parameters
-    head: [Item, Detail]
-    rows:
-      - [Assets, "USDT and USDC across 11 chains"]
-      - [Chain and token, Detected automatically, or set them yourself]
-      - [Direction, Inbound and outbound each have their own hops and weights]
-      - [Hops, "Configurable. Default 3 inbound, 1 outbound"]
-      - [Time order, "On by default: only funds that arrived before they left are counted"]
-      - [Exchange exemption, On by default; switch it off for strict sanctions screening]
-      - [Ruleset, "Built-in KYA ruleset (72 rules, 9 categories), clone it to edit"]
-      - [Result, "0–100 score, one of four verdicts, hit list, exposures, snapshot ID"]
-      - [Modes, "Sync returns the result directly; async returns a job ID for very active addresses traced deep"]
-      - [Access, "Console, REST API, MCP and CSV batch, all on one account"]
+      - { label: Self-hit, title: The Address Carries a Risk Label, text: "It is on a sanctions list, frozen by a stablecoin issuer, or belongs to a hacker or mixer. A self-hit scores 100 by default and is a block." }
+      - { label: Direct exposure, title: It Dealt with a Risky Address in One Hop, text: "It received from, or sent to, a risky address directly. Scored by amount and share of funds." }
+      - { label: Layered exposure, title: Enough Risky Funds Survive Several Hops, text: "Funds passed through intermediaries, in valid time order, and still clear that hop's threshold. Hops are configurable; we suggest 3 inbound and 1 outbound for daily screening." }
 
   - type: split
     eyebrow: API
-    title: One request, every chain
+    title: One Request, Every Chain
     text: Send just the address. DART finds every chain and token where it has stablecoin activity, screens each lane and puts the worst result on top. Most addresses come back within a minute.
     points:
       - Limit the chains with `chains`
       - Screen USDT and USDC together with `tokens`
       - Go async with `"mode":"async"`
     ctas:
-      - { label: API reference, href: "https://width.info/api-reference", style: ghost }
+      - { label: API Reference, href: "https://width.info/api-reference", style: ghost }
     visual: code
     code:
       title: POST /api/v3/screen/kya/multi
@@ -97,7 +80,7 @@ sections:
 
   - type: faq
     eyebrow: FAQ
-    title: Address screening questions
+    title: Address Screening Questions
     items:
       - q: What is the difference between KYA and KYT?
         a: KYA looks at an address as a whole, which suits onboarding, whitelisting and checks before you accept funds. KYT looks at one specific deposit or withdrawal and asks where that money came from or where it is going. Both run on the same data and rules engine and are often used together.
@@ -114,12 +97,12 @@ sections:
 
   - type: cta
     eyebrow: Free access
-    title: Run your past addresses <em>side by side</em>
+    title: Run Your Past Addresses <em>Side by Side</em>
     text: Keep your current system running. Send us a batch of addresses, anonymized is fine, and we return a result and risk path for each one.
     points:
       - Includes a **diff against your current tool**, with the reason for every difference
       - Free until **31 December 2028**
     ctas:
-      - { label: Get free access, href: /contact/ }
-      - { label: Transaction screening (KYT), href: /products/kyt/ }
+      - { label: Get Free Access, href: /contact/ }
+      - { label: Transaction Screening (KYT), href: /products/kyt/ }
 ---

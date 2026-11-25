@@ -1,7 +1,7 @@
 ---
 layout: layouts/page.njk
 permalink: /zh/check/
-title: 个人地址体检：收 U 前先查一下
+title: 个人地址体检：收U前先查一下
 description: 收 USDT 之前，粘贴地址查一下它是否命中制裁名单、是否被稳定币发行方冻结。DART 地址体检即将上线，个人免费使用。
 breadcrumb:
   - { label: 个人地址体检 }
@@ -9,7 +9,7 @@ sections:
   - type: hero
     compact: true
     eyebrow: DART 地址体检 · 即将上线
-    title: 收 U 之前，<em>先查一下这个地址</em>
+    title: 收U之前，<em>先查一下这个地址</em>
     lead: OTC 买家、商户、个人收款前最常问的一句话：这个地址安全吗？U 被冻了，又是为什么？DART 地址体检把企业用的筛查能力，做成个人也能用的版本。
     ctas:
       - { label: 上线时通知我, href: /contact/ }
@@ -25,7 +25,7 @@ sections:
         title: 这个地址安全吗？
         text: 粘贴地址，自动识别链和币种。给出三档结论：未发现风险、建议谨慎、高风险，并列出命中的公开来源类型。
       - tag: 冻结自查
-        title: 我的 U 为什么被冻？
+        title: 我的U为什么被冻？
         text: 查地址有没有被稳定币发行方冻结、什么时候冻结的、链上对应的处置交易，并附申诉和报案指引。
       - tag: 转账前检查
         title: 转出去之前提醒我

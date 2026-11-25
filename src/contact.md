@@ -8,7 +8,7 @@ breadcrumb:
 sections:
   - type: form
     eyebrow: Contact
-    title: Get free access, or book a demo first
+    title: Get Free Access, or Book a Demo First
     text: Tell us what kind of business you run and what you want to solve. We'll reply within one working day and connect you with an engineer.
     points:
       - Free until **31 December 2028**
@@ -18,7 +18,7 @@ sections:
     tone: alt
     columns: 3
     items:
-      - { tag: Sales, title: sales@width.com, text: "Free access, demos and enterprise partnerships.", href: "mailto:sales@width.com", link: Send an email }
-      - { tag: Media & marketing, title: marketing@width.com, text: "Press, tracker data and channel partnerships.", href: "mailto:marketing@width.com", link: Send an email }
-      - { tag: Phone, title: +65 6816 2740, text: "Singapore · Hong Kong · Beijing", href: "tel:+6568162740", link: Call us }
+      - { tag: Sales, title: sales@width.com, text: "Free access, demos and enterprise partnerships.", href: "mailto:sales@width.com", link: Send an Email }
+      - { tag: Media & marketing, title: marketing@width.com, text: "Press, tracker data and channel partnerships.", href: "mailto:marketing@width.com", link: Send an Email }
+      - { tag: Phone, title: +65 6816 2740, text: "Singapore · Hong Kong · Beijing", href: "tel:+6568162740", link: Call Us }
 ---

@@ -10,101 +10,71 @@ sections:
   - type: hero
     compact: true
     eyebrow: Solutions · Wallets
-    title: A warning before they send, <em>a heads-up after they receive</em>
+    title: A Warning Before They Send, <em>a Heads-Up After They Receive</em>
     lead: Wallet users mostly hold and move USDT and USDC. One accurate warning at the moment of sending or receiving is the most direct protection a wallet can offer. DART judges risk in time order, so warnings are fast and right, and don't scare off ordinary users.
     ctas:
-      - { label: Get free access, href: "/contact/?type=wallet" }
-      - { label: Read the docs, href: "https://width.info/docs" }
+      - { label: Get Free Access, href: "/contact/?type=wallet" }
+      - { label: Read the Docs, href: "https://width.info/docs" }
     note: Free until 31 December 2028
     visual: flow
 
   - type: problems
     eyebrow: Wallet challenges
-    title: What wallet users run into
+    title: What Wallet Users Run Into
     items:
-      - problem: Users send funds where they shouldn't
+      - problem: Users Send Funds Where They Shouldn't
         detail: A transfer can't be pulled back. If the recipient is tied to sanctions or terrorist financing, the user can get caught up too.
         solution: |
           - **Check the recipient before sending**: when it matches sanctions, terrorist financing or scam sources, show it on the confirm screen
           - Sanctions checks return in **under a second**, so sending isn't slowed down
         proof: A Web3 social platform built send and receive checks into a paid membership, so users avoid paying terrorist-financing addresses and the CFT risk that comes with it.
-      - problem: Users receive bad funds and get frozen too
+      - problem: Users Receive Bad Funds and Get Frozen Too
         detail: If incoming USDT came from issuer-frozen, hacked or scam funds, the freeze can land on the user, and the complaint lands on the wallet.
         solution: |
           - **Check the source after receiving**: trace upstream in time order. Only money that arrived before it left counts
           - Alert the user when funds trace back to issuer freezes, hacks or scams
         proof: Stablecoin issuer-freeze labels are already in production.
-      - problem: So many warnings that users stop reading them
+      - problem: So Many Warnings That Users Stop Reading Them
         detail: Warn on every transfer and users learn to click past it. Too many false alarms and they leave.
         solution: |
           - Paths that run backwards in time are dropped, and small shares of risky funds don't count
           - Exchange counterparties are exempt by default, so ordinary transfers to and from exchanges aren't flagged
           - Four result levels, so the wallet can interrupt only on the top ones
         proof: In one payment company's test, an address another tool rated "medium-low risk, needs review" scored 0 on DART. The risky funds could not have reached it in time.
-      - problem: Users don't know which chain or token an address is on
-        detail: An EVM address is the same wallet on every EVM chain, so checking one chain proves little.
-        solution: |
-          - **Paste and check**: DART detects every chain and token the address has activity on and screens USDT and USDC in one go
-          - USDC tracing follows CCTP across chains
-        proof: 11 chains covered. One call screens every chain and token with activity.
 
   - type: steps
     tone: alt
     eyebrow: Where DART sits
-    title: Two moments, one clear message
+    title: Two Moments, One Clear Message
     items:
-      - { label: BEFORE SEND, title: User enters a recipient, text: Call address screening before the confirm screen. }
-      - { label: WARN, title: Warn by level, text: Pass stays silent. Higher levels show which public source matched; the user decides. }
-      - { label: AFTER RECEIVE, title: New funds arrive, text: Screen the incoming transfer inbound to check where it came from. }
-      - { label: ALERT, title: Flag a bad source, text: Notify the user when funds trace to frozen, hacked or scam money, before a freeze spreads. }
-
-  - type: table
-    eyebrow: Recommended setup
-    title: How wallets typically integrate
-    head: [Checkpoint, Endpoint, Ruleset, Hops, Notes]
-    rows:
-      - [Before send, "`POST /api/v3/screen/kya/multi`", AML KYA Default, Default, Screens every chain and token the address uses]
-      - [After receive, "`POST /api/v3/screen/kyt`", Built-in KYT-IN, Inbound 3 (default), Traces upstream in time order]
-      - [Sanctions-only check, "`POST /api/v3/screen/kya`", Sanctions rulesets, Configurable, Returns in under a second]
-      - [Paid safety feature, Same as above, Per membership tier, Deeper as needed, Full check on every send and receive]
-    note: Exchange counterparties are exempt by default. Hops, thresholds and which levels trigger a warning are all yours to tune.
+      - { label: Before send, title: User Enters a Recipient, text: Call address screening before the confirm screen. }
+      - { label: Warn, title: Warn by Level, text: Pass stays silent. Higher levels show which public source matched; the user decides. }
+      - { label: After receive, title: New Funds Arrive, text: Screen the incoming transfer inbound to check where it came from. }
+      - { label: Alert, title: Flag a Bad Source, text: Notify the user when funds trace to frozen, hacked or scam money, before a freeze spreads. }
 
   - type: cases
     eyebrow: Customers
-    title: Wallets already on DART
+    title: Wallets Already on DART
     columns: 3
     items:
       - tag: Wallet
         metric: 70,000+
         metricLabel: Screenings a day, within a week
-        title: A top-tier self-custody wallet
+        title: A Top-Tier Self-Custody Wallet
         text: From first calls to 70,000+ screenings a day in one week. On the day FinCEN's 9714 order was published, it could identify related funds in deposits and withdrawals. Hops and other parameters are configured to its own risk policy.
       - tag: Social · Payments
         metric: Paid tier
         metricLabel: Safety that earns revenue
-        title: A Web3 social platform
+        title: A Web3 Social Platform
         text: Bundles DART into a paid membership. Every receipt and withdrawal is fully checked, counterparty risk is flagged, and users avoid paying terrorist-financing addresses.
       - tag: Wallet
-        title: A self-custody wallet
+        title: A Self-Custody Wallet
         text: Screens deposits and withdrawals automatically, with rulesets tuned to its own risk appetite.
     note: Customer names withheld for confidentiality. Figures from DART production data, November 2026.
 
-  - type: cards
-    tone: alt
-    eyebrow: Related products
-    title: What wallets use
-    columns: 3
-    items:
-      - { title: Address screening (KYA), text: Check the recipient before sending, across every chain and token., href: /products/kya/ }
-      - { title: Transaction screening (KYT), text: Check where incoming funds came from, in time order., href: /products/kyt/ }
-      - { title: Sanctions screening, text: Official lists in under a second, without slowing down sends., href: /products/sanctions/ }
-      - { title: Rulesets & scoring, text: Decide which levels interrupt the user., href: /products/rulesets/ }
-      - { title: AI agents (MCP), text: Let an in-wallet AI assistant screen addresses and read results., href: /products/agents/ }
-      - { title: Fund tracing & investigations, text: When a user reports a loss, follow the funds across hops and chains., href: /products/investigations/ }
-
   - type: faq
     eyebrow: FAQ
-    title: Questions wallets ask
+    title: Questions Wallets Ask
     items:
       - q: Will a pre-send check make users wait?
         a: Sanctions checks return in under a second, and sync address screening returns the result directly. For very active addresses with deep traces, use async mode so the send flow isn't blocked.
@@ -119,13 +89,13 @@ sections:
 
   - type: cta
     eyebrow: Free access
-    title: Run it <em>next to your current tools</em>
+    title: Run It <em>Next to Your Current Tools</em>
     text: Keep your existing security scanner. Send us a batch of historical addresses (anonymized is fine) and we explain every difference.
     points:
       - A result for every address, with the path behind it and a **diff against your current tools**
       - Stablecoins on DART, everything else stays where it is
       - Free until **31 December 2028**
     ctas:
-      - { label: Get free access, href: "/contact/?type=wallet" }
-      - { label: Book a demo, href: "/contact/?type=wallet" }
+      - { label: Get Free Access, href: "/contact/?type=wallet" }
+      - { label: Book a Demo, href: "/contact/?type=wallet" }
 ---

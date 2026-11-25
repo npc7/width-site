@@ -8,7 +8,7 @@ breadcrumb:
 sections:
   - type: hero
     compact: true
-    eyebrow: ABOUT · 关于 WIDTH
+    eyebrow: 关于 WIDTH
     title: 让每一笔稳定币，<em>来路去向都查得清</em>
     lead: 稳定币已经是链上最主要的支付工具，问题资金也大多以 USDT、USDC 的形式流动。Width 做 KYC 和金融合规 12 年，DART 是我们把这套能力延伸到链上的产品。我们专注稳定币链上情报，用自建的数据、标签和规则，帮机构把问题资金挡在门外，把正常用户放进来。
     ctas:
