@@ -61,10 +61,20 @@
 
 | | 中文 | English |
 |---|---|---|
-| 对立 | 别人问「连没连上」，DART 问「钱有没有真流过来」 | Others ask if it's connected. DART asks if the money actually got there. |
-| 收束 | 从「连没连上」，到「钱有没有真流过来」 | From connection to causation |
+| 主句 | **有关联，不等于收了问题资金** | **Connected doesn't mean tainted** |
+| 副句 | DART 只算真的流到你这里的钱 | DART only counts money that actually reached you |
 
-讲「只看关联的做法」，不说「其他工具 / 多数工具」，不点名任何竞品。
+**三个不等于**（全站统一的记号是「≠」，官网、图片、客户介绍都用这一套，不要自己另造）：
+
+| 卖点 | 中文 | English |
+|---|---|---|
+| 准 | 有关联 ≠ 收了问题资金 | Connected ≠ tainted |
+| 不漏 | 误报少 ≠ 放得松 | Fewer alerts ≠ looser checks |
+| 说得清 | 有分数 ≠ 有依据 | A score ≠ an explanation |
+
+- 用合规和风控的人自己的词：关联、资金来源、误报、命中。**不要写「连没连上」「钱有没有真流过来」这类口语**（2026-11-28 Max 否掉：没头没尾，读者看不懂）。
+- 讲「只看关联的做法」，不说「其他工具 / 多数工具」，不拿「别人」当靶子，不点名任何竞品。
+- 配图固定用同一个例子：钱 10:02 已转出，风险资金 10:05 才到账，这条路径不计入。
 
 **产品体系**：三层 + 一个 AI 助手。名字固定写法：
 

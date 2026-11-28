@@ -20,8 +20,8 @@ sections:
 
   - type: story
     id: story
-    title: Others ask if it's connected. <em>DART asks if the money actually got there.</em>
-    lead: Trace any address a few hops out and you will almost always touch something risky. If connection is all that counts, good addresses get flagged as high risk. DART checks the time and amount of every hop, and only counts money that could actually have reached you.
+    title: Connected <em>doesn't mean tainted</em>
+    lead: Trace any address a few hops out and you will almost always touch something risky. If a connection is all it takes, good addresses get flagged as high risk. DART checks the time and amount of every hop, and only counts money that actually reached you.
     old:
       label: The connection approach
       q: Is this address connected to a risky one?
@@ -38,11 +38,14 @@ sections:
         - "**Further hops need a bigger share**: 5% / 10% / 15% / 20% of risky funds by default at hops 2–5"
         - "**Serious risk is never missed**: direct contact with sanctions or terrorist financing above 10 USD is a hit, whatever its share"
       result: Every point maps to a rule and a path you can show an examiner
-    tagline: From connection to causation
+    marks:
+      - [Connected, tainted]
+      - [Fewer alerts, looser checks]
+      - [A score, an explanation]
 
   - type: showcase
     id: how
-    title: Fewer false alarms, <em>without letting risk through</em>
+    title: Fewer alerts <em>doesn't mean looser checks</em>
     lead: "Most screening tools give you a number. DART gives you the number, the reason behind it, and the controls to change it."
     items:
       - { tag: Accurate, title: "Only money that could reach you counts", text: "A hop counts only if funds arrived before they moved on. Distant links need a higher share of risky funds. Other exchanges' users never drag you in. When DART and another tool disagree, timing is the most common reason." }

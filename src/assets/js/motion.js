@@ -29,7 +29,7 @@
   const groups = [
     [".section-head > *", 1],
     [".cards > *, .cases > *, .steps > *, .points3 > *, .post-grid > *, .news-grid > *", 1],
-    [".story-col", 1], [".story-tagline", 0], [".stack-copilot", 0],
+    [".story-col", 1], [".story-tagline", 0], [".story-marks li", 1], [".stack-copilot", 0],
     [".faq details, .faq-item", 1],
     [".table-wrap tbody tr", 1],
     [".split-copy > *, .split-visual", 1],

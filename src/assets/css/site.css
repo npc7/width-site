@@ -1169,6 +1169,17 @@ main .cta-band h2, .home-v2 main .cta-band h2, .lang-en.home-v2 main .cta-band h
 .story-result { margin: auto 0 0; padding-top: 14px; border-top: 1px solid var(--line); font-size: 15px; font-weight: 600; color: var(--text); }
 .story-new .story-result { color: var(--accent); border-top-color: rgba(13, 79, 211, .18); }
 .story-tagline { margin: clamp(28px, 3.5vw, 44px) 0 0; text-align: center; font: 600 13px var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--text-3); }
+/* DART 的三个不等于：A ≠ B 一排三个，「≠」是全站统一的记号 */
+.story-marks { list-style: none; margin: clamp(28px, 3.5vw, 44px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border-top: 1px solid var(--text); border-bottom: 1px solid var(--line); }
+.story-marks li { display: flex; align-items: baseline; justify-content: center; gap: .5em; padding: 20px 12px; font-size: clamp(17px, 1.7vw, 22px); font-weight: 700; letter-spacing: -0.01em; color: var(--text); white-space: nowrap; }
+.story-marks li + li { border-left: 1px solid var(--line); }
+.story-marks li span:first-child { color: var(--text-3); font-weight: 600; }
+.story-marks b { font: 700 1.35em/1 var(--mono); color: var(--accent); transform: translateY(.06em); }
+@media (max-width: 860px) {
+  .story-marks { grid-template-columns: 1fr; }
+  .story-marks li { justify-content: flex-start; padding: 14px 0; }
+  .story-marks li + li { border-left: 0; border-top: 1px solid var(--line); }
+}
 
 .stack-grid { display: grid; grid-template-columns: 1fr 320px; gap: 16px; margin-top: clamp(36px, 4.5vw, 56px); align-items: stretch; }
 .stack-layers { display: grid; gap: 12px; }

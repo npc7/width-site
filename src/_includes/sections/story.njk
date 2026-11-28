@@ -1,6 +1,7 @@
-{#- story：品类故事，左右对照「只看关联」vs「DART 看钱真的怎么流」。
-    title, lead, tagline, old{label, q, points[], result}, new{label, q, points[], result}
-    左右各带一张小示意图：同样三个地址，左边判「连上了」，右边按时间核对后排除。 -#}
+{#- story：品类故事「有关联，不等于收了问题资金」，左右对照「只看关联」vs「DART 看钱真的怎么流」。
+    title, lead, old{label, q, points[], result}, new{label, q, points[], result}, marks[[左, 右]]
+    左右各带一张小示意图：同样三个地址，左边判「有关联 → 高风险」，右边按时间核对后排除。
+    marks 是底部一排「A ≠ B」：DART 的三个不等于（准 / 不漏 / 说得清），写法见 MESSAGING.md 第 6 节。 -#}
 {%- set zh = (lang == 'zh') -%}
 <section class="section story {{ s.tone }}"{% if s.id %} id="{{ s.id }}"{% endif %}>
   <div class="container">
@@ -36,7 +37,7 @@
           <text x="210" y="86" class="sv-cap">{{ '中间地址' if zh else 'Intermediary' }}</text>
           <text x="370" y="86" class="sv-cap">{{ '你的用户' if zh else 'Your user' }}</text>
           {%- if side == 'old' %}
-          <text x="210" y="112" class="sv-verdict bad">{{ '连上了 → 高风险' if zh else 'Connected → high risk' }}</text>
+          <text x="210" y="112" class="sv-verdict bad">{{ '有关联 → 高风险' if zh else 'Connected → high risk' }}</text>
           {%- else %}
           <text x="210" y="112" class="sv-verdict good">{{ '钱没流过来 → 不计入' if zh else 'Money never reached you → excluded' }}</text>
           {%- endif %}
@@ -48,6 +49,13 @@
       </div>
       {%- endfor %}
     </div>
+    {%- if s.marks %}
+    <ul class="story-marks" aria-label="{{ 'DART 的三个不等于' if zh else 'Three things DART keeps apart' }}">
+      {%- for m in s.marks %}
+      <li><span>{{ m[0] }}</span><b aria-label="{{ '不等于' if zh else 'does not mean' }}">≠</b><span>{{ m[1] }}</span></li>
+      {%- endfor %}
+    </ul>
+    {%- endif %}
     {%- if s.tagline %}<p class="story-tagline">{{ s.tagline | safe }}</p>{% endif %}
   </div>
 </section>
