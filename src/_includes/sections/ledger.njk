@@ -1,4 +1,5 @@
-{#- ledger：首页 hero（Ledger Field）。eyebrow, title（可用 <em> / <br>）, lead, ctas, note, stats。
+{#- ledger：首页 hero（Ledger Field）。eyebrow, title（可用 <em> / <br>，写 ≠ 会换成画出来的记号）, lead, ctas, note, stats, poster。
+    poster: true 时是海报版式：标题靠左、特大字，导语在左下，按钮在右下；导语里的 **粗体** 单独成一行。
     文字居中在上，下面整幅宽的账本点阵（assets/js/ledger.js，three.js r128 来自 cdnjs），再下面是数字条。
     点阵上的文字都是模拟演示，按页面语言显示。 -#}
 {%- set zh = (lang == 'zh') -%}
@@ -25,10 +26,10 @@
     'High-risk exchange': '高风险交易所' if zh else 'High-risk exchange'
   }
 } -%}
-<section class="ledger"{% if s.id %} id="{{ s.id }}"{% endif %} aria-labelledby="ledger-title" data-ledger data-i18n='{{ L | dump }}'>
+<section class="ledger{% if s.poster %} is-poster{% endif %}"{% if s.id %} id="{{ s.id }}"{% endif %} aria-labelledby="ledger-title" data-ledger data-i18n='{{ L | dump }}'>
   <div class="container ledger-copy">
     {%- if s.eyebrow %}<p class="eyebrow">{{ s.eyebrow }}</p>{% endif %}
-    <h1 id="ledger-title">{{ s.title | safe }}</h1>
+    <h1 id="ledger-title">{{ s.title | ne(lang) | safe }}</h1>
     {%- if s.lead %}<div class="ledger-lead">{{ s.lead | md | safe }}</div>{% endif %}
     {%- set ctas = s.ctas %}{% include "partials/ctas.njk" %}
     {%- if s.note %}<p class="ledger-note">{{ s.note | mdi | safe }}</p>{% endif %}

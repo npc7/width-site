@@ -67,6 +67,10 @@ export default function (eleventyConfig) {
     const sections = yaml.load(readFileSync("src/_data/docs.yml", "utf8")).sections;
     return api.getFilteredByGlob("src/zh/docs/**/*.md").filter((p) => !p.data.isDocsHome).sort(docsSort(sections));
   });
+  // 「≠」记号：把文字里的 ≠ 换成画出来的记号（两条横线 + 一道斜线，斜线可以做划过去的动画）。
+  // 用法：{{ s.title | ne(lang) | safe }}。全站只有这一种画法，见 MESSAGING.md 第 6 节。
+  eleventyConfig.addFilter("ne", (html, lang = "en") => String(html || "").replace(/\s*≠\s*/g,
+    `<span class="ne" role="img" aria-label="${lang === "zh" ? "不等于" : "does not mean"}"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="ne-b" x="6" y="29" width="88" height="14"/><rect class="ne-b" x="6" y="57" width="88" height="14"/><line class="ne-s" x1="71" y1="3" x2="29" y2="97" pathLength="1"/></svg></span>`));
   // 纯文本（站内搜索索引用）
   eleventyConfig.addFilter("plain", (html, n = 4000) =>
     String(html || "").replace(/<(script|style)[\s\S]*?<\/\1>/g, " ").replace(/<[^>]+>/g, " ")

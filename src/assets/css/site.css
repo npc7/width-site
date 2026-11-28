@@ -1204,3 +1204,75 @@ main .cta-band h2, .home-v2 main .cta-band h2, .lang-en.home-v2 main .cta-band h
   .story-grid, .stack-grid { grid-template-columns: 1fr; }
   .stack-layer { grid-template-columns: 1fr; gap: 10px; }
 }
+
+/* =========================================================================
+   V3（2026-11-28）：记忆点。三件事：
+   1. 中文大标题换成特粗黑体（DART Display ZH，见 display-zh.css）；拉丁字母和数字仍是 Gotham。
+   2. 「≠」是全站统一的记号（.ne，由 ne 过滤器画出来），首页首屏和「三个不等于」都围绕它排。
+   3. 首页首屏改成海报版式（.ledger.is-poster），中段加一幅深色的「三个不等于」（sections/marks.njk）。
+   ========================================================================= */
+
+/* == 中文大标题字体 ====================================================== */
+.lang-zh :is(.ledger, .hero, .section-head, .cta-band, .marks) :is(h1, h2),
+.lang-zh .mark-eq, .lang-zh .stat-value.is-word, .lang-zh .case-metric {
+  font-family: "Gotham", "DART Display ZH", -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-weight: 900;
+}
+.lang-zh :is(.hero, .section-head, .cta-band) :is(h1, h2) { line-height: 1.2; letter-spacing: -.005em; }
+
+/* == ne：「≠」记号 ======================================================== */
+.ne { display: inline-block; width: .84em; height: .84em; margin: 0 .16em; vertical-align: -.1em; flex: none; }
+.ne svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.ne-b { fill: var(--ne, var(--accent)); }
+.ne-s { fill: none; stroke: var(--ne, var(--accent)); stroke-width: 14; }
+br + .ne { margin-left: 0; }
+
+/* == ledger 海报版式（首页首屏，front matter 里写 poster: true）============ */
+.ledger.is-poster .ledger-copy { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto 1fr auto; column-gap: clamp(32px, 5vw, 88px); align-items: end; text-align: left; padding-top: clamp(44px, 5.4vw, 88px); }
+.ledger.is-poster h1 { grid-column: 1 / -1; max-width: none; font-size: clamp(46px, 9.6vw, 140px); line-height: .98; letter-spacing: -.05em; }
+.lang-zh .ledger.is-poster h1 { font-size: clamp(44px, 10.3vw, 150px); line-height: 1.1; letter-spacing: -.012em; }
+.ledger.is-poster .ledger-lead { grid-column: 1; grid-row: 2 / span 2; max-width: 620px; margin-top: clamp(24px, 3vw, 44px); }
+.ledger.is-poster .ledger-lead strong { display: block; margin-bottom: .45em; font-size: 1.3em; line-height: 1.4; font-weight: 700; color: var(--text); }
+.ledger.is-poster .ctas { grid-column: 2; grid-row: 2; justify-content: flex-end; align-self: end; margin-top: 0; }
+.ledger.is-poster .ledger-note { grid-column: 2; grid-row: 3; justify-self: end; text-align: right; white-space: nowrap; }
+.ledger.is-poster .ledger-wrap { margin-top: clamp(-110px, -6vw, -40px); }
+@media (max-width: 860px) {
+  .ledger.is-poster .ledger-copy { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; }
+  .ledger.is-poster .ledger-lead, .ledger.is-poster .ctas, .ledger.is-poster .ledger-note { grid-column: 1; grid-row: auto; }
+  .ledger.is-poster .ctas { justify-content: flex-start; margin-top: 28px; }
+  .ledger.is-poster .ledger-note { justify-self: start; text-align: left; white-space: normal; }
+  .ledger.is-poster .ledger-wrap { margin-top: -90px; }
+}
+
+/* == marks：三个不等于（深色整幅，sections/marks.njk）===================== */
+.marks { position: relative; overflow: hidden; padding: clamp(80px, 10vw, 148px) 0; color: #fff; --ne: #5c9dff;
+  background: radial-gradient(1100px 560px at 10% -12%, rgba(13, 79, 211, .46), transparent 62%), radial-gradient(900px 600px at 105% 110%, rgba(13, 79, 211, .22), transparent 60%), var(--night); }
+.marks-bg { position: absolute; right: 1%; top: 54%; width: min(42vw, 560px); aspect-ratio: 1; transform: translateY(-50%); opacity: .04; --ne: #fff; pointer-events: none; }
+.marks-bg .ne { width: 100%; height: 100%; margin: 0; }
+.marks .container { position: relative; }
+.marks-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px 32px; margin-bottom: clamp(20px, 2.6vw, 36px); }
+main .marks .marks-head h2 { margin: 0; font-size: clamp(20px, 2vw, 26px); line-height: 1.3; letter-spacing: 0; color: #fff; }
+main .marks .marks-head h2 em { color: #8fbaff; }
+.marks-head p { margin: 0; font-size: 16px; color: rgba(255, 255, 255, .62); }
+.marks-list { list-style: none; margin: 0; padding: 0; border-top: 1px solid rgba(255, 255, 255, .18); }
+.mark { display: grid; grid-template-columns: clamp(96px, 12vw, 172px) minmax(0, 1fr); gap: 0 24px; padding: clamp(30px, 4.2vw, 60px) 0; border-bottom: 1px solid rgba(255, 255, 255, .18); }
+.mark-key { display: flex; flex-direction: column; gap: 12px; padding-top: clamp(8px, 1.5vw, 24px); }
+.mark-no { font: 500 13px/1 var(--mono); letter-spacing: .1em; color: rgba(255, 255, 255, .42); }
+.mark-tag { font-size: clamp(18px, 1.9vw, 26px); font-weight: 700; line-height: 1.2; color: #fff; }
+.mark-eq { margin: 0; font-size: clamp(26px, 4.8vw, 68px); font-weight: 700; line-height: 1.12; letter-spacing: -.035em; color: #fff; text-wrap: balance; }
+.lang-zh .mark-eq { font-size: clamp(30px, 6.1vw, 86px); line-height: 1.16; letter-spacing: -.01em; white-space: nowrap; }
+.mk-a { color: rgba(255, 255, 255, .44); transition: color .4s ease; }
+.mark:hover .mk-a { color: rgba(255, 255, 255, .7); }
+.mark-proof { margin: clamp(14px, 1.7vw, 24px) 0 0; max-width: 780px; font-size: 16.5px; line-height: 1.75; color: rgba(255, 255, 255, .66); }
+.mark-proof strong { margin-right: .9em; font-weight: 600; color: #fff; }
+@media (max-width: 720px) {
+  .mark { grid-template-columns: minmax(0, 1fr); }
+  .mark-key { flex-direction: row; align-items: baseline; gap: 12px; padding: 0 0 14px; }
+  .mark-proof strong { display: block; margin: 0 0 4px; }
+  .marks-bg { width: 110vw; right: -40%; }
+}
+.lang-zh .case-metric small, .lang-zh .stat-value.is-word small { font-family: var(--font); font-weight: 500; }
+/* 手机上：示意图里的长代码行不能把整栏撑宽（之前 /products/kya/ 等页面会出现横向滚动） */
+.split-copy, .split-visual { min-width: 0; }
+.split-visual .viz-code { max-width: 100%; }
+.split-visual .viz-code pre { overflow-x: auto; }

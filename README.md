@@ -175,3 +175,10 @@ tags: [KYT, 稳定币]
 - [ ] 产品截图：`src/assets/img/` 里有控制台截图，可以按需放进产品页（`visual: image`）
 - [ ] 确认 width.info 域名和现有应用的路径方案
 - [ ] 正式上线时设置 `SITE_URL`、`PATH_PREFIX`、`ALLOW_INDEX=true`，并在 Google Search Console 提交 sitemap
+
+## V3：记忆点（2026-11-28）
+
+- **「≠」记号**：`eleventy.config.js` 里的 `ne` 过滤器把文字里的 `≠` 换成画出来的记号（`.ne`）。用法：`{{ s.title | ne(lang) | safe }}`。
+- **首页海报首屏**：`type: ledger` 加 `poster: true`。标题靠左、特大字；导语里的 `**粗体**` 单独成一行；按钮和小字在右下。
+- **三个不等于**：`type: marks`（`src/_includes/sections/marks.njk`），深色整幅。字段：`title, lead, items[{tag, a, b, title, text}]`，页面上显示成「a ≠ b」。
+- **中文大标题字体**：`src/assets/fonts/dart-display-zh.woff2`（Noto Sans SC Black 的子集，SIL OFL 1.1）和 `src/assets/css/display-zh.css` 由 `scripts/subset-display-font.py` 生成，只在中文页加载。内容改动比较大之后重跑一次脚本（用法写在脚本开头）；不重跑也不会缺字，只是会多下载一个备用字体文件。

@@ -7,10 +7,12 @@ description: DART screens USDT and USDC in time order. It only counts money that
 sections:
   - type: ledger
     eyebrow: WIDTH DART · USDT and USDC risk screening
-    title: Stop tainted stablecoins. <em>Clear everyone else.</em>
-    lead: "DART only counts money that could actually have reached you. Every hop is checked for timing, and paths where money left before it arrived are dropped. Every point ties to a rule and a path, so you can explain any decision to a regulator."
+    poster: true
+    title: Connected<br>≠ tainted
+    lead: "**Stop tainted stablecoins. Clear everyone else.** DART only counts money that could actually have reached you. Every hop is checked for timing, and paths where money left before it arrived are dropped. Every point ties to a rule and a path, so you can explain any decision to a regulator."
     ctas:
       - { label: Get access, href: /contact/ }
+      - { label: See how DART decides, href: "#story" }
     note: Free until 31 December 2028 · Console, API and MCP included
     stats:
       - { value: "0.61", unit: s, label: "median time for a fully traced screening" }
@@ -20,8 +22,8 @@ sections:
 
   - type: story
     id: story
-    title: Connected <em>doesn't mean tainted</em>
-    lead: Trace any address a few hops out and you will almost always touch something risky. If a connection is all it takes, good addresses get flagged as high risk. DART checks the time and amount of every hop, and only counts money that actually reached you.
+    title: Out at 10:02. <em>In at 10:05.</em>
+    lead: The middle address paid your user at 10:02. The risky funds only reached it at 10:05. Money that left before it arrived cannot be the same money, yet connection-only screening still counts the path. DART checks the time and amount of every hop, and only counts money that actually reached you.
     old:
       label: The connection approach
       q: Is this address connected to a risky one?
@@ -38,19 +40,20 @@ sections:
         - "**Further hops need a bigger share**: 5% / 10% / 15% / 20% of risky funds by default at hops 2–5"
         - "**Serious risk is never missed**: direct contact with sanctions or terrorist financing above 10 USD is a hit, whatever its share"
       result: Every point maps to a rule and a path you can show an examiner
-    marks:
-      - [Connected, tainted]
-      - [Fewer alerts, looser checks]
-      - [A score, an explanation]
+
+  - type: marks
+    id: marks
+    title: Three things <em>DART keeps apart</em>
+    lead: Accurate, nothing serious missed, explainable.
+    items:
+      - { tag: Accurate, a: Connected, b: tainted, title: "Only money that could reach you counts.", text: "A hop counts only if funds arrived before they moved on. Distant links need a higher share of risky funds. Other exchanges' users never drag you in." }
+      - { tag: Nothing serious missed, a: Fewer alerts, b: looser checks, title: "Severe risk always shows up.", text: "Direct contact with a sanctioned or terrorist-financing address is a hit from 10 USD up, whatever its share. Sanctioned exchanges are never exempt. Highlighted hits are listed on their own, never diluted by the score." }
+      - { tag: Explainable, a: A score, b: an explanation, title: "Every decision has its evidence.", text: "Every point maps to a rule, a path, a hop, an amount and a share. Excluded paths show why. Each snapshot keeps the parameters and ruleset used, even if you change the rules later." }
 
   - type: showcase
     id: how
-    title: Fewer alerts <em>doesn't mean looser checks</em>
-    lead: "Most screening tools give you a number. DART gives you the number, the reason behind it, and the controls to change it."
-    items:
-      - { tag: Accurate, title: "Only money that could reach you counts", text: "A hop counts only if funds arrived before they moved on. Distant links need a higher share of risky funds. Other exchanges' users never drag you in. When DART and another tool disagree, timing is the most common reason." }
-      - { tag: Nothing serious missed, title: "Severe risk always shows up", text: "Direct contact with a sanctioned or terrorist-financing address is a hit from 10 USD up, whatever its share. Sanctioned exchanges are never exempt. Highlighted hits are listed on their own, never diluted by the score. Incomplete data is flagged on the result." }
-      - { tag: Explainable, title: "Every decision has its evidence", text: "Every point maps to a rule, a path, a hop, an amount and a share. Excluded paths show why. Each snapshot keeps the parameters and ruleset used, even if you change the rules later." }
+    title: Every point <em>shows its source</em>
+    lead: "The score, the rules and paths behind it, and the controls to change it, all on one screen. Incomplete data is flagged on the result."
 
   - type: stack
     id: stack

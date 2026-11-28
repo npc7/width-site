@@ -1,0 +1,23 @@
+{#- marks：DART 的三个不等于（深色整幅）。每行一个「A ≠ B」大字，左边是序号和卖点（准 / 不漏 / 说得清），下面一句依据。
+    title, lead, items[{tag, a, b, title, text}]
+    「≠」是全站统一的记号（eleventy.config.js 的 ne 过滤器画的），写法和三句话见 MESSAGING.md 第 6 节，不要另造。 -#}
+<section class="marks"{% if s.id %} id="{{ s.id }}"{% endif %}>
+  <span class="marks-bg" aria-hidden="true">{{ "≠" | ne(lang) | safe }}</span>
+  <div class="container">
+    <div class="marks-head">
+      {%- if s.title %}<h2>{{ s.title | safe }}</h2>{% endif %}
+      {%- if s.lead %}<p>{{ s.lead | mdi | safe }}</p>{% endif %}
+    </div>
+    <ol class="marks-list">
+      {%- for it in s.items %}
+      <li class="mark">
+        <div class="mark-key"><span class="mark-no">0{{ loop.index }}</span><span class="mark-tag">{{ it.tag }}</span></div>
+        <div class="mark-body">
+          <p class="mark-eq"><span class="mk-a">{{ it.a }}</span>{{ "≠" | ne(lang) | safe }}<span class="mk-b">{{ it.b }}</span></p>
+          <p class="mark-proof">{% if it.title %}<strong>{{ it.title }}</strong>{% endif %}{{ it.text | mdi | safe }}</p>
+        </div>
+      </li>
+      {%- endfor %}
+    </ol>
+  </div>
+</section>
