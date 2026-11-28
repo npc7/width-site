@@ -68,7 +68,7 @@ sections:
 
   - type: cta
     title: 拿一个 API Key 试试
-    text: 接入 DART，免费用到 2028 年 12 月 31 日。工程师在群里直接支持对接。
+    text: 工程师在群里直接支持对接。
     ctas:
       - { label: 申请 API Key, href: /contact/ }
       - { label: API 文档, href: "https://width.info/api-reference", style: ghost }

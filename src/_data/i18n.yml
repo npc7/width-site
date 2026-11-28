@@ -5,34 +5,34 @@ en:
   switchTo: 中文
   skip: Skip to content
   menu: Menu
-  signIn: Sign In
-  ctaPrimary: Get Free Access
-  ctaDemo: Book a Demo
-  ctaDocs: Read the Docs
-  readMore: Read More
-  learnMore: Learn More
-  allPosts: All Articles
-  latest: Latest from the Blog
+  signIn: Sign in
+  ctaPrimary: Get access
+  ctaDemo: Book a demo
+  ctaDocs: Read the docs
+  readMore: Read more
+  learnMore: Learn more
+  allPosts: All articles
+  latest: Latest from the blog
   minRead: min read
   by: By
   category: Category
-  related: Related Articles
+  related: Related articles
   share: Share
-  backToBlog: Back to Blog
+  backToBlog: Back to blog
   page: Page
   prev: Newer
   next: Older
   breadcrumbHome: Home
   sampleData: Sample data · replace before launch
-  comingSoon: Coming Soon
-  footerTagline: Onchain intelligence for stablecoin compliance. DART screens USDT and USDC flows in time order, so good customers get through and bad funds don't.
+  comingSoon: Coming soon
+  footerTagline: Onchain risk screening for USDT and USDC. DART only counts money that could actually have reached you, so tainted funds are stopped and good customers get through.
   footerFree: Free until 31 Dec 2028
   contactTitle: Contact
   rights: WIDTH Pte. Ltd. All rights reserved.
   privacy: Privacy
   security: Security
   postCtaTitle: Screen your next address with DART
-  postCtaText: Free until 31 December 2028. Console, API and MCP included.
+  postCtaText: Run it next to your current tools on your own historical data. Every difference explained.
   categories:
     research: Research
     product: Product
@@ -56,7 +56,7 @@ zh:
   skip: 跳到正文
   menu: 菜单
   signIn: 登录
-  ctaPrimary: 免费接入
+  ctaPrimary: 开通账号
   ctaDemo: 预约演示
   ctaDocs: 看产品手册
   readMore: 阅读全文
@@ -75,14 +75,14 @@ zh:
   breadcrumbHome: 首页
   sampleData: 示例数据 · 上线前替换
   comingSoon: 即将上线
-  footerTagline: 以稳定币为核心的链上情报与合规。DART 按资金的时间顺序筛查 USDT / USDC，正常用户顺利通过，问题资金挡在门外。
+  footerTagline: USDT / USDC 链上风控。DART 只算真的流得到你这里的钱，问题资金挡在门外，正常用户不误伤。
   footerFree: 接入即免费用到 2028 年 12 月 31 日
   contactTitle: 联系方式
   rights: WIDTH Pte. Ltd. 版权所有
   privacy: 隐私政策
   security: 安全
   postCtaTitle: 用 DART 查一下你的下一个地址
-  postCtaText: 接入即免费用到 2028 年 12 月 31 日，控制台、API、MCP 全部可用。
+  postCtaText: 拿你自己的历史数据，和现有工具并行跑一次，差异逐条说明。
   categories:
     research: 研究
     product: 产品

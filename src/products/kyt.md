@@ -2,8 +2,8 @@
 layout: layouts/page.njk
 permalink: /products/kyt/
 title: Transaction screening (KYT)
-fullTitle: Stablecoin KYT transaction screening for deposits & withdrawals | Width DART
-description: KYT transaction screening for USDT and USDC. Check where every deposit came from and where every withdrawal is going, traced in time order, with separate inbound and outbound rulesets.
+fullTitle: Stablecoin KYT for USDT and USDC deposits and withdrawals | Width DART
+description: KYT transaction screening for USDT and USDC. Check where every deposit came from and where every withdrawal is going, traced in time order, with separate inbound and outbound rulesets. Median 0.61 s for a fully traced screening.
 breadcrumb:
   - { label: Platform, href: /platform/ }
   - { label: Transaction screening (KYT) }
@@ -11,82 +11,81 @@ sections:
   - type: hero
     compact: true
     eyebrow: KYT · Transaction screening
-    title: Where Did This Deposit Come from, <em>and Where Is This Withdrawal Going?</em>
-    lead: Exchanges, payment companies and custodians need every deposit and withdrawal checked before funds are credited or released. DART traces the source and destination of one specific transfer, with separate rulesets for each direction, and returns a score, a verdict and the evidence behind it.
+    title: Where did this deposit come from? <em>Where is this withdrawal going?</em>
+    lead: Exchanges, payment companies and custodians need every deposit and withdrawal checked before funds are credited or released. DART traces the source or destination of one specific transfer, with a separate ruleset for each direction, and returns a score, a verdict and the evidence behind it.
     ctas:
-      - { label: Get Free Access, href: /contact/ }
-      - { label: Read the Docs, href: "https://width.info/docs" }
-    note: Free until 31 December 2028
+      - { label: Get access, href: /contact/ }
+      - { label: Read the docs, href: /docs/ }
     visual: scores
 
   - type: problems
-    eyebrow: What KYT has to get right
-    title: Where Deposit and Withdrawal Screening Breaks Down
+    eyebrow: Where deposit and withdrawal screening gets stuck
+    title: Three problems we hear most
     items:
-      - problem: A Deposit May Carry Frozen or Stolen Funds
-        detail: Once it is credited, a freeze or a recovery claim can land on you and your user.
+      - problem: A deposit may come from frozen or stolen funds
+        detail: Once it is credited, any later freeze or recovery can land on you and your user.
         solution: |
           - **Deposits (inbound)**: trace the transfer upstream for sanctioned, issuer-frozen, hacked, scam or mixer funds
-          - Only funds that arrived before they moved on are counted; backwards paths are dropped
-          - Scored by share of risky funds, so you can credit, review or hold before the money lands
-        proof: 300,000–400,000 API calls a day in production, across exchanges, wallets, custodians and card programs.
-      - problem: A User Withdraws to a Risky Address and You Carry the Risk
+          - Only funds that arrived before they moved on count. Paths where money left before it arrived are dropped
+          - The risky share sets the score, so you can pass, review or block before crediting
+        proof: Median 0.61 s for a fully traced screening, 90% under 5 s, so crediting isn't held up.
+      - problem: A user withdraws to a risky address, and you carry the risk
         solution: |
-          - **Withdrawals (outbound)**: check the destination and what lies downstream: sanctions, terrorist financing, scams
-          - KYT-IN and KYT-OUT rulesets are separate, so each direction gets its own policy
-          - Or screen both sides in one call and get a merged result
-        proof: "New official actions ship as built-in rulesets: FinCEN's 9714 order was published on 6 November and the DART ruleset went live the same day."
-      - problem: One Transaction, Many Transfers
+          - **Withdrawals (outbound)**: check the recipient and where its money goes next, for sanctions, terrorist financing or scams
+          - Separate KYT-IN and KYT-OUT rulesets, each tuned on its own
+          - Or screen both directions in one call and get one merged result
+        proof: New orders become built-in rulesets. The FinCEN 9714 order was published on 6 November and DART covered it the same day.
+      - problem: One transaction holds several transfers. Which one do you screen?
         detail: Contract calls and batch payouts often move tokens several times in a single transaction.
         solution: |
           - List every token transfer in the transaction, in event order
-          - Pick the one you care about with `event_index` (or by sender / recipient) and screen just that
-        proof: Listing transfers is free. Only the transfer you screen is charged.
+          - Pick one with `event_index` (or the sender and recipient), and the result covers that transfer only
+        proof: Listing transfers isn't counted. Only the transfer you screen is.
 
   - type: steps
     eyebrow: Where it fits
-    title: Where KYT Sits in Your Flow
+    title: Check the source before crediting, <em>the destination before paying out</em>
     items:
-      - { label: Deposit, title: After confirmation, before crediting, text: "Screen the source with KYT-IN. Clean deposits credit automatically; review and EDD cases go to a queue." }
-      - { label: Withdrawal, title: After request, before signing, text: Screen the destination with KYT-OUT and stop high-risk transfers before funds leave. }
-      - { label: Triage, title: Four Verdicts, text: "0–19 pass, 20–49 review, 50–79 EDD, 80–100 block. Tune the bands to your risk appetite." }
-      - { label: Evidence, title: Snapshot Saved, text: Every screening's parameters and full result are stored as an immutable snapshot for audit. }
+      - { label: Deposit, title: After confirmation, before crediting, text: "Screen the source with the KYT-IN ruleset. Clean deposits credit automatically. Review and EDD cases go to your team." }
+      - { label: Withdrawal, title: After the request, before signing, text: "Screen the recipient and destination with the KYT-OUT ruleset. High-risk withdrawals are stopped." }
+      - { label: Verdict, title: Four bands, text: "Default bands: 0–19 pass, 20–49 review, 50–79 EDD, 80–100 block. Thresholds follow your risk appetite." }
+      - { label: Record, title: A snapshot every time, text: "The request, the ruleset and the full result are kept as a snapshot for audits and examinations." }
 
   - type: cards
-    eyebrow: Capabilities
-    title: What Comes with Every Screening
+    eyebrow: What's included
+    title: Six things that make KYT work
     columns: 3
     items:
-      - { title: Direction-Aware, text: "Deposits look upstream, withdrawals look downstream, each with its own rules and weights." }
-      - { title: Time Order, text: "A hop counts only if funds arrived before they left. Fewer false alarms." }
-      - { title: Materiality Thresholds, text: "Further hops need a bigger share: 5% / 10% / 15% / 20% at hops 2 / 3 / 4 / 5 by default." }
-      - { title: Exchange Exemption, text: "Paths stop at other exchanges, so their customers' history isn't pinned on yours. Can be switched off." }
-      - { title: Cross-Chain, text: USDC moved through Circle CCTP is followed onto the destination chain. }
-      - { title: Batch Rescans, text: "Upload past transactions by CSV and re-screen them in one go, at launch or after a rule change." }
+      - { title: Direction-aware, text: "Deposits look upstream, withdrawals look downstream. Rules and weights are set separately for each." }
+      - { title: Time-ordered, text: "A hop counts only if funds arrived before they moved on. Paths that fail the timing check are left out." }
+      - { title: Higher bars for distant hops, text: "5% / 10% / 15% / 20% of the funds must be risky at hops 2 / 3 / 4 / 5. Direct contact needs no share." }
+      - { title: Exchange exemption, text: "A path stops at an ordinary exchange, so other exchanges' users never drag you in. Sanctioned exchanges are never exempt." }
+      - { title: Cross-chain, text: "USDC moved through Circle CCTP and USDT moved through USDT0 are followed onto the destination chain." }
+      - { title: Batch back-screening, text: "Import historical transactions by CSV and screen them in one go, at launch or after a rule change." }
 
   - type: faq
     eyebrow: FAQ
-    title: Transaction Screening Questions
+    title: Transaction screening questions
     items:
       - q: Why use different rulesets for deposits and withdrawals?
-        a: They answer different questions. For a deposit you want to know whether the money is tainted; for a withdrawal, whether it is going somewhere it shouldn't. DART ships built-in KYT-IN and KYT-OUT rulesets that you can tune separately.
-      - q: Will screening slow down deposits and payouts?
-        a: Sanctions checks return in under a second and most screenings finish within a minute. For very active addresses traced deep, use async mode and act when the result is ready.
-      - q: What if a transaction contains several token transfers?
-        a: Call the transfer list endpoint to see every token transfer in the transaction, then pass the `event_index` of the one to screen. Listing transfers is not charged.
-      - q: Can DART follow funds across chains?
-        a: Yes for USDC moved through Circle CCTP. The path continues on the destination chain.
-      - q: We already run a KYT tool. Can we test DART first?
-        a: Yes. Keep your current tool running and send us a batch of past transactions. We return a result and risk path for each, with a diff against your current tool. DART is free until 31 December 2028.
+        a: The questions differ. For deposits you ask whether the money came from tainted sources. For withdrawals you ask whether it is going to a risky party. DART ships KYT-IN and KYT-OUT rulesets, and you tune each on its own.
+      - q: Will screening slow down crediting or payouts?
+        a: A fully traced screening takes 0.61 s at the median, and 90% finish within 5 s. For very active addresses traced deep, use async mode and act when the result is ready.
+      - q: A transaction contains several token transfers. Which one is screened?
+        a: Call the transfers endpoint to list every token transfer in the transaction, then pick the one to screen with `event_index`. Listing transfers isn't counted.
+      - q: Can DART follow money that crossed chains?
+        a: Yes. USDC moved through Circle CCTP and USDT moved through USDT0 continue on the destination chain. Other bridges are endpoints, and the node shows which bridge it is.
+      - q: We already run a KYT tool. Can we test first?
+        a: Yes. Keep your current system running. Send us historical transactions and we return each result and risk path, with every difference from your current tool explained.
 
   - type: cta
-    eyebrow: Free access
-    title: Run Your Past Transactions <em>Side by Side</em>
-    text: No change to your current flow. Compare the results and judge for yourself.
+    eyebrow: See it on your own data
+    title: Run historical transactions <em>side by side</em>
+    text: Keep your current flow. Compare the results and decide for yourself which is more accurate.
     points:
-      - A result and risk path for every transaction, with a **diff against your current tool**
-      - Free until **31 December 2028**
+      - A result and risk path for each transaction, with **every difference from your current tool explained**
+      - Stablecoins on DART, other assets stay where they are
     ctas:
-      - { label: Get Free Access, href: /contact/ }
-      - { label: Solutions for Exchanges, href: /solutions/exchanges/ }
+      - { label: Get access, href: /contact/ }
+      - { label: Solutions for exchanges, href: /solutions/exchanges/ }
 ---

@@ -11,7 +11,7 @@ main:
       - title: { en: Screening, zh: 筛查 }
         items:
           - label: { en: Platform Overview, zh: 平台总览 }
-            desc: { en: "Data, tracing, rules and scoring in one engine", zh: 数据、追踪、规则、评分一套引擎 }
+            desc: { en: "How a screening works, end to end", zh: 一次筛查是怎么完成的 }
             icon: layers
             href: /platform/
           - label: { en: Address Screening (KYA), zh: 地址筛查 KYA }
@@ -29,7 +29,7 @@ main:
       - title: { en: Go Deeper, zh: 进阶能力 }
         items:
           - label: { en: Fund Tracing & Investigations, zh: 资金追踪与调查 }
-            desc: { en: Follow the money across hops and chains, zh: 跨跳、跨链追资金去向 }
+            desc: { en: "Up to 500 transactions in one case", zh: 一个案子最多 500 笔交易一起追 }
             icon: trace
             href: /products/investigations/
           - label: { en: Rulesets & Scoring, zh: 规则集与评分 }
@@ -48,17 +48,17 @@ main:
   - label: { en: Solutions, zh: 解决方案 }
     feature:
       type: offer
-      big: { en: Free, zh: 免费 }
-      sub: { en: until 31 Dec 2028, zh: 至 2028 年 12 月 31 日 }
-      title: { en: Connect DART and pay nothing until 2029, zh: 接入 DART，免费用到 2028 年底 }
-      text: { en: "Console, API and MCP all included", zh: 控制台、API、MCP 全部可用 }
-      go: { en: "See what's included", zh: 看包含什么 }
-      href: /pricing/
+      big: { en: "0.61 s", zh: "0.61 秒" }
+      sub: { en: median fully traced screening, zh: 追资金的筛查，中位耗时 }
+      title: { en: Run DART next to your current tools, zh: 和你现在的工具并行跑一次 }
+      text: { en: "Send historical addresses and we explain every difference", zh: 给一批历史地址，差异逐条说明 }
+      go: { en: Get access, zh: 开通账号 }
+      href: /contact/
     groups:
       - title: { en: By Industry, zh: 按行业 }
         items:
           - label: { en: Exchanges, zh: 交易所 }
-            desc: { en: Screen deposits and withdrawals without false alarms, zh: 充提筛查，不误报不误伤 }
+            desc: { en: Screen deposits and withdrawals with a short review queue, zh: 充提都筛，复核队列只留该看的 }
             icon: bars
             href: /solutions/exchanges/
           - label: { en: Wallets, zh: 钱包 }
@@ -82,7 +82,7 @@ main:
       - title: { en: Work with DART, zh: 合作通道 }
         items:
           - label: { en: Law Enforcement, zh: 执法机构 }
-            desc: { en: "Tracing, case support and evidence packs", zh: 追踪、案件协助、证据包 }
+            desc: { en: "Multi-transaction tracing and case support", zh: 多笔交易追踪与案件协助 }
             icon: badge
             href: /partners/lea/
           - label: { en: Universities & Research, zh: 高校与研究 }

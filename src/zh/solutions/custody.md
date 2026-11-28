@@ -13,9 +13,8 @@ sections:
     title: 下游企业客户<em>开箱即有 KYA / KYT</em>
     lead: 你服务的每一家企业都需要充提筛查，但不是每一家都有能力自己采购和维护。由你统一接入 DART，筛查成为钱包基础设施的一部分。
     ctas:
-      - { label: 免费接入, href: "/contact/?type=custody" }
-      - { label: 看产品手册, href: "https://width.info/docs" }
-    note: 接入 DART，免费用到 2028 年 12 月 31 日
+      - { label: 开通账号, href: "/contact/?type=custody" }
+      - { label: 看文档, href: /docs/ }
     visual: result
 
   - type: problems
@@ -77,19 +76,18 @@ sections:
       - q: 存量地址怎么处理？
         a: 用 CSV 批量导入，一次性重新筛查存量地址，之后再切换到实时筛查。
       - q: 量大会不会影响速度？
-        a: 制裁筛查 1 秒内返回；同步调用直接给结果，大批量和深度追踪可以用异步模式，返回任务 ID 再查询，不阻塞充提。
+        a: 需要追资金的筛查中位 0.61 秒，同步调用直接给结果；大批量和深度追踪可以用异步模式，返回任务 ID 再查询，不阻塞充提。
       - q: 控制台和 API 能一起用吗？
         a: 能。控制台、REST API、MCP 和 CSV 批量共用同一个账号、同一份额度和同一批快照。
 
   - type: cta
-    eyebrow: 免费接入
+    eyebrow: 先试再说
     title: 和你现在的工具<em>并行跑一次</em>
     text: 不用停掉现有系统。给我们一批客户的历史充提地址，脱敏也可以，差异逐条说明原因。
     points:
       - 我们逐条给出结果和命中路径，并附**与现有工具的差异对比**
       - 稳定币交给 DART，其他资产照旧
-      - 接入 DART，免费用到 **2028 年 12 月 31 日**
     ctas:
-      - { label: 免费接入, href: "/contact/?type=custody" }
+      - { label: 开通账号, href: "/contact/?type=custody" }
       - { label: 预约演示, href: "/contact/?type=custody" }
 ---

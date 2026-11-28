@@ -2,8 +2,8 @@
 layout: layouts/page.njk
 permalink: /products/sanctions/
 title: Sanctions screening
-fullTitle: Crypto sanctions screening API in under a second | Width DART
-description: "Crypto sanctions screening on a self-built database covering OFAC, UN, EU, UK and more: entities, individuals, companies and onchain addresses, answered in under a second."
+fullTitle: Crypto sanctions screening in under a second | Width DART
+description: "Crypto sanctions screening on our own database covering OFAC, UN, EU, UK and more: addresses, entities, individuals and companies, answered in under a second. Listed addresses are blocked by default, and direct contact above 10 USD is always a hit."
 breadcrumb:
   - { label: Platform, href: /platform/ }
   - { label: Sanctions screening }
@@ -11,87 +11,84 @@ sections:
   - type: hero
     compact: true
     eyebrow: Sanctions screening
-    title: Is the Other Side Sanctioned? <em>Know in Under a Second.</em>
-    lead: Sanctions are the line you can't cross and the check you can't wait for. DART searches its own sanctions database for addresses, entities, individuals and companies in under a second. When authorities act, we turn it into a built-in ruleset fast so you can switch it on; the FinCEN 9714 order was live the day it was published.
+    title: Is the other side sanctioned? <em>Know in under a second.</em>
+    lead: A sanctions hit is a hard stop, so the check must be instant and the lists must be current. DART searches its own sanctions database for addresses, entities, individuals and companies in under a second. When authorities issue a new order, we ship it as a built-in ruleset the same day.
     ctas:
-      - { label: Get Free Access, href: /contact/ }
-      - { label: Read the Docs, href: "https://width.info/docs" }
-    note: Free until 31 December 2028
+      - { label: Get access, href: /contact/ }
+      - { label: Read the docs, href: /docs/ }
     stats:
-      - { value: "< 1", unit: s, label: Sanctions check response }
-      - { value: Same day, label: FinCEN 9714 order live as a ruleset the day it was published }
-      - { value: 200M, label: "Labeled addresses, with sanctions, freeze and hack labels kept current" }
-      - { value: "11", unit: chains, label: USDT and USDC covered }
+      - { value: "< 1", unit: s, label: label-only sanctions check }
+      - { value: Same day, label: FinCEN 9714 order published, ruleset live }
+      - { value: "10", unit: USD, label: "direct contact with sanctions above this is a hit, whatever its share" }
+      - { value: "100", label: "points for a listed address, blocked by default" }
 
   - type: problems
-    eyebrow: What sanctions screening has to get right
-    title: Not Slow, Not Leaky, Not Noisy
+    eyebrow: Sanctions screening
+    title: Instant, current, <em>and nothing missed</em>
     items:
-      - problem: Lists Change Faster Than Your Rules
-        detail: Official lists and enforcement orders are updated more often than ever. Maintaining rules by hand can't keep up.
+      - problem: Lists change, and your system falls behind
+        detail: Official lists and enforcement orders change more often than a team can maintain rules by hand.
         solution: |
-          - A self-built sanctions database covering **OFAC, UN, EU, UK** and more, updated continuously
-          - New official actions become **built-in rulesets** you can select in the console or the API
-        proof: FinCEN's 9714 order was published on 6 November. The matching DART ruleset went live the same day.
-      - problem: Sanctions Checks Hold Up Onboarding and Payouts
+          - Our own sanctions database covers **OFAC, UN, EU, UK** and other official sources, kept current
+          - New sanctions and enforcement orders become **built-in rulesets** you switch on in the console or API
+        proof: The FinCEN 9714 order was published on 6 November, and DART covered it the same day.
+      - problem: Sanctions checks slow down onboarding and transfers
         solution: |
-          - Sanctions checks return **in under a second**, fast enough for pre-transfer and onboarding checks
-          - An address that is itself listed is a self-hit and comes back as a block
-        proof: 300,000–400,000 API calls a day in production.
-      - problem: Checking Only the Address Misses One-Hop-Away Funds
-        detail: Funds often pass through an intermediary before they reach you.
+          - A label-only sanctions check returns **in under a second**, fast enough for onboarding and pre-send checks
+          - An address on a list gets a block verdict from its own label
+        proof: Even a fully traced screening takes 0.61 s at the median.
+      - problem: Checking the address alone misses money one hop away
+        detail: Funds often pass through an intermediary before they reach your platform.
         solution: |
-          - Direct and multi-hop exposure are checked too, in time order and by share of funds
-          - For strict sanctions screening, switch off the exchange exemption so paths are followed through exchanges as well
-        proof: Every hit lists its path, hop, amount and share.
+          - Direct contact with a sanctioned address is **a hit from 10 USD up**, whatever its share
+          - Links a few hops away are judged by timing and the share of risky funds
+          - Sanctioned exchanges **never get the exchange exemption**, so their paths always count
+        proof: Every hit lists its path, hops, amount and share.
 
   - type: cards
     tone: alt
     eyebrow: Coverage
-    title: What You Can Screen Against
+    title: What DART checks
     columns: 4
     items:
-      - { tag: Sources, title: Official Lists, text: "OFAC, UN, EU, UK and other official sanctions and enforcement lists." }
-      - { tag: Parties, title: Entities and People, text: "Sanctioned entities, individuals and companies, searchable by name." }
-      - { tag: Onchain, title: Linked Addresses, text: Addresses named on the lists and addresses we attribute to those entities. }
-      - { tag: Actions, title: Enforcement Orders, text: "Actions such as FinCEN's 9714 order, shipped as built-in rulesets." }
+      - { tag: Sources, title: Official lists, text: "OFAC, UN, EU, UK and other official sanctions and enforcement lists." }
+      - { tag: Subjects, title: Entities and people, text: "Sanctioned entities, individuals and companies, searchable by name." }
+      - { tag: Onchain, title: Linked addresses, text: "Addresses named on the lists, plus addresses our intelligence team has verified as belonging to those entities." }
+      - { tag: Orders, title: Enforcement orders, text: "Orders such as FinCEN 9714, shipped as built-in rulesets." }
 
   - type: split
     tone: alt
     eyebrow: Rulesets
-    title: New Actions, Ready to Switch On
-    text: Each official action maps to a built-in ruleset, and every rule is readable. Built-in rulesets are read-only; clone one to apply your own policy. Every snapshot records which ruleset a screening used.
+    title: New orders, <em>ready to switch on</em>
+    text: Each enforcement order has its own built-in ruleset, and every rule is readable. Built-in rulesets are read-only. To adapt one, copy it and change the conditions and points. Every snapshot records which ruleset was used.
     points:
-      - Sanctions hits score at **critical** severity; a self-hit is a block by default
-      - Rulesets carry a jurisdiction, so you enable only what applies to you
-      - After a list update, the ruleset version behind every past result stays on record
+      - Sanctions hits score at **critical** severity, and an address on a list is blocked by default
+      - Switch on only the rulesets that apply to your business
+      - To watch a named institution, mark the rule as a **highlight (★)** so its hits are listed on their own
     ctas:
-      - { label: Rulesets & Scoring, href: /products/rulesets/, style: ghost }
+      - { label: Rulesets & scoring, href: /products/rulesets/, style: ghost }
     visual: scores
 
   - type: faq
     eyebrow: FAQ
-    title: Sanctions Screening Questions
+    title: Sanctions screening questions
     items:
       - q: Which lists does the sanctions database cover?
-        a: Official sources including OFAC, the UN, the EU and the UK, covering entities, individuals, companies and onchain addresses. It is updated continuously.
-      - q: How soon can we use a new official action?
-        a: We turn new official actions into built-in rulesets. FinCEN's 9714 order, for example, was published on 6 November and was available in DART the same day.
-      - q: How fast is sanctions screening?
-        a: Under a second, which makes it practical before transfers and during onboarding.
-      - q: Can DART catch an address that isn't listed but deals with listed ones?
-        a: Yes. DART checks direct and multi-hop exposure in time order and by share of risky funds, and shows the full path. For sanctions use cases you can switch off the exchange exemption so paths are followed through exchanges too.
+        a: OFAC, UN, EU, UK and other official sources, including entities, individuals, companies and onchain addresses, kept current.
+      - q: How soon is a new order available?
+        a: We turn new orders into built-in rulesets. The FinCEN 9714 order was published on 6 November, and DART covered it the same day.
+      - q: Can DART catch an address that isn't listed but dealt with one that is?
+        a: Yes. Direct contact above 10 USD is a hit. Links a few hops away are judged by timing and the share of risky funds, and the result lists the full path.
+      - q: Does the exchange exemption let a sanctioned exchange through?
+        a: No. Only ordinary exchanges are exempt. Sanctioned exchanges, or exchanges with other high-risk labels, are never exempt.
       - q: Can we run sanctions screening without full KYT?
-        a: Yes. Enable only the sanctions rulesets, or screen only the address's own labels, depending on what your compliance policy requires.
+        a: Yes. Switch on only the sanctions rulesets, or set both hop counts to 0 to check the address's own labels.
 
   - type: cta
-    eyebrow: Free access
-    title: Start by <em>Rescanning What You Already Have</em>
-    text: Send us a batch of addresses, anonymized is fine, and get a result and risk path for each.
-    points:
-      - Includes a **diff against your current tool**, with reasons
-      - Free until **31 December 2028**
+    eyebrow: See it on your own data
+    title: Back-screen your <em>existing addresses</em>
+    text: Send us a batch of addresses (anonymized is fine). We return each result with its risk path and explain every difference from your current tool.
     ctas:
-      - { label: Get Free Access, href: /contact/ }
-      - { label: Sanctions Actions Tracker, href: "/data/#sanctions" }
+      - { label: Get access, href: /contact/ }
+      - { label: Sanctions actions tracker, href: "/data/#sanctions" }
 ---

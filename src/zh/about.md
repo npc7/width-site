@@ -9,25 +9,25 @@ sections:
   - type: hero
     compact: true
     eyebrow: 关于 WIDTH
-    title: 让每一笔稳定币，<em>来路去向都查得清</em>
-    lead: 稳定币已经是链上最主要的支付工具，问题资金也大多以 USDT、USDC 的形式流动。Width 做 KYC 和金融合规 12 年，DART 是我们把这套能力延伸到链上的产品。我们专注稳定币链上情报，用自建的数据、标签和规则，帮机构把问题资金挡在门外，把正常用户放进来。
+    title: 该拦的拦住，<em>正常用户不误伤</em>
+    lead: Width 做 KYC 和金融合规 12 年，DART 是我们把这套能力延伸到链上的产品，只做 USDT 和 USDC。我们用自建的数据、标签和规则，帮机构把问题资金挡在门外、让正常用户顺利通过，每一个结论都说得清。
     ctas:
       - { label: 联系我们, href: /contact/ }
       - { label: 合作伙伴, href: /partners/, style: ghost }
     stats:
-      - { value: "30", unit: 万+, label: 每天生产环境 API 调用次数 }
+      - { value: "150", unit: 万+, label: 每周生产环境 API 调用 }
       - { value: "2", unit: 亿, label: 已标注地址 }
-      - { value: "11", unit: 条链, label: USDT / USDC 覆盖 }
+      - { value: "428", unit: 家, label: 认得出钱包的交易所 }
       - { value: "3", unit: 地, label: 新加坡、香港、北京 }
 
   - type: cards
     eyebrow: 我们怎么做
-    title: 四个坚持
+    title: 我们怎么做 DART
     columns: 2
     items:
       - { title: 数据自己做, text: 链上数据层、地址标签、规则和评分都是自建的。能按客户的口径改，也能说清每个结论从哪来。 }
-      - { title: 按时间顺序判断, text: 钱先到账、后转出，才算有关联。这是减少误报最关键的一步，也是 DART 和其他做法最大的不同。 }
-      - { title: 每一分都说得清, text: 结果里列明路径、跳数、金额、占比和分值，每次筛查留存不可篡改的快照，经得起监管检查。 }
+      - { title: 按时间顺序判断, text: 钱先到账、后转出，才算有关联。这是减少误报最关键的一步。 }
+      - { title: 每一分都说得清, text: 结果里列明路径、跳数、金额、占比和分值，每次筛查都存为快照，监管检查时直接调出。 }
       - { title: 只说来源，不给人定性, text: 我们不公开具体的风险地址，也不给任何个人地址贴「诈骗」「洗钱」的标签。 }
 
   - type: split

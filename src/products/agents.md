@@ -11,12 +11,11 @@ sections:
   - type: hero
     compact: true
     eyebrow: For AI agents · MCP
-    title: Ask Your AI Agent <em>to Check the Address</em>
+    title: Ask your AI agent <em>to check the address</em>
     lead: '"Is this address safe to receive from?" "Why did this deposit land in review?" "Raise the hop-3 threshold to 15%." DART speaks MCP, so your agent can screen, read results and edit rules directly, on the same account and snapshots as the console and API.'
     ctas:
-      - { label: Get an API Key, href: /contact/ }
-      - { label: Developer Docs, href: /developers/ }
-    note: Free until 31 December 2028
+      - { label: Get an API key, href: /contact/ }
+      - { label: Developer docs, href: /developers/ }
     visual: code
     code:
       title: mcp.json
@@ -34,19 +33,19 @@ sections:
 
   - type: problems
     eyebrow: Why connect an agent
-    title: Where Compliance Time Goes Today
+    title: Where compliance time goes today
     items:
-      - problem: Reviewing One Case Means Opening Several Screens
+      - problem: Reviewing one case means opening several screens
         solution: |
           - Your agent reads the result and snapshot and explains the hit paths, hops, shares and points in a paragraph
           - The reviewer decides; nobody pieces the story together by hand
         proof: Every point maps to a rule, so the agent's explanation can be checked.
-      - problem: Editing Rules Means Learning the Condition Syntax
+      - problem: Editing rules means learning the condition syntax
         solution: |
           - Describe the policy in plain language; the agent clones a built-in ruleset, writes the conditions and sets the points
           - Every create, read, update and delete on rulesets and rules has a tool
         proof: Built-in rulesets are read-only, so the agent can only change your own copies.
-      - problem: You Want Risk Checks Inside Your Own AI Product
+      - problem: You want risk checks inside your own AI product
         solution: |
           - Wallet assistants, support bots and trading agents can screen before a transfer goes out
           - Standard MCP, so switching models or frameworks doesn't mean rewriting the integration
@@ -55,7 +54,7 @@ sections:
   - type: table
     tone: alt
     eyebrow: 19 tools
-    title: What an Agent Can Do
+    title: What an agent can do
     head: [Group, Tools, Purpose]
     rows:
       - [Screening, "`screen_address`, `screen_address_all_chains`, `screen_transaction`", "Address, all-chain and transaction screening"]
@@ -67,7 +66,7 @@ sections:
 
   - type: faq
     eyebrow: FAQ
-    title: MCP Questions
+    title: MCP questions
     items:
       - q: Which AI tools work with DART?
         a: Any MCP client, including Claude Code, Cursor and Codex. Add the configuration above with your API key and the tools appear.
@@ -79,13 +78,12 @@ sections:
         a: Results list the rules, paths, hops, amounts, shares and points behind every score, so an agent can explain them in plain language. When showing results to the public, say which kind of public source was hit rather than labelling a person's address.
 
   - type: cta
-    eyebrow: Free access
-    title: Get an API Key <em>and Plug It In</em>
+    eyebrow: See it on your own data
+    title: Get an API key <em>and plug it in</em>
     text: Console, API and MCP all run on one account.
     points:
-      - Free until **31 December 2028**
       - Engineers support you directly in a shared group
     ctas:
-      - { label: Get Free Access, href: /contact/ }
-      - { label: Developer Docs, href: /developers/ }
+      - { label: Get access, href: /contact/ }
+      - { label: Developer docs, href: /developers/ }
 ---

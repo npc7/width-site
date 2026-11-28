@@ -14,9 +14,8 @@ sections:
     title: 一句话，<br><em>让 AI 帮你查地址</em>
     lead: 「帮我查一下这个地址能不能收」「这笔充值为什么被判复核」「把第 3 跳的门槛调到 15%」。DART 开放 MCP，AI 助手直接调用筛查、读结果、改规则，和控制台、API 用同一个账号、同一批快照。
     ctas:
-      - { label: 免费拿 API Key, href: /contact/ }
+      - { label: 申请 API Key, href: /contact/ }
       - { label: 开发者文档, href: /developers/ }
-    note: 接入 DART，免费用到 2028 年 12 月 31 日
     visual: code
     code:
       title: mcp.json
@@ -79,13 +78,12 @@ sections:
         a: 结果里列明了命中的规则、路径、跳数、金额、占比和加分，AI 可以据此用自然语言解释。建议对外展示时只说命中了哪类公开来源，不给个人地址下定性。
 
   - type: cta
-    eyebrow: 免费接入
+    eyebrow: 先试再说
     title: 拿一个 API Key，<em>接上就能用</em>
     text: 控制台、API、MCP 用同一个账号。
     points:
-      - 接入 DART，免费用到 **2028 年 12 月 31 日**
       - 工程师直接在群里支持
     ctas:
-      - { label: 免费接入, href: /contact/ }
+      - { label: 开通账号, href: /contact/ }
       - { label: 开发者文档, href: /developers/ }
 ---
