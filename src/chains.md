@@ -16,6 +16,7 @@ sections:
     ctas:
       - { label: Get access, href: /contact/ }
       - { label: Address screening (KYA), href: /products/kya/ }
+    visual: orbit
 
   - type: table
     eyebrow: Coverage

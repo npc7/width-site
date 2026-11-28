@@ -27,6 +27,13 @@
         <span class="stack-role">{{ c.role }}</span>
         <h3>{{ c.name }}</h3>
         <p>{{ c.text | mdi | safe }}</p>
+        {%- set zh = (lang == 'zh') %}
+        <div class="cp-term" aria-hidden="true" data-term='{{ ([
+          ["q", "› 这个地址能收吗？TQ7v…9xKc" if zh else "› Can we accept funds from TQ7v…9xKc?"],
+          ["ok", "✓ 0 分 · 通过 · 0.6 秒" if zh else "✓ score 0 · pass · 0.6 s"],
+          ["q", "› 第 3 跳门槛调到 15%，重跑上次任务" if zh else "› Set hop 3 threshold to 15%, re-run"],
+          ["ok", "✓ 规则集已更新 · 重新判定完成" if zh else "✓ ruleset updated · re-scored"]
+        ]) | dump }}'><span class="tag">{{ '演示' if zh else 'demo' }}</span></div>
         {%- if c.points %}<ul>{% for p in c.points %}<li>{{ p | mdi | safe }}</li>{% endfor %}</ul>{% endif %}
         <span class="link-arrow">{{ c.link or i18n[lang].learnMore }}</span>
       </a>

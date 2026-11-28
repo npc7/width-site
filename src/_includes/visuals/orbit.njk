@@ -1,0 +1,33 @@
+{#- orbit：支持的链绕着 DART 转，几条跨链弧线上有资金在跑（USDT0 / CCTP）。
+    链和币种与 /chains/ 页的表格一致（2026-11-28 GET /api/v3/chains）；改链列表时两处一起改。 -#}
+{%- set zh = (lang == 'zh') -%}
+{%- set chains = [
+  ["Tron", "USDT"], ["Ethereum", "USDT · USDC"], ["BSC", "USDT · USDC"], ["Arbitrum", "USDT · USDC"],
+  ["Polygon", "USDT · USDC"], ["Hyperliquid", "USDT · USDC"], ["Morph", "USDT · USDC"], ["Base", "USDC"],
+  ["Arc", "USDC"], ["Plasma", "USDT"], ["Robinhood", "USDG"]
+] -%}
+{%- set n = chains | length -%}
+<div class="orbit-wrap">
+<div class="orbit" aria-label="{{ '支持的链：' if zh else 'Supported chains: ' }}{% for c in chains %}{{ c[0] }}{% if not loop.last %}, {% endif %}{% endfor %}" role="img">
+  <div class="orbit-ring r1"></div>
+  <div class="orbit-ring r2"></div>
+  <div class="orbit-spin">
+    <svg class="orbit-arcs" viewBox="0 0 100 100" aria-hidden="true">
+      {#- 跨链弧线：以太坊 ↔ Arbitrum / Base / Polygon / Arc（CCTP）、以太坊 ↔ Hyperliquid（USDT0）；点的位置按链的序号算 -#}
+      {%- set pairs = [[1, 3], [1, 7], [1, 4], [1, 8], [1, 5]] -%}
+      {%- for p in pairs %}
+      {%- set a1 = (p[0] / n) * 6.2832 - 1.5708 -%}{%- set a2 = (p[1] / n) * 6.2832 - 1.5708 -%}
+      {%- set x1 = 50 + 41 * (a1 | cos) -%}{%- set y1 = 50 + 41 * (a1 | sin) -%}
+      {%- set x2 = 50 + 41 * (a2 | cos) -%}{%- set y2 = 50 + 41 * (a2 | sin) -%}
+      <path id="arc{{ loop.index }}" d="M{{ x1 | round(2) }} {{ y1 | round(2) }} Q50 50 {{ x2 | round(2) }} {{ y2 | round(2) }}"/>
+      <circle r=".9"><animateMotion dur="{{ 2.6 + loop.index * 0.7 }}s" repeatCount="indefinite" begin="{{ loop.index * 0.6 }}s" keyPoints="0;1" keyTimes="0;1" calcMode="spline" keySplines=".45 0 .2 1"><mpath href="#arc{{ loop.index }}"/></animateMotion></circle>
+      {%- endfor %}
+    </svg>
+    {%- for c in chains %}
+    <div class="orbit-arm" style="--a: {{ (loop.index0 / n * 360) | round(2) }}deg"><div class="orbit-chip"><span>{{ c[0] }}<small>{{ c[1] }}</small></span></div></div>
+    {%- endfor %}
+  </div>
+  <div class="orbit-core"><div><b>DART</b><small>{{ '一次查完所有链' if zh else 'ALL CHAINS, ONE CALL' }}</small></div></div>
+</div>
+<p class="orbit-legend"><span><i></i>{{ '跨链续追：USDT0 · CCTP' if zh else 'Cross-chain tracing: USDT0 · CCTP' }}</span></p>
+</div>

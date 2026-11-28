@@ -13,18 +13,25 @@
         <h3>{{ c.q }}</h3>
         <svg class="story-viz" viewBox="0 0 420 118" role="img" aria-label="{{ c.result }}">
           {%- if side == 'old' %}
-          <line x1="70" y1="44" x2="190" y2="44" class="sv-edge risk"/>
-          <line x1="230" y1="44" x2="350" y2="44" class="sv-edge risk"/>
+          <line x1="70" y1="44" x2="190" y2="44" class="sv-edge risk e1"/>
+          <line x1="230" y1="44" x2="350" y2="44" class="sv-edge risk e2"/>
           {%- else %}
           <line x1="70" y1="44" x2="190" y2="44" class="sv-edge risk"/>
+          <line x1="230" y1="44" x2="350" y2="44" class="sv-ghost"/>
           <line x1="230" y1="44" x2="350" y2="44" class="sv-edge cut"/>
           <text x="130" y="30" class="sv-time">{{ '10:05 到账' if zh else 'in 10:05' }}</text>
           <text x="290" y="30" class="sv-time cut">{{ '10:02 已转出' if zh else 'out 10:02' }}</text>
-          <g class="sv-x" transform="translate(290 44)"><line x1="-7" y1="-7" x2="7" y2="7"/><line x1="7" y1="-7" x2="-7" y2="7"/></g>
+          <g transform="translate(290 44)"><g class="sv-x"><line x1="-7" y1="-7" x2="7" y2="7"/><line x1="7" y1="-7" x2="-7" y2="7"/></g></g>
           {%- endif %}
           <circle cx="50" cy="44" r="20" class="sv-node risk"/>
           <circle cx="210" cy="44" r="20" class="sv-node mid"/>
           <circle cx="370" cy="44" r="20" class="sv-node you"/>
+          {%- if side == 'old' %}
+          <circle cx="50" cy="44" r="7" class="sv-coin red"/>
+          {%- else %}
+          <circle cx="210" cy="44" r="7" class="sv-coin gray"/>
+          <circle cx="50" cy="44" r="7" class="sv-coin red"/>
+          {%- endif %}
           <text x="50" y="86" class="sv-cap">{{ '风险地址' if zh else 'Risky address' }}</text>
           <text x="210" y="86" class="sv-cap">{{ '中间地址' if zh else 'Intermediary' }}</text>
           <text x="370" y="86" class="sv-cap">{{ '你的用户' if zh else 'Your user' }}</text>

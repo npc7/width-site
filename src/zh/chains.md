@@ -16,6 +16,7 @@ sections:
     ctas:
       - { label: 开通账号, href: /contact/ }
       - { label: 地址筛查 KYA, href: /products/kya/ }
+    visual: orbit
 
   - type: table
     eyebrow: 覆盖范围

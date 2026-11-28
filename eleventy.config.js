@@ -92,6 +92,8 @@ export default function (eleventyConfig) {
   // ---------- 过滤器 ----------
   // Markdown：块级 / 行内
   eleventyConfig.addFilter("md", (s) => (s ? md.render(String(s)) : ""));
+  eleventyConfig.addFilter("cos", (x) => Math.cos(Number(x)));
+  eleventyConfig.addFilter("sin", (x) => Math.sin(Number(x)));
   eleventyConfig.addFilter("mdi", (s) => (s ? md.renderInline(String(s)) : ""));
 
   // 站内链接加语言前缀："/pricing/" | locale("zh") → "/zh/pricing/"

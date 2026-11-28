@@ -73,10 +73,24 @@ src/
 | `boards` | 数据榜单 | items: 榜单 key（见 boards.yml） |
 | `form` | 联系表单 | title, text, points |
 | `prose` | 一段正文 | body |
+| `story` | 品类故事：左右对照「只看关联」和「DART 的做法」，各带一张会动的资金示意图 | title, lead, tagline, old / new: label, q, points, result |
+| `stack` | 产品体系：左边三层，右边 AI 助手（带一个逐字打出的小终端） | title, lead, layers: name, role, text, links; copilot: name, role, text, points, href, link |
+| `glossary` | 合规词典（词条在 `_data/glossary.yml`） | 无 |
+
+### 动效
+
+全站动效在 `assets/css/motion.css` 和 `assets/js/motion.js`，没有依赖：
+
+- **页面切换**：跨页 View Transitions，正文滑入滑出，导航栏不动。
+- **滚动出现**：`motion.js` 给常见版块里的元素自动加 `data-rv`，进入屏幕时出现；标题从遮罩里升起，`<em>` 上有一道光扫过。不想要动效的元素，在它或它的容器上加 `data-no-rv`。
+- **数字**：数字条和案例里的数字从 0 跳到位（「当天」这类文字不动）。
+- **卡片**：鼠标聚光、轻微倾斜，主按钮有磁吸（只在有鼠标的设备上）。
+- **示意图**：`story` 的资金逐跳流动、`stack` 的小终端、底部行动号召的资金网络、`/chains/` 的轨道图（`visual: orbit`，链列表写在 `visuals/orbit.njk`，改链时和页面表格一起改）。
+- **减少动态效果**：系统开了「减少动态效果」的访客看到的是静态页面。`motion.js` 没加载成功时，4 秒后内容全部显示。
 
 全站版式：大标题在左、说明在右，细线代替卡片边框，底部行动号召是一整条深蓝（带流动的点）。首页另外写了 `bodyClass: home-v2`：字更大。首页头图用 `ledger` 版块，它的脚本是 `assets/js/ledger.js`，需要从 cdnjs 加载 three.js r128（模板 `sections/ledger.njk` 里已经引入，只在用到这个版块的页面加载）。
 
-所有版块都支持 `id`（锚点）和 `tone: alt`（换底色）。`visual` 可选 `flow`、`result`、`scores`、`code`、`image`。
+所有版块都支持 `id`（锚点）和 `tone: alt`（换底色）。`visual` 可选 `flow`、`result`、`scores`、`code`、`image`、`multitrace`、`orbit`。
 
 ## 发布文章
 

@@ -1,0 +1,190 @@
+/* =========================================================================
+   Width DART · 动效层（motion.css，配合 assets/js/motion.js）
+   原则：
+   - 只在 html.motion 下生效（head 里的小脚本判断：用户没有开启「减少动态效果」才加）。
+   - 内容默认可见；动效脚本没加载时，4 秒后自动全部显示（html.rv-all）。
+   - 动画只用 transform / opacity / filter，屏幕外的循环动画暂停。
+   ========================================================================= */
+
+/* ---------- 1. 页面切换：跨页 View Transitions（Chrome / Edge / Safari 18+） ---------- */
+/* 只让正文（main）滑入滑出；导航栏留在 root 里做默认的交叉淡化，两页一样所以看起来不动。
+   不要给 .site-header 加 view-transition-name：它会变成 backdrop root，导航栏的毛玻璃就失效了。 */
+@view-transition { navigation: auto; }
+#main { view-transition-name: page; }
+::view-transition-old(page) { animation: vt-out .3s cubic-bezier(.4, 0, .2, 1) both; }
+::view-transition-new(page) { animation: vt-in .6s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes vt-out { to { opacity: 0; transform: translateY(-12px); } }
+@keyframes vt-in { from { opacity: 0; transform: translateY(28px); } }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(page), ::view-transition-new(page) { animation: none; }
+}
+
+/* ---------- 2. 阅读进度线（贴在导航栏下沿） ---------- */
+.scroll-line { position: fixed; left: 0; right: 0; top: var(--header-h); height: 2px; z-index: 60; pointer-events: none;
+  transform-origin: 0 50%; transform: scaleX(var(--sp, 0));
+  background: linear-gradient(90deg, #7fb0ff, var(--accent) 40%, #0b2f86); opacity: .9; }
+
+/* ---------- 3. 首屏入场 ---------- */
+html.motion :is(.ledger-copy, .hero-copy) > * { animation: rise .9s cubic-bezier(.16, 1, .3, 1) both; }
+html.motion :is(.ledger-copy, .hero-copy) > :nth-child(1) { animation-delay: .05s; }
+html.motion :is(.ledger-copy, .hero-copy) > :nth-child(2) { animation-delay: .14s; }
+html.motion :is(.ledger-copy, .hero-copy) > :nth-child(3) { animation-delay: .26s; }
+html.motion :is(.ledger-copy, .hero-copy) > :nth-child(4) { animation-delay: .38s; }
+html.motion :is(.ledger-copy, .hero-copy) > :nth-child(5) { animation-delay: .48s; }
+html.motion .hero-visual { animation: rise-visual 1.2s .2s cubic-bezier(.16, 1, .3, 1) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(28px); filter: blur(8px); } }
+@keyframes rise-visual { from { opacity: 0; transform: translateY(40px) scale(.97); filter: blur(10px); } }
+
+/* 标题里的 <em>：一道光从左扫到右。背景宽 260%，位置只在 100% → 0% 之间动，文字始终被完整盖住 */
+:root { --sheen: #8fbaff; }
+.cta-band { --sheen: #ffffff; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  /* 中文标题里的文字被 site.js 包成 .ph（inline-block，可能折成两行）：光效要加在 .ph 上，
+     加在 em 上的话背景只有一行高，折下来的那一行会变透明。英文标题没有 .ph，直接加在 em 上。 */
+  html.motion :is(h1, h2) em:not(:has(.ph)), html.motion :is(h1, h2) em .ph {
+    background: linear-gradient(100deg, currentColor 0 40%, var(--sheen) 50%, currentColor 60% 100%) 100% 0 / 260% 100% no-repeat;
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    animation: sheen 2.2s .7s cubic-bezier(.4, 0, .2, 1) both;
+  }
+  html.motion h2 :is(em, em .ph) { animation-play-state: paused; }
+  html.motion h2.in :is(em, em .ph), html.motion .in h2 :is(em, em .ph), html.rv-all h2 :is(em, em .ph) { animation-play-state: running; }
+}
+@keyframes sheen { from { background-position: 100% 0; } to { background-position: 0% 0; } }
+
+/* ---------- 4. 滚动出现 ---------- */
+html.motion [data-rv] { opacity: 0; transform: translateY(34px); filter: blur(6px);
+  transition: opacity .9s cubic-bezier(.16, 1, .3, 1), transform 1s cubic-bezier(.16, 1, .3, 1), filter .9s ease;
+  transition-delay: calc(var(--i, 0) * 80ms); }
+html.motion [data-rv="left"] { transform: translateX(-40px); }
+html.motion [data-rv="scale"] { transform: translateY(24px) scale(.96); }
+html.motion [data-rv].in, html.rv-all [data-rv] { opacity: 1; transform: none; filter: none; }
+/* 标题：整块从遮罩里升起。遮罩放在 h2 上、位移放在里面的 .rv-inner 上（motion.js 包的），
+   这样 h2 自己的位置和可见区域不变，IntersectionObserver 才判断得准 */
+html.motion h2.rv-rise[data-rv] { opacity: 1; transform: none; filter: none; overflow: hidden; padding-bottom: .14em; margin-bottom: -.14em; }
+html.motion h2.rv-rise .rv-inner { display: block; transform: translateY(108%); transition: transform 1.15s cubic-bezier(.16, 1, .3, 1); }
+html.motion h2.rv-rise.in .rv-inner, html.rv-all h2.rv-rise .rv-inner { transform: none; }
+/* 表格行逐行出现 */
+html.motion tr[data-rv] { transform: translateX(-16px); filter: none; }
+
+/* ---------- 5. 光标聚光（卡片） ---------- */
+:is(.card, .case, .points3 > div, .stack-layer, .story-col, .faq details, .post-card) { position: relative; }
+.spot::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(13, 79, 211, .10), transparent 45%); }
+.spot:hover::after { opacity: 1; }
+.case:first-child.spot::after, .stack-copilot.spot::after { background: radial-gradient(380px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .14), transparent 45%); }
+.stack-copilot { position: relative; overflow: hidden; }
+/* 卡片轻微立体倾斜（只在桌面端，由 motion.js 写入 --rx / --ry） */
+html.motion .tilt { transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)); transition: transform .5s cubic-bezier(.16, 1, .3, 1); will-change: transform; }
+
+/* 主按钮：磁吸 */
+html.motion .btn-primary { transition: transform .35s cubic-bezier(.16, 1, .3, 1), background-color .18s, color .18s, border-color .18s; }
+
+/* ---------- 6. 品类故事：资金逐跳流动（sections/story.njk） ---------- */
+.sv-coin { opacity: 0; }
+.sv-ghost { opacity: 0; }
+.sv-coin.red { fill: var(--block); filter: drop-shadow(0 0 6px rgba(217, 45, 32, .6)); }
+.sv-coin.gray { fill: var(--text-3); }
+.sv-ghost { stroke: var(--line-strong); stroke-width: 3; }
+.sv-stamp { opacity: 0; }
+html.motion .story-grid.play .story-old .sv-edge { stroke-dasharray: 120; animation: sv-draw 8s linear infinite; }
+html.motion .story-grid.play .story-old .sv-edge.e2 { animation-name: sv-draw2; }
+html.motion .story-grid.play .story-old .sv-coin { animation: sv-old-coin 8s cubic-bezier(.45, 0, .2, 1) infinite; }
+html.motion .story-grid.play .story-old .sv-node.mid { animation: sv-taint-mid 8s infinite; }
+html.motion .story-grid.play .story-old .sv-node.you { animation: sv-taint-you 8s infinite; }
+html.motion .story-grid.play .story-old .sv-verdict { animation: sv-verdict-old 8s infinite; }
+@keyframes sv-draw { 0% { stroke-dashoffset: 120; } 22%, 92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 120; } }
+@keyframes sv-draw2 { 0%, 22% { stroke-dashoffset: 120; } 44%, 92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 120; } }
+@keyframes sv-old-coin { 0% { transform: translateX(0); opacity: 0; } 3% { opacity: 1; } 44% { transform: translateX(320px); opacity: 1; } 52%, 100% { transform: translateX(320px); opacity: 0; } }
+@keyframes sv-taint-mid { 0%, 20% { fill: #fff; stroke: var(--text-3); } 24%, 92% { fill: #fdecea; stroke: var(--block); } 100% { fill: #fff; stroke: var(--text-3); } }
+@keyframes sv-taint-you { 0%, 42% { fill: #e8effc; stroke: var(--accent); } 46%, 92% { fill: #fdecea; stroke: var(--block); } 100% { fill: #e8effc; stroke: var(--accent); } }
+@keyframes sv-verdict-old { 0%, 46% { opacity: 0; transform: translateY(6px); } 52%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+html.motion .story-grid.play .story-old .sv-verdict { transform-box: fill-box; transform-origin: center; }
+
+/* 右边：10:02 先转出（灰币到你的用户），10:05 风险资金才到中间地址，时序不成立 → 打叉 → 不计入 */
+html.motion .story-grid.play .story-new .sv-coin.gray { animation: sv-new-gray 8s cubic-bezier(.45, 0, .2, 1) infinite; }
+html.motion .story-grid.play .story-new .sv-coin.red { animation: sv-new-red 8s cubic-bezier(.45, 0, .2, 1) infinite; }
+html.motion .story-grid.play .story-new .sv-time.cut { animation: sv-show-a 8s infinite; }
+html.motion .story-grid.play .story-new .sv-time:not(.cut) { animation: sv-show-b 8s infinite; }
+html.motion .story-grid.play .story-new .sv-edge.risk { stroke-dasharray: 120; animation: sv-draw-b 8s linear infinite; }
+html.motion .story-grid.play .story-new .sv-edge.cut { animation: sv-cut 8s infinite; }
+html.motion .story-grid.play .story-new .sv-ghost { animation: sv-ghost 8s infinite; }
+html.motion .story-grid.play .story-new .sv-x { animation: sv-x 8s cubic-bezier(.34, 1.56, .64, 1) infinite; transform-box: fill-box; transform-origin: center; }
+html.motion .story-grid.play .story-new .sv-verdict { animation: sv-verdict-new 8s infinite; }
+@keyframes sv-new-gray { 0% { transform: translateX(0); opacity: 0; } 3% { opacity: 1; } 20% { transform: translateX(160px); opacity: 1; } 26%, 100% { transform: translateX(160px); opacity: 0; } }
+@keyframes sv-new-red { 0%, 28% { transform: translateX(0); opacity: 0; } 31% { opacity: 1; } 48% { transform: translateX(160px); opacity: 1; } 54%, 100% { transform: translateX(160px); opacity: 0; } }
+@keyframes sv-show-a { 0%, 6% { opacity: 0; } 12%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes sv-show-b { 0%, 36% { opacity: 0; } 44%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes sv-draw-b { 0%, 28% { stroke-dashoffset: 120; } 48%, 92% { stroke-dashoffset: 0; } 100% { stroke-dashoffset: 120; } }
+@keyframes sv-ghost { 0%, 54% { opacity: 1; } 58%, 92% { opacity: 0; } 100% { opacity: 1; } }
+@keyframes sv-cut { 0%, 54% { opacity: 0; } 58%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@keyframes sv-x { 0%, 54% { opacity: 0; transform: scale(.2) rotate(-30deg); } 60%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+@keyframes sv-verdict-new { 0%, 60% { opacity: 0; transform: translateY(6px); } 66%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; } }
+html.motion .story-grid.play .story-new .sv-verdict { transform-box: fill-box; transform-origin: center; }
+.story-grid.paused * { animation-play-state: paused !important; }
+
+/* ---------- 7. 产品体系：层层就位 + 信号脉冲（sections/stack.njk） ---------- */
+.stack-layer { overflow: visible; }
+@media (min-width: 981px) {
+  .stack-layer::before { content: ""; position: absolute; top: 50%; right: -17px; width: 17px; height: 2px;
+    background: linear-gradient(90deg, rgba(13, 79, 211, .15), rgba(13, 79, 211, .6)); }
+  html.motion .stack-layer::before { background: linear-gradient(90deg, rgba(13, 79, 211, .12), rgba(13, 79, 211, .5)),
+      radial-gradient(circle, #7fb0ff 0 2px, transparent 3px) -6px 50% / 6px 6px no-repeat;
+    animation: beam 2.4s cubic-bezier(.4, 0, .2, 1) infinite; animation-delay: calc(var(--i, 0) * .45s); }
+}
+@keyframes beam { 0% { background-position: 0 0, 120% 50%; } 60%, 100% { background-position: 0 0, -40% 50%; } }
+html.motion .stack-layer[data-rv] { transform: translateX(-48px); }
+html.motion .stack-layer[data-rv].in, html.rv-all .stack-layer[data-rv] { transform: none; }
+html.motion .stack-layer { transition-property: opacity, transform, filter, border-color, box-shadow; }
+.stack-layer:hover { box-shadow: var(--shadow-card); }
+
+/* Copilot 卡里的小终端（motion.js 逐字打出） */
+.cp-term { margin: 6px 0 4px; padding: 12px 14px; background: rgba(0, 0, 0, .28); border: 1px solid rgba(255, 255, 255, .08);
+  font: 500 12.5px/1.7 var(--mono); color: #cfe0ff; min-height: 7.6em; white-space: pre-wrap; }
+.cp-term .ok { color: #7ee2b0; }
+.cp-term .q { color: #fff; }
+.cp-term .caret { display: inline-block; width: 7px; height: 1.1em; vertical-align: -2px; background: #9fc0ff; animation: ccaret 1s steps(1) infinite; }
+.cp-term .tag { float: right; color: rgba(255, 255, 255, .4); font-size: 11px; }
+
+/* ---------- 8. 底部 CTA：资金流星图（motion.js 在 .cta-section 里画 canvas，铺满整条蓝色带） ---------- */
+.cta-section { position: relative; overflow: hidden; }
+.cta-net { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; opacity: .9; }
+.cta-section > .container { position: relative; z-index: 1; }
+
+/* ---------- 9. 支持的链：轨道（visuals/orbit.njk） ---------- */
+.orbit { position: relative; width: min(100%, 520px); aspect-ratio: 1; margin-inline: auto; }
+.orbit-ring { position: absolute; inset: 0; border-radius: 50%; }
+.orbit-ring.r1 { inset: 9%; border: 1px dashed rgba(13, 79, 211, .22); }
+.orbit-ring.r2 { inset: 27%; border: 1px solid rgba(13, 79, 211, .12); }
+.orbit-core { position: absolute; inset: 37%; border-radius: 50%; display: grid; place-items: center; text-align: center;
+  background: radial-gradient(circle at 35% 30%, #3a74e6, var(--dark) 70%); color: #fff;
+  box-shadow: 0 0 0 10px rgba(13, 79, 211, .07), 0 0 0 22px rgba(13, 79, 211, .04), 0 30px 60px -20px rgba(7, 34, 89, .6); }
+.orbit-core b { display: block; font-size: clamp(16px, 2.4vw, 22px); letter-spacing: .02em; }
+.orbit-core small { display: block; font: 500 10.5px var(--mono); color: #b9d2ff; letter-spacing: .06em; margin-top: 2px; }
+html.motion .orbit-core { animation: core-pulse 3.2s ease-in-out infinite; }
+@keyframes core-pulse { 50% { box-shadow: 0 0 0 16px rgba(13, 79, 211, .09), 0 0 0 34px rgba(13, 79, 211, .03), 0 30px 60px -20px rgba(7, 34, 89, .6); } }
+.orbit-arm { position: absolute; inset: 0; transform: rotate(var(--a)); }
+html.motion .orbit-spin { animation: spin 80s linear infinite; }
+.orbit-spin { position: absolute; inset: 0; }
+.orbit-chip { position: absolute; left: 50%; top: 9%; transform: translate(-50%, -50%) rotate(calc(-1 * var(--a))); }
+html.motion .orbit-chip > span { animation: spin 80s linear infinite reverse; }
+.orbit-chip > span { display: inline-flex; flex-direction: column; align-items: center; gap: 1px; padding: 6px 10px; white-space: nowrap;
+  background: #fff; border: 1px solid rgba(13, 79, 211, .16); box-shadow: 0 10px 24px -14px rgba(7, 34, 89, .45);
+  font-size: 12.5px; font-weight: 700; color: var(--text); }
+.orbit-chip small { font: 500 10px var(--mono); color: var(--accent); }
+.orbit-arcs { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.orbit-arcs path { fill: none; stroke: rgba(13, 79, 211, .3); stroke-width: 1.5px; vector-effect: non-scaling-stroke; }
+.orbit-arcs circle { fill: var(--accent); filter: drop-shadow(0 0 1px rgba(13, 79, 211, .8)); }
+.orbit-legend { display: flex; justify-content: center; gap: 16px; margin-top: 10px; font: 500 12px var(--mono); color: var(--text-3); }
+.orbit-legend i { display: inline-block; width: 18px; height: 2px; background: var(--accent); vertical-align: middle; margin-right: 6px; }
+@keyframes spin { to { transform: rotate(360deg); } }
+@media (max-width: 640px) { .orbit-chip > span { font-size: 10.5px; padding: 4px 7px; } .orbit-chip small { font-size: 9px; } }
+
+/* ---------- 10. 数字滚动时不跳动 ---------- */
+.stat-value, .case-metric { font-variant-numeric: tabular-nums; }
+
+/* ---------- 减少动态效果：全部静止 ---------- */
+@media (prefers-reduced-motion: reduce) {
+  [data-rv] { opacity: 1 !important; transform: none !important; filter: none !important; clip-path: none !important; }
+  .cta-net { display: none; }
+}
