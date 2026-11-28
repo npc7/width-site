@@ -1,0 +1,35 @@
+{#- stack：产品体系。左边三层（调查 / 判定 / 情报，从上到下），右边一条贯穿的 AI 助手。
+    title, lead, layers[{name, role, text, links[{label, href}]}], copilot{name, role, text, points[], href, link} -#}
+<section class="section stack {{ s.tone }}"{% if s.id %} id="{{ s.id }}"{% endif %}>
+  <div class="container">
+    {% include "partials/section-head.njk" %}
+    <div class="stack-grid">
+      <div class="stack-layers">
+        {%- for l in s.layers %}
+        <div class="stack-layer">
+          <div class="stack-name">
+            <span class="stack-role">{{ l.role }}</span>
+            <h3>{{ l.name }}</h3>
+          </div>
+          <div class="stack-body">
+            <p>{{ l.text | mdi | safe }}</p>
+            {%- if l.links %}
+            <div class="stack-links">
+              {%- for k in l.links %}<a href="{{ k.href | locale(lang) }}">{{ k.label }}</a>{% endfor %}
+            </div>
+            {%- endif %}
+          </div>
+        </div>
+        {%- endfor %}
+      </div>
+      {%- set c = s.copilot %}
+      <a class="stack-copilot" href="{{ c.href | locale(lang) }}">
+        <span class="stack-role">{{ c.role }}</span>
+        <h3>{{ c.name }}</h3>
+        <p>{{ c.text | mdi | safe }}</p>
+        {%- if c.points %}<ul>{% for p in c.points %}<li>{{ p | mdi | safe }}</li>{% endfor %}</ul>{% endif %}
+        <span class="link-arrow">{{ c.link or i18n[lang].learnMore }}</span>
+      </a>
+    </div>
+  </div>
+</section>

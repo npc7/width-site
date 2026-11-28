@@ -8,12 +8,8 @@ main:
       type: latest
       kicker: { en: Latest article, zh: 最新文章 }
     groups:
-      - title: { en: Screening, zh: 筛查 }
+      - title: { en: DART Screen · Decide, zh: DART Screen · 判定 }
         items:
-          - label: { en: Platform Overview, zh: 平台总览 }
-            desc: { en: "How a screening works, end to end", zh: 一次筛查是怎么完成的 }
-            icon: layers
-            href: /platform/
           - label: { en: Address Screening (KYA), zh: 地址筛查 KYA }
             desc: { en: Is this address safe to deal with?, zh: 这个地址能不能打交道 }
             icon: target
@@ -26,24 +22,38 @@ main:
             desc: { en: "Official lists, answered in under a second", zh: 官方名单，1 秒内返回 }
             icon: shield
             href: /products/sanctions/
-      - title: { en: Go Deeper, zh: 进阶能力 }
-        items:
-          - label: { en: Fund Tracing & Investigations, zh: 资金追踪与调查 }
-            desc: { en: "Up to 500 transactions in one case", zh: 一个案子最多 500 笔交易一起追 }
-            icon: trace
-            href: /products/investigations/
           - label: { en: Rulesets & Scoring, zh: 规则集与评分 }
             desc: { en: "Your risk appetite, written as rules", zh: 把你的风险偏好写成规则 }
             icon: sliders
             href: /products/rulesets/
-          - label: { en: AI Agents (MCP), zh: AI 助手（MCP） }
-            desc: { en: "19 tools for any AI agent", zh: "19 个工具，AI 直接调用" }
+      - title: { en: DART Intel & Trace, zh: DART Intel · 情报 & Trace · 调查 }
+        items:
+          - label: { en: DART Intel, zh: DART Intel 标签与情报 }
+            desc: { en: "200M labeled addresses, 428 exchanges", zh: 2 亿已标注地址，认得出 428 家交易所 }
+            icon: layers
+            href: /products/intelligence/
+          - label: { en: DART Trace, zh: DART Trace 资金追踪 }
+            desc: { en: "Up to 500 transactions in one case", zh: 一个案子最多 500 笔交易一起追 }
+            icon: trace
+            href: /products/investigations/
+          - label: { en: Supported Chains, zh: 支持的链 }
+            desc: { en: "Stablecoins by chain, plus cross-chain tracing", zh: 各条链的稳定币与跨链追踪 }
+            icon: swap
+            href: /chains/
+      - title: { en: AI & Access, zh: AI 与接入 }
+        items:
+          - label: { en: DART Copilot, zh: DART Copilot AI 助手 }
+            desc: { en: "AI does the legwork. Your team signs off.", zh: AI 跑腿，合规官签字 }
             icon: spark
-            href: /products/agents/
+            href: /products/copilot/
           - label: { en: Developers & API, zh: 开发者与 API }
             desc: { en: "API, MCP, OpenAPI and llms.txt", zh: API、MCP、OpenAPI、llms.txt }
             icon: code
             href: /developers/
+          - label: { en: Platform Overview, zh: 平台总览 }
+            desc: { en: "How a screening works, end to end", zh: 一次筛查是怎么完成的 }
+            icon: bars
+            href: /platform/
 
   - label: { en: Solutions, zh: 解决方案 }
     feature:
@@ -109,9 +119,11 @@ footer:
       - { label: { en: KYA Screening, zh: 地址筛查 KYA }, href: /products/kya/ }
       - { label: { en: KYT Screening, zh: 交易筛查 KYT }, href: /products/kyt/ }
       - { label: { en: Sanctions Screening, zh: 制裁筛查 }, href: /products/sanctions/ }
-      - { label: { en: Fund Tracing, zh: 资金追踪与调查 }, href: /products/investigations/ }
       - { label: { en: Rulesets & Scoring, zh: 规则集与评分 }, href: /products/rulesets/ }
-      - { label: { en: AI Agents (MCP), zh: AI 助手（MCP） }, href: /products/agents/ }
+      - { label: { en: DART Intel, zh: DART Intel 标签与情报 }, href: /products/intelligence/ }
+      - { label: { en: DART Trace, zh: DART Trace 资金追踪 }, href: /products/investigations/ }
+      - { label: { en: DART Copilot, zh: DART Copilot AI 助手 }, href: /products/copilot/ }
+      - { label: { en: Supported Chains, zh: 支持的链 }, href: /chains/ }
       - { label: { en: Developers & API, zh: 开发者与 API }, href: /developers/ }
   - title: { en: Solutions, zh: 解决方案 }
     items:
@@ -122,7 +134,9 @@ footer:
   - title: { en: Data, zh: 数据 }
     items:
       - { label: { en: Data Hub, zh: 数据中心 }, href: /data/ }
+      - { label: { en: DART Brief, zh: DART 快报 }, href: /blog/category/incidents/ }
       - { label: { en: Blog & Research, zh: 文章与研究 }, href: /blog/ }
+      - { label: { en: Glossary, zh: 合规词典 }, href: /glossary/ }
       - { label: { en: Docs & Tutorials, zh: 文档与教程 }, href: /docs/ }
       - { label: { en: API Reference, zh: API 文档 }, href: "https://width.info/api-reference" }
   - title: { en: Partners, zh: 合作 }
@@ -134,6 +148,7 @@ footer:
   - title: { en: Company, zh: 公司 }
     items:
       - { label: { en: About Us, zh: 关于我们 }, href: /about/ }
+      - { label: { en: Trust Center, zh: 信任中心 }, href: /trust/ }
       - { label: { en: Pricing, zh: 价格 }, href: /pricing/ }
       - { label: { en: Contact, zh: 联系我们 }, href: /contact/ }
       - { label: { en: Width Platform, zh: Width 合规平台 }, href: "https://www.width.com/" }

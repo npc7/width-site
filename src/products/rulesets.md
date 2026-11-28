@@ -96,5 +96,5 @@ sections:
       - Old and new rules compared case by case, with reasons for every difference
     ctas:
       - { label: Get access, href: /contact/ }
-      - { label: AI agents (MCP), href: /products/agents/ }
+      - { label: Meet DART Copilot, href: /products/copilot/ }
 ---

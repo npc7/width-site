@@ -18,6 +18,28 @@ sections:
       - { value: "2", unit: 亿, label: 已标注地址，认得出 428 家交易所 }
       - { value: 当天, unit: 上线, label: FinCEN 9714 命令发布当天，规则集上线 }
 
+  - type: story
+    id: story
+    title: 别人问「连没连上」，<br><em>DART 问「钱有没有真流过来」</em>
+    lead: 从任何地址往外追几跳，几乎总能碰到一个风险地址。只看连没连上，好地址也会被判成高风险。DART 按时间和金额核对每一跳，只算真的流得到你这里的钱。
+    old:
+      label: 只看关联的做法
+      q: 这个地址和风险地址，连没连上？
+      points:
+        - "**不看先后**：钱还没到就先转出的路径，也算进来"
+        - "**不看多少**：一笔零头，也能把地址拖成高风险"
+        - "**追得越远，连上的越多**，复核队列越排越长"
+      result: 结果是一个分数，很难说清为什么
+    new:
+      label: DART 的做法
+      q: 风险资金有没有真的流到这里？流了多少？
+      points:
+        - "**每一跳先到账、后转出才算**，时序不成立的路径直接排除"
+        - "**跳得越远，门槛越高**：第 2–5 跳的风险资金占比门槛默认 5% / 10% / 15% / 20%"
+        - "**严重的不漏**：一跳内直接碰到制裁、恐怖融资，超过 10 美元就命中，不看占比"
+      result: 每一分都对应一条规则、一条路径，拿给监管也说得清
+    tagline: From connection to causation · 从「连没连上」，到「钱有没有真流过来」
+
   - type: showcase
     id: how
     title: 误报少，<em>不等于放得松</em>
@@ -26,6 +48,44 @@ sections:
       - { tag: 准, title: "只算流得到你这里的钱", text: "每一跳先到账、后转出才算关联；跳得越远，风险资金占比门槛越高；交易所的其他用户不会牵连你。和其他工具结果不一样时，最常见的原因就是时序。" }
       - { tag: 不漏, title: "严重的风险，一定看得见", text: "和制裁、恐怖融资地址一跳内直接往来，超过 10 美元就命中，不看占比；被制裁的交易所不豁免；重点关注的命中单独列出，不会被分数稀释。数据没读全时，结果会标明。" }
       - { tag: 说得清, title: "每个结论，都拿得出依据", text: "每一分对应规则、路径、跳数、金额和占比，被排除的路径也写明原因。快照原样留存当时的参数和规则集，之后改规则也不影响。" }
+
+  - type: stack
+    id: stack
+    tone: alt
+    title: 一套数据，三层能力，<em>一个 AI 助手</em>
+    lead: 从标签数据到筛查判定，再到资金追踪，DART 用的是同一套数据和规则；AI 助手帮你跑腿，最后由你签字。
+    layers:
+      - name: DART Trace
+        role: 调查层
+        text: 几十笔转账追成一条资金链：一个案子最多 500 笔交易一起追，看钱在哪汇合、现在停在哪；USDT0、CCTP 跨链后在目标链接着追。
+        links:
+          - { label: 资金追踪与调查, href: /products/investigations/ }
+          - { label: 执法合作, href: /partners/lea/ }
+      - name: DART Screen
+        role: 判定层
+        text: 地址、交易、制裁一次筛：72 条规则全部可读，按跳数、时序和风险资金占比打 0–100 分，分通过、复核、加强尽调、拦截四档。
+        links:
+          - { label: 地址筛查 KYA, href: /products/kya/ }
+          - { label: 交易筛查 KYT, href: /products/kyt/ }
+          - { label: 制裁筛查, href: /products/sanctions/ }
+          - { label: 规则集与评分, href: /products/rulesets/ }
+      - name: DART Intel
+        role: 情报层
+        text: 2 亿已标注地址，九成以上是交易所地址，认得出 428 家交易所；自建制裁库，发行方冻结、黑客、诈骗、混币等标签持续更新；其他 EVM 链上的标签也能一起算。
+        links:
+          - { label: 标签与情报, href: /products/intelligence/ }
+          - { label: 支持的链, href: /chains/ }
+          - { label: 制裁动态, href: /data/ }
+    copilot:
+      name: DART Copilot
+      role: AI 助手
+      text: AI 跑腿，合规官签字。在你已经在用的 AI 工具里，通过 MCP 直接调用 DART。
+      points:
+        - 用一句话发起筛查，结果逐条解释
+        - 帮你改规则集，约 1 秒用原任务重新判定，前后对比
+        - "**分数永远由规则引擎算，不由大模型算**，同样的输入得到同样的结果"
+      href: /products/copilot/
+      link: 了解 DART Copilot
 
   - type: cases
     eyebrow: 在生产环境

@@ -37,7 +37,7 @@ en:
     research: Research
     product: Product
     regulation: Regulation
-    incidents: Incident reviews
+    incidents: DART Brief
     guides: Guides
   form:
     name: Your name
@@ -87,7 +87,7 @@ zh:
     research: 研究
     product: 产品
     regulation: 监管动态
-    incidents: 事件复盘
+    incidents: DART 快报
     guides: 指南
   form:
     name: 姓名

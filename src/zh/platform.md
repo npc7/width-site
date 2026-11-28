@@ -16,6 +16,44 @@ sections:
       - { label: 看文档, href: /docs/ }
     visual: result
 
+  - type: stack
+    id: stack
+    tone: alt
+    title: 一套数据，三层能力，<em>一个 AI 助手</em>
+    lead: 从标签数据到筛查判定，再到资金追踪，DART 用的是同一套数据和规则；AI 助手帮你跑腿，最后由你签字。
+    layers:
+      - name: DART Trace
+        role: 调查层
+        text: 几十笔转账追成一条资金链：一个案子最多 500 笔交易一起追，看钱在哪汇合、现在停在哪；USDT0、CCTP 跨链后在目标链接着追。
+        links:
+          - { label: 资金追踪与调查, href: /products/investigations/ }
+          - { label: 执法合作, href: /partners/lea/ }
+      - name: DART Screen
+        role: 判定层
+        text: 地址、交易、制裁一次筛：72 条规则全部可读，按跳数、时序和风险资金占比打 0–100 分，分通过、复核、加强尽调、拦截四档。
+        links:
+          - { label: 地址筛查 KYA, href: /products/kya/ }
+          - { label: 交易筛查 KYT, href: /products/kyt/ }
+          - { label: 制裁筛查, href: /products/sanctions/ }
+          - { label: 规则集与评分, href: /products/rulesets/ }
+      - name: DART Intel
+        role: 情报层
+        text: 2 亿已标注地址，九成以上是交易所地址，认得出 428 家交易所；自建制裁库，发行方冻结、黑客、诈骗、混币等标签持续更新；其他 EVM 链上的标签也能一起算。
+        links:
+          - { label: 标签与情报, href: /products/intelligence/ }
+          - { label: 支持的链, href: /chains/ }
+          - { label: 制裁动态, href: /data/ }
+    copilot:
+      name: DART Copilot
+      role: AI 助手
+      text: AI 跑腿，合规官签字。在你已经在用的 AI 工具里，通过 MCP 直接调用 DART。
+      points:
+        - 用一句话发起筛查，结果逐条解释
+        - 帮你改规则集，约 1 秒用原任务重新判定，前后对比
+        - "**分数永远由规则引擎算，不由大模型算**，同样的输入得到同样的结果"
+      href: /products/copilot/
+      link: 了解 DART Copilot
+
   - type: steps
     eyebrow: 四层，全部自建
     title: 因为每一层都是自己做的，<em>所以改得动、说得清</em>
@@ -48,7 +86,7 @@ sections:
       - { tag: 制裁, title: 制裁筛查, text: 地址在不在制裁名单上，1 秒内返回；执法命令发布当天跟进。, href: /products/sanctions/ }
       - { tag: 追踪, title: 资金追踪与调查, text: 一个案子最多 500 笔交易一起追，跨链、过兑换不断线。, href: /products/investigations/ }
       - { tag: 规则, title: 规则集与评分, text: 72 条公开规则、可改的评分矩阵，把你的风险偏好写成规则。, href: /products/rulesets/ }
-      - { tag: MCP, title: AI 助手, text: 19 个 MCP 工具，AI 助手直接查地址、读结果、改规则。, href: /products/agents/ }
+      - { tag: DART Copilot, title: AI 助手, text: 19 个 MCP 工具，AI 助手直接查地址、读结果、改规则。, href: /products/copilot/ }
 
   - type: split
     reverse: true

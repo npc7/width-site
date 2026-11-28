@@ -1,0 +1,545 @@
+# 稳定币合规词典（/glossary/、/zh/glossary/）
+# groups：分组顺序和名称。terms：每条术语。
+#   id    锚点，/glossary/#kyt 直接跳到这一条；改了会断掉外部链接，别随便改
+#   group 属于哪个分组（groups 里的 id）
+#   aka   缩写或别名，中英文共用（可选）
+#   link  站内链接，写英文路径（中文页自动加 /zh）。英文页没有对应页面时，自动指向中文页（可选）
+#   en / zh  term 是名称，def 是 1–3 句解释，可以用 **加粗**
+# 文案规则见 MESSAGING.md：不点名竞品和客户，不写「最 / 第一 / 唯一」，不写链的数量。
+
+groups:
+  - id: basics
+    en: { name: Basics, lead: "The core vocabulary of AML and customer checks." }
+    zh: { name: 基础概念, lead: 反洗钱和客户核查的基本词汇。 }
+  - id: regulation
+    en: { name: Regulation, lead: "Standard setters, regulators and the rules they issue. A summary, not legal advice." }
+    zh: { name: 监管, lead: 制定标准的机构、各地监管和它们的规则。这里只做概括，不构成法律意见。 }
+  - id: onchain
+    en: { name: Onchain, lead: "How stablecoins move, and the infrastructure they move through." }
+    zh: { name: 链上, lead: 稳定币怎么流动，经过哪些基础设施。 }
+  - id: risk
+    en: { name: Risk types, lead: "Common sources of tainted funds." }
+    zh: { name: 风险类型, lead: 问题资金常见的来源。 }
+  - id: dart
+    en: { name: DART concepts, lead: "The terms you see in a DART result." }
+    zh: { name: DART 概念, lead: DART 筛查结果里会看到的词。 }
+
+terms:
+  # ---------- 基础概念 ----------
+  - id: aml
+    group: basics
+    aka: AML
+    en:
+      term: Anti-money laundering
+      def: "The laws, controls and processes that stop criminal proceeds from being passed off as legitimate funds. For a stablecoin business, it covers customer checks, address and transaction screening, ongoing monitoring and reporting."
+    zh:
+      term: 反洗钱
+      def: "防止犯罪所得被包装成合法资金的法律、制度和流程。对稳定币业务来说，包括客户身份核验、地址和交易筛查、持续监控和可疑交易上报。"
+
+  - id: cft
+    group: basics
+    aka: CFT
+    en:
+      term: Countering the financing of terrorism
+      def: "Controls that stop funds from reaching terrorist groups, even when the money itself comes from a legitimate source. It is usually paired with AML as AML/CFT."
+    zh:
+      term: 反恐怖融资
+      def: "防止资金流向恐怖组织的制度，即使这笔钱本身来源合法。通常和反洗钱并称 AML/CFT。"
+
+  - id: kyc
+    group: basics
+    aka: KYC
+    en:
+      term: Know your customer
+      def: "Identifying a customer and verifying who they are, before and throughout the relationship. It usually includes ID checks and screening against sanctions and PEP lists."
+    zh:
+      term: 了解你的客户
+      def: "在建立业务关系前和存续期间，识别并核验客户身份。通常包括证件核验，以及和制裁名单、政治公众人物名单比对。"
+
+  - id: kyb
+    group: basics
+    aka: KYB
+    en:
+      term: Know your business
+      def: "KYC for companies. It verifies a business's registration, directors and beneficial owners, and what the business actually does."
+    zh:
+      term: 了解你的企业客户
+      def: "针对公司客户的 KYC。核验公司的注册信息、董事和最终受益人，以及它实际做什么业务。"
+
+  - id: kya
+    group: basics
+    aka: KYA
+    link: /products/kya/
+    en:
+      term: Know your address
+      def: "Screening a blockchain address before you deal with it: whose it is, where its money came from and where it went. DART checks the address's own labels and its fund trail, then scores the result with a ruleset."
+    zh:
+      term: 地址筛查
+      def: "Know Your Address。在和一个链上地址往来之前，先查它是谁、钱从哪来、去了哪里。DART 比对地址自身的标签和资金路径，再按规则集打分。"
+
+  - id: kyt
+    group: basics
+    aka: KYT
+    link: /products/kyt/
+    en:
+      term: Know your transaction
+      def: "Screening one specific transfer, on the sender side, the receiver side or both. It typically runs before a deposit is credited or a withdrawal is sent."
+    zh:
+      term: 交易筛查
+      def: "Know Your Transaction。针对一笔具体的转账，筛付款方、收款方或两边。通常放在充值入账前、提现执行前。"
+
+  - id: cdd
+    group: basics
+    aka: CDD
+    en:
+      term: Customer due diligence
+      def: "The standard checks on a customer: identity, beneficial ownership, the purpose of the relationship and ongoing monitoring. How deep you go depends on the customer's risk."
+    zh:
+      term: 客户尽职调查
+      def: "对客户的常规核查：身份、最终受益人、业务关系的目的，以及持续监控。核查深度随客户风险高低调整。"
+
+  - id: edd
+    group: basics
+    aka: EDD
+    link: /docs/dispositions/
+    en:
+      term: Enhanced due diligence
+      def: "Extra checks for higher-risk customers or transactions, such as source-of-funds evidence and senior sign-off. In DART, EDD is also the verdict for scores of 50–79 by default."
+    zh:
+      term: 加强尽调
+      def: "对较高风险的客户或交易做的额外核查，例如索取资金来源说明和凭证、由主管审批。在 DART 里，加强尽调也是默认 50–79 分对应的处置。"
+
+  - id: str-sar
+    group: basics
+    aka: STR / SAR
+    en:
+      term: Suspicious transaction report
+      def: "A report to the national financial intelligence unit when a firm suspects money laundering or terrorist financing. The US calls it a suspicious activity report (SAR). The customer must not be tipped off."
+    zh:
+      term: 可疑交易报告
+      def: "怀疑涉及洗钱或恐怖融资时，向所在地金融情报机构提交的报告，例如香港的联合财富情报组、新加坡的 STRO。美国称为可疑活动报告（SAR）。不能向客户透露已上报。"
+
+  - id: pep
+    group: basics
+    aka: PEP
+    en:
+      term: Politically exposed person
+      def: "Someone who holds or has held a prominent public function, along with their family and close associates. PEPs are not off limits, but they usually call for enhanced due diligence."
+    zh:
+      term: 政治公众人物
+      def: "担任或担任过重要公共职务的人，以及其家人和密切关系人。政治公众人物不是禁止往来的对象，但通常需要加强尽调。"
+
+  - id: vasp
+    group: basics
+    aka: VASP
+    en:
+      term: Virtual asset service provider
+      def: "FATF's term for a business that exchanges, transfers, holds or administers virtual assets for others, such as exchanges and custodial wallets. The EU uses crypto-asset service provider (CASP) for a similar idea."
+    zh:
+      term: 虚拟资产服务商
+      def: "FATF 的用语，指为他人兑换、转移、保管或管理虚拟资产的机构，例如交易所、托管钱包。欧盟用的类似概念叫加密资产服务商（CASP）。"
+
+  - id: travel-rule
+    group: basics
+    aka: FATF R.16
+    en:
+      term: Travel Rule
+      def: "FATF Recommendation 16 applied to virtual assets. When one VASP sends a transfer to another, it must pass on originator and beneficiary information. Transfers to and from self-hosted wallets have their own requirements."
+    zh:
+      term: 旅行规则
+      def: "FATF 建议 16 在虚拟资产上的适用：服务商之间转账时，发起方要把付款人和收款人信息传给接收方。和自托管钱包之间的转账另有要求。"
+
+  # ---------- 监管 ----------
+  - id: fatf
+    group: regulation
+    aka: FATF
+    link: /docs/regulatory-map/
+    en:
+      term: Financial Action Task Force
+      def: "The intergovernmental body that sets global AML/CFT standards, known as the FATF Recommendations. Recommendation 15 brings virtual assets and VASPs into scope. Countries are assessed against these standards."
+    zh:
+      term: 金融行动特别工作组
+      def: "制定全球反洗钱、反恐怖融资标准（FATF 建议）的政府间组织。建议 15 把虚拟资产和虚拟资产服务商纳入其中，各国按这些标准接受评估。"
+
+  - id: ofac-sdn
+    group: regulation
+    aka: OFAC / SDN
+    link: /products/sanctions/
+    en:
+      term: OFAC and the SDN list
+      def: "The US Treasury's Office of Foreign Assets Control administers US sanctions. Its Specially Designated Nationals (SDN) list names blocked persons, and some entries include crypto addresses. US persons must block their property and generally may not deal with them, directly or indirectly."
+    zh:
+      term: OFAC 与 SDN 名单
+      def: "美国财政部海外资产控制办公室，负责执行美国制裁。它发布的特别指定国民（SDN）名单列出被封锁的个人和实体，部分条目附有加密货币地址。美国人须冻结其财产，一般不得与其直接或间接往来。"
+
+  - id: fincen-9714
+    group: regulation
+    aka: FinCEN 9714
+    link: /blog/fincen-9714-ruleset/
+    en:
+      term: FinCEN Section 9714 order
+      def: "An order from the US Financial Crimes Enforcement Network under Section 9714 of the Combating Russian Money Laundering Act. It bars covered US financial institutions from certain transmittals of funds involving a named institution. It is an order, **not a sanction**: the November 2026 order on MEXC did not put it on the SDN list or freeze assets."
+    zh:
+      term: FinCEN 9714 命令
+      def: "美国金融犯罪执法网络（FinCEN）依据《打击俄罗斯洗钱法》第 9714 条发布的命令，禁止受约束的美国金融机构为被点名机构办理特定的资金收付。它是命令，**不是制裁**：2026 年 11 月针对 MEXC 的命令没有把它列入 SDN 名单，也没有冻结资产。"
+
+  - id: mica
+    group: regulation
+    aka: MiCA
+    en:
+      term: Markets in Crypto-Assets Regulation
+      def: "The EU regulation that licenses crypto-asset service providers (CASPs) and sets rules for stablecoin issuers, which it classes as e-money tokens and asset-referenced tokens. A CASP licensed in one member state can passport its services across the EU. AML duties and the Travel Rule sit in separate EU laws."
+    zh:
+      term: 欧盟加密资产市场法规
+      def: "欧盟对加密资产服务商（CASP）发牌、并规范稳定币发行方的法规，稳定币分为电子货币代币和资产参考代币。在一个成员国取得牌照，可以在全欧盟展业。反洗钱义务和旅行规则由欧盟另外的法规规定。"
+
+  - id: genius-act
+    group: regulation
+    aka: GENIUS Act
+    en:
+      term: GENIUS Act
+      def: "A US federal law that sets up licensing and supervision for issuers of payment stablecoins. It requires 1:1 reserves and treats issuers as financial institutions under the Bank Secrecy Act, including the technical ability to freeze tokens when lawfully ordered."
+    zh:
+      term: 美国 GENIUS 法案
+      def: "美国联邦层面的支付型稳定币法律，为发行方建立牌照和监管框架。要求 1:1 储备，并把发行方作为《银行保密法》下的金融机构管理，包括在合法命令下冻结代币的技术能力。"
+
+  - id: hk-vatp
+    group: regulation
+    aka: SFC VATP
+    link: /docs/regulatory-map/
+    en:
+      term: Hong Kong SFC VATP licensing
+      def: "Virtual asset trading platforms serving Hong Kong must be licensed by the Securities and Futures Commission. The SFC's AML guideline expects licensees to trace transaction history and screen addresses before transfers, and to assess any onchain analytics tool they use."
+    zh:
+      term: 香港 SFC 虚拟资产交易平台牌照
+      def: "在香港提供服务的虚拟资产交易平台须取得证券及期货事务监察委员会（SFC）发出的牌照。SFC 的反洗钱指引要求持牌平台追踪交易历史、在转账前筛查地址，并对所用的链上分析工具做尽职调查。"
+
+  - id: mas-psa
+    group: regulation
+    aka: PSA
+    link: /docs/regulatory-map/
+    en:
+      term: MAS Payment Services Act
+      def: "Singapore's licensing law for payment services, including digital payment token (DPT) services, supervised by the Monetary Authority of Singapore. DPT providers follow MAS Notice PSN02, which expects risk-based onchain analytics and screening before a transaction is executed."
+    zh:
+      term: 新加坡《支付服务法》
+      def: "新加坡对支付服务的牌照法律，覆盖数字支付代币（DPT）服务，由新加坡金融管理局（MAS）监管。DPT 服务商须遵守 MAS PSN02 通知：按风险使用链上分析工具，并在交易执行前完成筛查。"
+
+  - id: vara
+    group: regulation
+    aka: VARA
+    link: /docs/regulatory-map/
+    en:
+      term: Virtual Assets Regulatory Authority
+      def: "Dubai's regulator for virtual assets. It licenses and supervises virtual asset service providers in Dubai outside the DIFC. Its rules require screening of customers, transactions and wallet addresses."
+    zh:
+      term: 迪拜虚拟资产监管局
+      def: "迪拜的虚拟资产监管机构，为迪拜（迪拜国际金融中心 DIFC 以外）的虚拟资产服务商发牌并监管。它要求对客户、交易和钱包地址做筛查。"
+
+  # ---------- 链上 ----------
+  - id: stablecoin
+    group: onchain
+    en:
+      term: Stablecoin
+      def: "A token designed to hold a steady value against a reference asset, usually the US dollar. Mainstream ones are issued by a company that holds reserves and can freeze tokens at specific addresses."
+    zh:
+      term: 稳定币
+      def: "设计上和某种参考资产（通常是美元）保持稳定价值的代币。主流稳定币由一家公司发行，发行方持有储备，并可以冻结指定地址上的代币。"
+
+  - id: usdt
+    group: onchain
+    aka: Tether
+    en:
+      term: USDT
+      def: "Tether's US dollar stablecoin, issued on Tron, Ethereum and other chains. Tether can freeze the USDT held at an address."
+    zh:
+      term: USDT
+      def: "Tether 发行的美元稳定币，在 Tron、以太坊等链上发行。Tether 可以冻结某个地址上的 USDT。"
+
+  - id: usdc
+    group: onchain
+    en:
+      term: USDC
+      def: "Circle's US dollar stablecoin, issued natively on Ethereum and other chains. Circle can block an address from sending or receiving USDC."
+    zh:
+      term: USDC
+      def: "Circle 发行的美元稳定币，在以太坊等链上原生发行。Circle 可以禁止某个地址收发 USDC。"
+
+  - id: issuer-freeze
+    group: onchain
+    link: /data/
+    en:
+      term: Issuer freeze
+      def: "A stablecoin issuer blacklists an address in the token contract, so its balance can no longer move. Freezes usually follow law enforcement requests or confirmed theft. DART records published USDT and USDC freezes, with their timestamps, as Public Freezing Action labels."
+    zh:
+      term: 发行方冻结
+      def: "稳定币发行方在代币合约里把某个地址拉黑，这个地址上的余额从此转不出去。冻结通常来自执法要求或已确认的被盗资金。DART 把 USDT、USDC 发行方的冻结记录（含冻结时间）收录为执法冻结标签。"
+
+  - id: hot-wallet
+    group: onchain
+    link: /docs/exchange-exemption/
+    en:
+      term: Hot wallet
+      def: "A wallet whose keys stay online so a service can send transfers automatically, such as an exchange's withdrawal wallet. Hot wallets deal with huge numbers of addresses, so they show up near almost any address."
+    zh:
+      term: 热钱包
+      def: "私钥保持在线、可以自动出款的钱包，例如交易所的提币钱包。热钱包和海量地址往来，所以几乎任何地址往外追几跳都会碰到它。"
+
+  - id: sweeping
+    group: onchain
+    link: /blog/mpc-sweep-kyt-guide/
+    en:
+      term: Sweeping
+      def: "Moving funds from many per-user deposit addresses into one collection or hot wallet. Screening each deposit before it is swept keeps tainted funds out of the hot wallet."
+    zh:
+      term: 归集
+      def: "把分散在每个用户充值地址上的资金，转到统一的归集地址或热钱包。先筛查每笔充值再归集，问题资金就进不了热钱包。"
+
+  - id: cross-chain-bridge
+    group: onchain
+    link: /docs/cross-chain/
+    en:
+      term: Cross-chain bridge
+      def: "A protocol that moves value between blockchains, usually by locking or burning tokens on one chain and releasing or minting them on another. DART treats bridges as shared pools and does not trace through them, because the pool holds other people's money."
+    zh:
+      term: 跨链桥
+      def: "在不同区块链之间转移资产的协议，通常在一条链上锁定或销毁代币，在另一条链上释放或铸造。DART 把跨链桥当作公共资金池，不往里穿透追，因为池子里是别人的钱。"
+
+  - id: usdt0
+    group: onchain
+    en:
+      term: USDT0
+      def: "A cross-chain version of USDT built on LayerZero's OFT standard. USDT is locked on Ethereum and USDT0 is minted 1:1 on other chains, then moves between them by burning on one chain and minting on another."
+    zh:
+      term: USDT0
+      def: "基于 LayerZero OFT 标准的跨链版 USDT。USDT 锁定在以太坊上，在其他链上 1:1 铸造 USDT0；在链之间转移时，一边销毁、一边铸造。"
+
+  - id: cctp
+    group: onchain
+    aka: CCTP
+    link: /docs/cross-chain/
+    en:
+      term: Cross-Chain Transfer Protocol
+      def: "Circle's protocol for moving USDC between chains: USDC is burned on the source chain and minted natively on the destination. DART pairs the two sides by Circle's official identifiers and keeps tracing on the destination chain."
+    zh:
+      term: CCTP 跨链协议
+      def: "Circle 官方的 USDC 跨链协议：在源链销毁 USDC，在目标链原生铸造。DART 按 Circle 的官方编号把两边配对，跨链后在目标链上继续追。"
+
+  - id: dex
+    group: onchain
+    aka: DEX
+    en:
+      term: Decentralised exchange
+      def: "A smart-contract venue where users swap tokens from their own wallets, usually without account-level KYC. DART labels DEXs as neutral: the label tells you who the counterparty is and carries no risk on its own."
+    zh:
+      term: 去中心化交易所
+      def: "用智能合约撮合交易的平台，用户直接用自己的钱包兑换代币，通常没有账户层面的 KYC。DART 把 DEX 标为中性标签：只说明对手方是谁，本身不计风险。"
+
+  - id: mixer
+    group: onchain
+    link: /docs/labels/
+    en:
+      term: Mixer
+      def: "A service that pools funds from many users and pays them out to new addresses, breaking the visible link between sender and receiver. DART classes mixers under obfuscation, with a high default risk level."
+    zh:
+      term: 混币器
+      def: "把很多用户的资金混在一起，再打到新地址，切断付款方和收款方之间可见联系的服务。DART 把混币器归在混淆服务大类，默认风险等级为高。"
+
+  - id: address-poisoning
+    group: onchain
+    en:
+      term: Address poisoning
+      def: "A scam where the attacker sends a tiny or zero-value transfer from an address that looks like one you use, often with the same first and last characters. The aim is for you to copy the fake address from your history next time."
+    zh:
+      term: 地址投毒
+      def: "攻击者用一个和你常用地址长得很像（通常首尾几位相同）的地址，给你转一笔极小或零金额的转账。目的是让你下次从转账记录里复制地址时，复制到假地址。"
+
+  - id: dust
+    group: onchain
+    link: /docs/hops/
+    en:
+      term: Dust
+      def: "Very small transfers, often unsolicited, used for spam, tracking or address poisoning. DART leaves out transfers below a minimum amount, 10 USD by default, so dust cannot pull an address into a risk path."
+    zh:
+      term: 粉尘
+      def: "金额极小、往往不请自来的转账，用于广告、追踪或地址投毒。DART 默认不分析 10 美元以下的转账，粉尘不会把一个地址拖进风险路径。"
+
+  # ---------- 风险类型 ----------
+  - id: pig-butchering
+    group: risk
+    en:
+      term: Pig butchering
+      def: "A long-con fraud where scammers spend weeks or months building trust with a victim, often through romance or friendship, then steer them into a fake investment platform. Victims usually pay in stablecoins."
+    zh:
+      term: 杀猪盘
+      def: "诈骗者先花几周甚至几个月和受害人建立感情或信任，再引导对方到虚假投资平台「投资」。受害人通常用稳定币付款。"
+
+  - id: phishing
+    group: risk
+    en:
+      term: Phishing
+      def: "Tricking someone into revealing a seed phrase, signing a malicious approval or sending funds to an attacker. It typically uses fake websites, fake airdrops or fake support accounts."
+    zh:
+      term: 钓鱼
+      def: "骗人泄露助记词、签署恶意授权，或把钱转给攻击者。常见手法是仿冒网站、虚假空投和冒充客服。"
+
+  - id: ponzi-scheme
+    group: risk
+    en:
+      term: Ponzi scheme
+      def: "A scheme that pays earlier investors with money from newer ones rather than from real returns. It collapses once new money slows down."
+    zh:
+      term: 庞氏骗局
+      def: "用后来投资者的钱支付早期投资者的「收益」，而不是来自真实盈利。新资金一放缓，就会崩盘。"
+
+  - id: ransomware
+    group: risk
+    en:
+      term: Ransomware
+      def: "Malware that encrypts or steals a victim's data and demands payment, usually in crypto, to restore it or keep it private."
+    zh:
+      term: 勒索软件
+      def: "加密或窃取受害者数据，再要求付款（通常是加密货币）才恢复数据或不公开的恶意软件。"
+
+  - id: darknet-market
+    group: risk
+    en:
+      term: Darknet market
+      def: "An online marketplace on anonymity networks such as Tor that sells illegal goods and services and takes payment in crypto."
+    zh:
+      term: 暗网市场
+      def: "开在 Tor 等匿名网络上的线上市场，买卖非法商品和服务，用加密货币结算。"
+
+  - id: guarantee-marketplace
+    group: risk
+    en:
+      term: Guarantee marketplace
+      def: "A Telegram-based marketplace where an operator holds buyers' funds in escrow, the guarantee, until a deal completes. Some host money laundering services, stolen data and scam tooling, and settle in USDT. DART monitors public Telegram channels and bots as one of its label sources."
+    zh:
+      term: 担保市场
+      def: "以 Telegram 为主的交易市场：平台方作为「担保」，先替买家保管资金，交易完成再放款。其中一些市场提供洗钱、被盗数据、诈骗工具等服务，用 USDT 结算。DART 持续监控公开的 Telegram 频道和机器人，作为标签来源之一。"
+
+  # ---------- DART 概念 ----------
+  - id: time-order
+    group: dart
+    link: /docs/time-order/
+    en:
+      term: Enforced time order
+      def: "Each hop on a path must happen no earlier than the hop before it. If money left before it arrived, the path is dropped and the result says why. It is on by default, which is a main reason DART raises fewer false alerts."
+    zh:
+      term: 强制时序
+      def: "路径上每一跳的时间都不能早于上一跳。钱还没到就先转出了，这条路径时序不成立，直接排除，结果里写明原因。默认开启，是 DART 误报少的主要原因。"
+
+  - id: hop
+    group: dart
+    link: /docs/hops/
+    en:
+      term: Hop
+      def: "One transfer on a fund trail. The direct counterparty is hop 1 and the next layer out is hop 2. Inflow and outflow hops are set separately; 0 means that direction is not traced."
+    zh:
+      term: 跳数
+      def: "资金路径上的一次转账就是一跳。直接对手方在第 1 跳，再往外一层是第 2 跳。流入、流出跳数分开设；设为 0 表示这个方向不追。"
+
+  - id: risk-share
+    group: dart
+    aka: risk_rate
+    link: /docs/fund-share/
+    en:
+      term: Share of risky funds
+      def: "How much of the money on a path could have come from the risky source: the smallest transfer on the path divided by the last one. By default, hops 2 to 5 count only at 5%, 10%, 15% and 20% or more, so distant, small links stay quiet."
+    zh:
+      term: 风险资金占比
+      def: "一条路径上的钱，有多少可能来自风险源：路径上最小的一笔转账 ÷ 最后一笔转账。默认第 2 到第 5 跳分别要达到 5%、10%、15%、20% 才算命中，远距离、小比例的关联不会被放大。"
+
+  - id: exchange-exemption
+    group: dart
+    aka: cex_immune
+    link: /docs/exchange-exemption/
+    en:
+      term: Exchange exemption
+      def: "On by default. An ordinary exchange address scores 0, and a path stops when it reaches an exchange, so other exchange users' risk does not land on you. Sanctioned exchanges, and exchanges with other high-risk labels, are never exempt."
+    zh:
+      term: 交易所豁免
+      def: "默认开启。普通交易所地址直接返回 0 分；路径追到交易所就停下，交易所其他用户的风险不会算到你头上。被制裁或带其他高风险标签的交易所不豁免。"
+
+  - id: own-label
+    group: dart
+    link: /docs/rulesets/
+    en:
+      term: Own label
+      def: "The screened address itself carries a risk label, for example it is on a sanctions list. It is a decisive signal: with a severe label, the default score is 100 and the verdict is block."
+    zh:
+      term: 自身命中
+      def: "被筛查的地址自己带有风险标签，例如它本身就在制裁名单上。这是分量很重的信号：带严重标签时默认 100 分、拦截。"
+
+  - id: direct-contact
+    group: dart
+    link: /docs/rulesets/
+    en:
+      term: Direct contact
+      def: "A counterparty one hop away carries a risk label. No share threshold applies: in the default rules, a transfer above 10 USD with a sanctioned or terrorist-financing counterparty is a hit, whatever its share."
+    zh:
+      term: 直接往来
+      def: "一跳内的直接对手方带有风险标签。直接往来不看占比：默认规则下，和制裁、恐怖融资对手方之间超过 10 美元的转账，不论占比多少都算命中。文档里也叫「直接暴露」。"
+
+  - id: indirect-exposure
+    group: dart
+    link: /docs/fund-share/
+    en:
+      term: Indirect exposure
+      def: "A risk label two or more hops away. The further the hop, the higher the share of risky funds a path needs before it counts."
+    zh:
+      term: 多跳关联
+      def: "第 2 跳及更远处的风险标签。跳得越远，路径需要的风险资金占比越高，才算命中。文档里也叫「分层暴露」。"
+
+  - id: verdict
+    group: dart
+    link: /docs/dispositions/
+    en:
+      term: Verdict
+      def: "The action a score maps to. By default: pass (0–19), review (20–49), EDD (50–79) and block (80–100). You can adjust the thresholds in your scoring ruleset."
+    zh:
+      term: 处置
+      def: "分数对应的建议动作。默认四档：通过（0–19）、复核（20–49）、加强尽调（50–79）、拦截（80–100）。档位阈值可以在评分规则集里调整。"
+
+  - id: highlights
+    group: dart
+    aka: ★
+    link: /docs/reading-results/
+    en:
+      term: Highlights
+      def: "A ★ mark you put on rules for counterparties you must always know about. Any ★ hit is listed separately, however small the amount. It does not change the score, and the score cannot bury it."
+    zh:
+      term: 重点关注
+      def: "给规则打的 ★ 标记，用来盯住你必须知道的对手方。★ 规则一旦命中就单独列出，不管金额多小。它不改分数，也不会被分数稀释。"
+
+  - id: snapshot
+    group: dart
+    link: /docs/data-status/
+    en:
+      term: Snapshot
+      def: "Every screening is saved as a snapshot: the parameters, the ruleset and the full result at that moment. Later rule changes do not alter it, so you can show exactly what you knew when you decided."
+    zh:
+      term: 快照
+      def: "每次筛查都自动保存为快照：当时的参数、规则集和完整结果。之后改规则也不影响它，检查时能拿出你做决定那一刻的依据。"
+
+  - id: all-chain-labels
+    group: dart
+    aka: all_chain_labels
+    link: /docs/cross-chain/
+    en:
+      term: All-chain labels
+      def: "For an EVM address, labels from every chain count as the address's own labels. A label from another chain can remove the exchange exemption but never grant it. It does not apply to Tron addresses."
+    zh:
+      term: 全链标签
+      def: "筛 EVM 地址时，把这个地址在所有链上的标签都当作它自己的标签参与判定。其他链上的标签可以取消交易所豁免，但不能授予豁免。对 Tron 地址不适用。"
+
+  - id: ruleset
+    group: dart
+    link: /products/rulesets/
+    en:
+      term: Ruleset
+      def: "The rules that decide a result. A path-matching ruleset decides what counts as a hit; a scoring ruleset decides how serious it is and which verdict follows. The 72 built-in rules in 9 categories are all readable, and you can copy and edit them."
+    zh:
+      term: 规则集
+      def: "决定筛查结果的规则。路径匹配规则集决定「什么算命中」，评分规则集决定「有多严重、怎么处置」。内置 72 条规则、9 大类全部可读，复制一份就能改。"

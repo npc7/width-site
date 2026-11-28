@@ -96,5 +96,5 @@ sections:
       - 新旧规则逐条对比，差异说明原因
     ctas:
       - { label: 开通账号, href: /contact/ }
-      - { label: 了解 AI 助手（MCP）, href: /products/agents/ }
+      - { label: 了解 DART Copilot, href: /products/copilot/ }
 ---

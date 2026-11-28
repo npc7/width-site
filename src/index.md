@@ -18,6 +18,28 @@ sections:
       - { value: 200M, label: "labeled addresses, covering 428 exchanges" }
       - { value: Same day, label: "FinCEN 9714 order published, ruleset live" }
 
+  - type: story
+    id: story
+    title: Others ask if it's connected. <em>DART asks if the money actually got there.</em>
+    lead: Trace any address a few hops out and you will almost always touch something risky. If connection is all that counts, good addresses get flagged as high risk. DART checks the time and amount of every hop, and only counts money that could actually have reached you.
+    old:
+      label: The connection approach
+      q: Is this address connected to a risky one?
+      points:
+        - "**Ignores order**: paths where money left before it arrived still count"
+        - "**Ignores size**: a trace amount can drag an address into high risk"
+        - "**The further you trace, the more you connect**, and the review queue keeps growing"
+      result: You get a score that is hard to explain
+    new:
+      label: The DART approach
+      q: Did risky money actually reach this address, and how much?
+      points:
+        - "**A hop counts only if funds arrived before they left**. Paths that fail the time check are dropped"
+        - "**Further hops need a bigger share**: 5% / 10% / 15% / 20% of risky funds by default at hops 2–5"
+        - "**Serious risk is never missed**: direct contact with sanctions or terrorist financing above 10 USD is a hit, whatever its share"
+      result: Every point maps to a rule and a path you can show an examiner
+    tagline: From connection to causation
+
   - type: showcase
     id: how
     title: Fewer false alarms, <em>without letting risk through</em>
@@ -26,6 +48,44 @@ sections:
       - { tag: Accurate, title: "Only money that could reach you counts", text: "A hop counts only if funds arrived before they moved on. Distant links need a higher share of risky funds. Other exchanges' users never drag you in. When DART and another tool disagree, timing is the most common reason." }
       - { tag: Nothing serious missed, title: "Severe risk always shows up", text: "Direct contact with a sanctioned or terrorist-financing address is a hit from 10 USD up, whatever its share. Sanctioned exchanges are never exempt. Highlighted hits are listed on their own, never diluted by the score. Incomplete data is flagged on the result." }
       - { tag: Explainable, title: "Every decision has its evidence", text: "Every point maps to a rule, a path, a hop, an amount and a share. Excluded paths show why. Each snapshot keeps the parameters and ruleset used, even if you change the rules later." }
+
+  - type: stack
+    id: stack
+    tone: alt
+    title: One dataset, three layers, <em>one AI assistant</em>
+    lead: Labels, screening verdicts and fund tracing all run on the same data and the same rules. The AI assistant does the legwork, and your team signs off.
+    layers:
+      - name: DART Trace
+        role: Investigate
+        text: Turn dozens of transfers into one money trail. Trace up to 500 transactions in one case, see where funds meet and where they sit now, and keep tracing across USDT0 and CCTP bridges.
+        links:
+          - { label: Fund tracing, href: /products/investigations/ }
+          - { label: Law enforcement, href: /partners/lea/ }
+      - name: DART Screen
+        role: Decide
+        text: Screen addresses, transactions and sanctions. 72 readable rules score hops, time order and share of risky funds from 0 to 100, with four verdicts — pass, review, EDD, block.
+        links:
+          - { label: Address screening (KYA), href: /products/kya/ }
+          - { label: Transaction screening (KYT), href: /products/kyt/ }
+          - { label: Sanctions screening, href: /products/sanctions/ }
+          - { label: Rulesets and scoring, href: /products/rulesets/ }
+      - name: DART Intel
+        role: Know
+        text: 200 million labeled addresses, over 90% of them exchange addresses, covering 428 exchanges. Our own sanctions database, plus issuer-freeze, hack, scam and mixer labels kept current. Labels from other EVM chains can count too.
+        links:
+          - { label: Labels and intelligence, href: /products/intelligence/ }
+          - { label: Supported chains, href: /chains/ }
+          - { label: Sanctions tracker, href: /data/ }
+    copilot:
+      name: DART Copilot
+      role: AI assistant
+      text: AI does the legwork. Your team signs off. Call DART over MCP from the AI tools you already use.
+      points:
+        - Start a screening in one sentence and get every result explained
+        - Tune a ruleset and re-score the original task in about a second
+        - "**Scores always come from the rules engine, never from a language model**, so the same input gives the same result"
+      href: /products/copilot/
+      link: Meet DART Copilot
 
   - type: cases
     eyebrow: In production

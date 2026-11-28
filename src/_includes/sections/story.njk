@@ -1,0 +1,46 @@
+{#- story：品类故事，左右对照「只看关联」vs「DART 看钱真的怎么流」。
+    title, lead, tagline, old{label, q, points[], result}, new{label, q, points[], result}
+    左右各带一张小示意图：同样三个地址，左边判「连上了」，右边按时间核对后排除。 -#}
+{%- set zh = (lang == 'zh') -%}
+<section class="section story {{ s.tone }}"{% if s.id %} id="{{ s.id }}"{% endif %}>
+  <div class="container">
+    {% include "partials/section-head.njk" %}
+    <div class="story-grid">
+      {%- for side in ['old', 'new'] %}
+      {%- set c = s[side] %}
+      <div class="story-col story-{{ side }}">
+        <span class="story-label">{{ c.label }}</span>
+        <h3>{{ c.q }}</h3>
+        <svg class="story-viz" viewBox="0 0 420 118" role="img" aria-label="{{ c.result }}">
+          {%- if side == 'old' %}
+          <line x1="70" y1="44" x2="190" y2="44" class="sv-edge risk"/>
+          <line x1="230" y1="44" x2="350" y2="44" class="sv-edge risk"/>
+          {%- else %}
+          <line x1="70" y1="44" x2="190" y2="44" class="sv-edge risk"/>
+          <line x1="230" y1="44" x2="350" y2="44" class="sv-edge cut"/>
+          <text x="130" y="30" class="sv-time">{{ '10:05 到账' if zh else 'in 10:05' }}</text>
+          <text x="290" y="30" class="sv-time cut">{{ '10:02 已转出' if zh else 'out 10:02' }}</text>
+          <g class="sv-x" transform="translate(290 44)"><line x1="-7" y1="-7" x2="7" y2="7"/><line x1="7" y1="-7" x2="-7" y2="7"/></g>
+          {%- endif %}
+          <circle cx="50" cy="44" r="20" class="sv-node risk"/>
+          <circle cx="210" cy="44" r="20" class="sv-node mid"/>
+          <circle cx="370" cy="44" r="20" class="sv-node you"/>
+          <text x="50" y="86" class="sv-cap">{{ '风险地址' if zh else 'Risky address' }}</text>
+          <text x="210" y="86" class="sv-cap">{{ '中间地址' if zh else 'Intermediary' }}</text>
+          <text x="370" y="86" class="sv-cap">{{ '你的用户' if zh else 'Your user' }}</text>
+          {%- if side == 'old' %}
+          <text x="210" y="112" class="sv-verdict bad">{{ '连上了 → 高风险' if zh else 'Connected → high risk' }}</text>
+          {%- else %}
+          <text x="210" y="112" class="sv-verdict good">{{ '钱没流过来 → 不计入' if zh else 'Money never reached you → excluded' }}</text>
+          {%- endif %}
+        </svg>
+        <ul class="story-points">
+          {%- for p in c.points %}<li>{{ p | mdi | safe }}</li>{% endfor %}
+        </ul>
+        <p class="story-result">{{ c.result | mdi | safe }}</p>
+      </div>
+      {%- endfor %}
+    </div>
+    {%- if s.tagline %}<p class="story-tagline">{{ s.tagline | safe }}</p>{% endif %}
+  </div>
+</section>

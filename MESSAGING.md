@@ -54,3 +54,35 @@
 - English: sentence case for every heading and button. One claim per sentence, verb-led, 20 words or fewer. Questions only in heroes and FAQs.
 - 标题 ≤ 8 个词 / 16 个字，写结果或机制，不写「我们的能力」「常见问题」这种栏目名（FAQ 区块除外）。
 - 每个标题最多一处 `<em>`，放在利益点上。
+
+## 6. 品类故事与产品体系（2026-11-28 定，参考 CipherOwl 拆解）
+
+**品类故事**（首页第二屏，放在结果口号之后讲机制）：
+
+| | 中文 | English |
+|---|---|---|
+| 对立 | 别人问「连没连上」，DART 问「钱有没有真流过来」 | Others ask if it's connected. DART asks if the money actually got there. |
+| 收束 | 从「连没连上」，到「钱有没有真流过来」 | From connection to causation |
+
+讲「只看关联的做法」，不说「其他工具 / 多数工具」，不点名任何竞品。
+
+**产品体系**：三层 + 一个 AI 助手。名字固定写法：
+
+| 名字 | 层 | 包含 | 页面 |
+|---|---|---|---|
+| DART Intel | 情报层 / Know | 标签、交易所图谱、制裁库、全链标签 | /products/intelligence/ |
+| DART Screen | 判定层 / Decide | KYA、KYT、制裁筛查、规则集与评分、持续监控 | /products/kya/ 等 |
+| DART Trace | 调查层 / Investigate | 资金追踪、多笔交易追踪（500 笔）、跨链续追 | /products/investigations/ |
+| DART Copilot | AI 助手 | MCP 19 个工具、llms.txt、skill 文件、AMLClaw | /products/copilot/ |
+
+- DART Copilot 的口号：**AI 跑腿，合规官签字** / **AI does the legwork. Your team signs off.**
+- 讲 Copilot 必须同时讲：**分数永远由规则引擎算，不由大模型算**，同样的输入得到同样的结果；处置由人决定。
+- 不写 Copilot 能写报告、起草 SAR、自动结案（「生成报告」已下线）。
+
+**信任页（/trust/）可以写的认证**：ISO/IEC 27001、27701、42001 已取得；SOC 2 Type II 进行中。证书和安全问卷按需提供。不写加密算法、托管商、SLA、数据驻留地等没确认的细节。
+
+**支持的链（/chains/）**：按名字列出链和币种，注明日期和「以 GET /api/v3/chains 实时返回为准」；仍然不写链的数量。
+
+**内容栏目**：事件复盘统一叫 **DART 快报 / DART Brief**（博客分类 incidents），按 docs/dart-brief-style.md 的规则写。
+
+**合规词典（/glossary/）**：中英双语，定义中立，不做营销表述。

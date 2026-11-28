@@ -16,6 +16,44 @@ sections:
       - { label: Read the docs, href: /docs/ }
     visual: result
 
+  - type: stack
+    id: stack
+    tone: alt
+    title: One dataset, three layers, <em>one AI assistant</em>
+    lead: Labels, screening verdicts and fund tracing all run on the same data and the same rules. The AI assistant does the legwork, and your team signs off.
+    layers:
+      - name: DART Trace
+        role: Investigate
+        text: Turn dozens of transfers into one money trail. Trace up to 500 transactions in one case, see where funds meet and where they sit now, and keep tracing across USDT0 and CCTP bridges.
+        links:
+          - { label: Fund tracing, href: /products/investigations/ }
+          - { label: Law enforcement, href: /partners/lea/ }
+      - name: DART Screen
+        role: Decide
+        text: Screen addresses, transactions and sanctions. 72 readable rules score hops, time order and share of risky funds from 0 to 100, with four verdicts — pass, review, EDD, block.
+        links:
+          - { label: Address screening (KYA), href: /products/kya/ }
+          - { label: Transaction screening (KYT), href: /products/kyt/ }
+          - { label: Sanctions screening, href: /products/sanctions/ }
+          - { label: Rulesets and scoring, href: /products/rulesets/ }
+      - name: DART Intel
+        role: Know
+        text: 200 million labeled addresses, over 90% of them exchange addresses, covering 428 exchanges. Our own sanctions database, plus issuer-freeze, hack, scam and mixer labels kept current. Labels from other EVM chains can count too.
+        links:
+          - { label: Labels and intelligence, href: /products/intelligence/ }
+          - { label: Supported chains, href: /chains/ }
+          - { label: Sanctions tracker, href: /data/ }
+    copilot:
+      name: DART Copilot
+      role: AI assistant
+      text: AI does the legwork. Your team signs off. Call DART over MCP from the AI tools you already use.
+      points:
+        - Start a screening in one sentence and get every result explained
+        - Tune a ruleset and re-score the original task in about a second
+        - "**Scores always come from the rules engine, never from a language model**, so the same input gives the same result"
+      href: /products/copilot/
+      link: Meet DART Copilot
+
   - type: steps
     eyebrow: Four layers, all built in-house
     title: We built every layer, <em>so you can change it and explain it</em>
@@ -48,7 +86,7 @@ sections:
       - { tag: Sanctions, title: Sanctions screening, text: "Is this address on a sanctions list? Answered in under a second, with new orders covered the same day.", href: /products/sanctions/ }
       - { tag: Tracing, title: Fund tracing & investigations, text: "Up to 500 transactions in one case, followed across chains and through swaps.", href: /products/investigations/ }
       - { tag: Rules, title: Rulesets & scoring, text: "72 readable rules and an editable scoring matrix. Your risk appetite, written as rules.", href: /products/rulesets/ }
-      - { tag: MCP, title: AI agents, text: "19 MCP tools so an AI agent can screen addresses, read results and edit rules.", href: /products/agents/ }
+      - { tag: DART Copilot, title: AI assistant, text: "19 MCP tools so an AI agent can screen addresses, read results and edit rules.", href: /products/copilot/ }
 
   - type: split
     reverse: true

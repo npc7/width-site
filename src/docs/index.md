@@ -27,5 +27,5 @@ isDocsHome: true
   <a href="https://width.info/api-reference"><b>Interactive API reference</b>Every endpoint with a Try-it panel.</a>
   <a href="https://width.info/llms-full.txt"><b>Complete reference (one file)</b>Auth, rulesets, the condition DSL, workflows and every endpoint.</a>
   <a href="https://width.info/openapi.json"><b>OpenAPI 3.1</b>Schemas for every endpoint.</a>
-  <a href="/products/agents/"><b>AI agents (MCP)</b>Connect DART to Claude, Cursor or Codex.</a>
+  <a href="/products/copilot/"><b>DART Copilot (MCP)</b>Connect DART to Claude, Cursor or Codex.</a>
 </div>
